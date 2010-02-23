@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ABE6B7C1-C99F-43E5-AC89-231659000166}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenSlx.Lib</RootNamespace>
+    <AssemblyName>OpenSlx.Lib</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Unity, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Microsoft.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.Common, Version=10.0.0.141, Culture=neutral, PublicKeyToken=6e1ad03deaa1eb79">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.Common.Syndication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c59b718b5ca510a8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Common.Syndication.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.Common.Syndication.Json, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Common.Syndication.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.Platform, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.Platform.Application, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.Application.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.Platform.Configuration, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.SalesLogix, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.SalesLogix.API, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.API.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.SalesLogix.NHibernate, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Sage.SalesLogix.Web, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Db\SlxCustomDialect.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Web\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

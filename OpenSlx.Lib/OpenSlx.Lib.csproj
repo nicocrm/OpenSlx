@@ -160,6 +160,7 @@
     <Compile Include="Web\Controls\Impl\TextBoxPicklistAdapter.cs" />
     <Compile Include="Web\Controls\PicklistStorageMode.cs" />
     <Compile Include="Web\Controls\SimplePicklist.cs" />
+    <Compile Include="Web\Utility\TypedWebEntityBindingGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Controls\Impl\SimplePicklist.js" />

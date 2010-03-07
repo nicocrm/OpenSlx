@@ -54,6 +54,11 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             {
                 if (TextChanged != null)
                     TextChanged(this, EventArgs.Empty);
+                // we have to reset the value here, otherwise the dropdown will keep using the 
+                // cached value from its viewstate 
+                // (this comes from the fact that we are maintaining the state for the adapter itself 
+                // but the dropdown's viewstate is disabled)
+                _dropdown.SelectedValue = _dropdown.SelectedValue;
             };
             _dropdown.AutoPostBack = parentControl.AutoPostBack;
             parentControl.Controls.Add(_dropdown);

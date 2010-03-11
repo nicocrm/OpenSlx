@@ -150,8 +150,11 @@
     <Compile Include="SlxDataHelpers\TimeZoneConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SecUtils.cs" />
+    <Compile Include="Utility\ICacheService.cs" />
+    <Compile Include="Utility\Impl\MemCacheService.cs" />
     <Compile Include="Web\Controls\BindableDropDownList.cs" />
     <Compile Include="Web\Controls\BindableRadioButtonList.cs" />
+    <Compile Include="Web\Controls\BindingSourceParameter.cs" />
     <Compile Include="Web\Controls\Impl\DropDownPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\IPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\MultiSelectPicklistAdapter.cs" />
@@ -159,14 +162,20 @@
     <Compile Include="Web\Controls\Impl\PicklistPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\TextBoxPicklistAdapter.cs" />
     <Compile Include="Web\Controls\PicklistStorageMode.cs" />
+    <Compile Include="Web\Controls\SimpleLookup.cs" />
     <Compile Include="Web\Controls\SimplePicklist.cs" />
+    <Compile Include="Utility\ReflectionHelper.cs" />
+    <Compile Include="Web\Controls\SlxSqlDataSource.cs" />
+    <Compile Include="Web\Controls\Workarounds\FixSlxGridView.cs" />
     <Compile Include="Web\Utility\TypedWebEntityBindingGenerator.cs" />
+    <Compile Include="Web\Utility\WebCacheService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Web\Controls\Impl\SimplePicklist.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SlxDataHelpers\README.txt" />
+    <Content Include="Web\Controls\Workarounds\README.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Groups\" />

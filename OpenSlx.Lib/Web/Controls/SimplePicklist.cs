@@ -19,7 +19,7 @@ namespace OpenSlx.Lib.Web.Controls
     [DefaultProperty("Text")]
     [ToolboxData("<{0}:SimplePicklist runat=server></{0}:SimplePicklist>")]
     [ValidationProperty("Text")]
-    public class SimplePicklist : CompositeControl
+    public class SimplePicklist : CompositeControl, ITextControl
     {
         private static readonly ILog LOG = LogManager.GetLogger(typeof(SimplePicklist));
 

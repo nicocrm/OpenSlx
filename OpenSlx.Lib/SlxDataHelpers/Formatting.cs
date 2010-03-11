@@ -12,6 +12,11 @@ namespace OpenSlx.Lib.SlxDataHelpers
     /// </summary>
     public class Formatting
     {
+        /// <summary>
+        /// Retrieve user name based on user id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static String FormatUserName(String userId)
         {
             if (String.IsNullOrEmpty(userId))
@@ -19,5 +24,7 @@ namespace OpenSlx.Lib.SlxDataHelpers
             var user = EntityFactory.GetById<IUser>(userId);
             return user == null ? "" : user.UserInfo.UserName;
         }
+
+
     }
 }

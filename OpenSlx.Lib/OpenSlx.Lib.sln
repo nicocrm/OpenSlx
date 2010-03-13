@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSlx.Lib", "OpenSlx.Lib.csproj", "{ABE6B7C1-C99F-43E5-AC89-231659000166}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSlx.Lib.UnitTest", "..\OpenSlx.Lib.UnitTest\OpenSlx.Lib.UnitTest.csproj", "{25BC86B0-2CBE-4E74-970D-44DDACC0CDA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{ABE6B7C1-C99F-43E5-AC89-231659000166}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABE6B7C1-C99F-43E5-AC89-231659000166}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABE6B7C1-C99F-43E5-AC89-231659000166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25BC86B0-2CBE-4E74-970D-44DDACC0CDA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25BC86B0-2CBE-4E74-970D-44DDACC0CDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25BC86B0-2CBE-4E74-970D-44DDACC0CDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25BC86B0-2CBE-4E74-970D-44DDACC0CDA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

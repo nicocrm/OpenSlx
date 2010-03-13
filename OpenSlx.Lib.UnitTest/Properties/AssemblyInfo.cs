@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Web.UI;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenSlx.Lib")]
+[assembly: AssemblyTitle("OpenSlx.Lib.UnitTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Strategic Sales Systems")]
-[assembly: AssemblyProduct("OpenSlx.Lib")]
+[assembly: AssemblyProduct("OpenSlx.Lib.UnitTest")]
 [assembly: AssemblyCopyright("Copyright © Strategic Sales Systems 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +20,7 @@ using System.Web.UI;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fdca469a-1152-49d2-8097-fd49f7162555")]
+[assembly: Guid("f552e89a-d06e-41e6-aa63-2073d23fb171")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,8 +32,5 @@ using System.Web.UI;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.*")]
-
-[assembly:InternalsVisibleTo("OpenSlx.Lib.UnitTest")]
-
-[assembly: WebResource("OpenSlx.Lib.Web.Controls.Impl.SimplePicklist.js", "text/javascript")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

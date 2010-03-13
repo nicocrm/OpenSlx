@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ABE6B7C1-C99F-43E5-AC89-231659000166}</ProjectGuid>
+    <ProjectGuid>{25BC86B0-2CBE-4E74-970D-44DDACC0CDA6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenSlx.Lib</RootNamespace>
-    <AssemblyName>OpenSlx.Lib</AssemblyName>
+    <RootNamespace>OpenSlx.Lib.UnitTest</RootNamespace>
+    <AssemblyName>OpenSlx.Lib.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,13 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Unity, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -47,75 +51,61 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.SysCache, Version=2.1.0.4000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\NHibernate.Caches.SysCache.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="Sage.Common, Version=10.0.0.141, Culture=neutral, PublicKeyToken=6e1ad03deaa1eb79">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Common.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sage.Common.Syndication, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c59b718b5ca510a8, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Common.Syndication.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sage.Common.Syndication.Json, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Common.Syndication.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SlxWeb.git\Model\deployment\common\bin\Sage.Entity.Interfaces.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.Application, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.Application.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.Application.UI.Web, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.Application.UI.Web.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.Configuration, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.Configuration.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.WebPortal, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.Platform.WebPortal.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.API, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.API.dll</HintPath>
-      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sage.SalesLogix.BusinessRules, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.BusinessRules.dll</HintPath>
     </Reference>
     <Reference Include="Sage.SalesLogix.HighLevelTypes, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.HighLevelTypes.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.NHibernate, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.NHibernate.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sage.SalesLogix.PickLists, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.PickLists.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Security, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -124,22 +114,16 @@
     <Reference Include="Sage.SalesLogix.Web, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.Web.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Web.Controls, Version=7.5.2.2151, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SlxWeb.git\Model\Portal\SlxClient\SupportFiles\Bin\Sage.SalesLogix.Web.Controls.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -150,42 +134,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Db\SlxCustomDialect.cs" />
-    <Compile Include="SlxDataHelpers\Formatting.cs" />
-    <Compile Include="SlxDataHelpers\TimeZoneConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\SecUtils.cs" />
-    <Compile Include="Utility\ICacheService.cs" />
-    <Compile Include="Utility\Impl\MemCacheService.cs" />
-    <Compile Include="Utility\MockUserService.cs" />
-    <Compile Include="Utility\SlxAppSetup.cs" />
-    <Compile Include="Web\Controls\BindableDropDownList.cs" />
-    <Compile Include="Web\Controls\BindableRadioButtonList.cs" />
-    <Compile Include="Web\Controls\BindingSourceParameter.cs" />
-    <Compile Include="Web\Controls\Impl\DropDownPicklistAdapter.cs" />
-    <Compile Include="Web\Controls\Impl\IPicklistAdapter.cs" />
-    <Compile Include="Web\Controls\Impl\MultiSelectPicklistAdapter.cs" />
-    <Compile Include="Web\Controls\Impl\PicklistItem.cs" />
-    <Compile Include="Web\Controls\Impl\PicklistPicklistAdapter.cs" />
-    <Compile Include="Web\Controls\Impl\TextBoxPicklistAdapter.cs" />
-    <Compile Include="Web\Controls\PicklistStorageMode.cs" />
-    <Compile Include="Web\Controls\SimpleLookup.cs" />
-    <Compile Include="Web\Controls\SimplePicklist.cs" />
-    <Compile Include="Utility\ReflectionHelper.cs" />
-    <Compile Include="Web\Controls\SlxSqlDataSource.cs" />
-    <Compile Include="Web\Controls\Workarounds\FixSlxGridView.cs" />
-    <Compile Include="Web\Utility\TypedWebEntityBindingGenerator.cs" />
-    <Compile Include="Web\Utility\WebCacheService.cs" />
+    <Compile Include="TestSimpleLookup.cs" />
+    <Compile Include="TestSuiteSetup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Web\Controls\Impl\SimplePicklist.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SlxDataHelpers\README.txt" />
-    <Content Include="Web\Controls\Workarounds\README.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Groups\" />
+    <ProjectReference Include="..\OpenSlx.Lib\OpenSlx.Lib.csproj">
+      <Project>{ABE6B7C1-C99F-43E5-AC89-231659000166}</Project>
+      <Name>OpenSlx.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

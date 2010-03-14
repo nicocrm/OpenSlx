@@ -14,6 +14,25 @@ using System.Web;
 using Sage.Platform.Orm;
 using System.Text.RegularExpressions;
 using Sage.SalesLogix.Security;
+using log4net;
+
+/*
+    OpenSlx - Open Source SalesLogix Library and Tools
+    Copyright (C) 2010 Strategic Sales Systems
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 namespace OpenSlx.Lib.Web.Controls
 {
@@ -24,13 +43,22 @@ namespace OpenSlx.Lib.Web.Controls
     [ValidationProperty("LookupResultValue")]
     public class SimpleLookup : LookupControl
     {
+        private static readonly ILog LOG = LogManager.GetLogger(typeof(SimpleLookup));
+
         #region Lookup metadata extraction
 
-        internal static LookupPropertyCollection GetLookupProperties(String tableName, String lookupName, String entityTypeName)
+        /// <summary>
+        /// Attempt to extract properties from the lookup metadata.
+        /// The result of this operation is cached.
+        /// </summary>
+        /// <param name="lookupName"></param>
+        /// <param name="entityTypeName"></param>
+        /// <returns></returns>
+        internal static LookupPropertyCollection GetLookupProperties(String lookupName, String entityTypeName)
         {
             LookupPropertyCollection result = null;
             if (HttpContext.Current != null &&
-                ((result = HttpContext.Current.Cache["LookupProperties$" + tableName + "$" + lookupName] as LookupPropertyCollection) != null))
+                ((result = HttpContext.Current.Cache["LookupProperties$" + entityTypeName + "$" + lookupName] as LookupPropertyCollection) != null))
             {
                 return result;
             }
@@ -47,18 +75,21 @@ namespace OpenSlx.Lib.Web.Controls
                 if (entityName == null)
                     throw new ArgumentException("Unable to locate persister for entity type " + entityType.FullName);
                 AbstractEntityPersister persister = (AbstractEntityPersister)((SessionFactoryImpl)sess.SessionFactory).GetEntityPersister(entityName);
-                foreach (String[] lookupField in GetLookupFields(sess, tableName, lookupName))
+                foreach (LookupLayoutField lookupField in GetLookupFields(sess, persister.TableName, lookupName))
                 {
-                    String[] tableField = lookupField[0].Split(new char[] { ':' });
+                    String[] tableField = lookupField.Path.Split(new char[] { ':' });
                     if (persister == null || persister.TableName != tableField[0])
                     {
-                        throw new ArgumentException("Invalid lookup data - table name does not match persister table (" + persister.TableName + ") - check EntityName settin");
+                        throw new ArgumentException("Invalid lookup data - table name does not match persister table (" + persister.TableName + " vs " + tableField[0] + ") - check EntityName setting");
                     }
-                    String propName = DecomposePath((SessionFactoryImpl)sess.SessionFactory, persister, tableField[1]);
-
-                    result.Add(new LookupProperty(propName, lookupField[1]));
+                    String propName = DecomposePath((SessionFactoryImpl)sess.SessionFactory, persister, lookupField.Path, lookupField.Format);
+                    if (propName != null)
+                    {
+                        result.Add(new LookupProperty(propName, lookupField.Caption));
+                    }
                 }
             }
+            HttpContext.Current.Cache["LookupProperties$" + entityTypeName + "$" + lookupName] = result;
             return result;
         }
 
@@ -76,7 +107,7 @@ namespace OpenSlx.Lib.Web.Controls
         /// </summary>
         /// <param name="root"></param>
         /// <param name="path"></param>
-        internal static String DecomposePath(SessionFactoryImpl sf, AbstractEntityPersister root, String path)
+        internal static String DecomposePath(SessionFactoryImpl sf, AbstractEntityPersister root, String path, String format)
         {
             String[] parts;
 
@@ -89,15 +120,23 @@ namespace OpenSlx.Lib.Web.Controls
                 // SLX provider interpreter
                 if (parts[0][0] == '@')
                     parts[0] = parts[0].Substring(1);
-                foreach (String propName in root.PropertyNames)
+                for (int i = 0; i < root.PropertyTypes.Length; i++)
                 {
+                    IType propType = root.PropertyTypes[i];
+                    if (propType.IsCollectionType)
+                    {
+                        return null;
+                    }
+                    String propName = root.PropertyNames[i];
                     String[] columns = root.ToColumns(propName);
                     if (columns.Length == 1 && columns[0] == parts[0])
                     {
-                        return propName;
+                        return FormatProperty(propName, propType, format);
                     }
                 }
-                throw new ArgumentException("Unable to locate property by column - " + parts[0]);
+
+                LOG.Warn("Unable to locate property by column - " + parts[0]);
+                return null;
             }
             else
             {
@@ -112,8 +151,38 @@ namespace OpenSlx.Lib.Web.Controls
                 root = FindJoinedEntity(sf, root, toTable, fromField, out propertyName);
                 if (root == null)
                     throw new ArgumentException("Unable to locate linked property " + toTable + " via " + fromField + "!");
-                return propertyName + "." + DecomposePath(sf, root, newpath);
+                return propertyName + "." + DecomposePath(sf, root, newpath, format);
             }
+        }
+
+        private static String FormatProperty(String propName, IType propType, String format)
+        {
+            if (String.IsNullOrEmpty(format) || format == "0")
+                return propName;
+            // adjust field for specific SLX formats
+            switch (format)
+            {
+                case "6":  // user - change the table, but only if this is a simple field
+                    if (propType.IsEntityType)
+                    {
+                        if (propType.Name == "UserInfo")
+                        {
+                            return propName + ".UserName";
+                        }
+                        else if (propType.Name == "User")
+                        {
+                            return propName + ".UserInfo.UserName";
+                        }
+                    }
+                    break;
+                case "8":  // owner - change the table, but only if this is a simple field
+                    if (propType.IsEntityType && propType.Name == "Owner")
+                    {
+                        return propName + ".OwnerDescription";
+                    }
+                    break;
+            }
+            return propName;
         }
 
         /// <summary>
@@ -162,11 +231,12 @@ namespace OpenSlx.Lib.Web.Controls
         /// <param name="tableName"></param>
         /// <param name="lookupName"></param>
         /// <returns></returns>
-        private static IEnumerable<String[]> GetLookupFields(ISession sess, String tableName, String lookupName)
+        private static IEnumerable<LookupLayoutField> GetLookupFields(ISession sess, String tableName, String lookupName)
         {
-            var lst = sess.CreateSQLQuery("select layout from lookup where maintable=? and lookupname=?")
+            var lst = sess.CreateSQLQuery("select layout from lookup where maintable=? and (isnull(lookupname,'')=? or searchfield=?)")
                     .SetString(0, tableName)
                     .SetString(1, lookupName)
+                    .SetString(2, lookupName)
                     .SetMaxResults(1).List();
             if (lst.Count == 0)
                 throw new ArgumentException("Invalid lookup " + tableName + ":" + lookupName);
@@ -174,9 +244,24 @@ namespace OpenSlx.Lib.Web.Controls
             String[] layoutParts = Regex.Split(layout, "\\|\r\n\\|");
             foreach (String layoutPart in layoutParts)
             {
-                String[] fields = layoutPart.Split(new char[] { '|' });
-                yield return new String[] { fields[1], fields[3] };
+                String tmp = layoutPart;
+                if (tmp.StartsWith("|"))
+                    tmp = layoutPart.Substring(1);
+                String[] fields = tmp.Split(new char[] { '|' });
+                yield return new LookupLayoutField
+                {
+                    Path = fields[0],
+                    Caption = fields[2],
+                    Format = fields[5]
+                };
             }
+        }
+
+        private class LookupLayoutField
+        {
+            public String Path { get; set; }
+            public String Format { get; set; }
+            public String Caption { get; set; }
         }
 
         #endregion
@@ -184,16 +269,17 @@ namespace OpenSlx.Lib.Web.Controls
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            this.LookupProperties = GetLookupProperties(this.LookupTableName, this.LookupName, this.LookupEntityTypeName);
+            this.LookupProperties = GetLookupProperties(this.LookupName, this.LookupEntityTypeName);
+            // Fix the image - by default the SLX controls tries to load it from the current type's assembly.
+            // since this is a subclass of LookupControl it is not in the "correct" assembly anymore.
+            // this fix ensures that the image is loaded from the original assembly
+            LookupImageURL = this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Find_16x16.gif");
         }
 
-        /// <summary>
-        /// Table for the lookup (as defined in the SLX Lookup Manager)
-        /// </summary>
-        public String LookupTableName { get; set; }
 
         /// <summary>
-        /// Lookup name, as defined in the SLX Lookup Manager.
+        /// Lookup name, as defined in the SLX Lookup Manager.  It can also specify the search field,
+        /// for example "ACCOUNT:ACCOUNT".
         /// If a blank is passed then the first lookup for the specified table will be used.
         /// </summary>
         public String LookupName { get; set; }

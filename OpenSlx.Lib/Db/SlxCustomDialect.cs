@@ -7,7 +7,7 @@ using NHibernate.SqlCommand;
 
 /*
     OpenSlx - Open Source SalesLogix Library and Tools
-    Copyright (C) 2010 Sailfish Consulting
+    Copyright (C) 2010 Strategic Sales Systems
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

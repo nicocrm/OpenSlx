@@ -82,11 +82,19 @@ namespace OpenSlx.Lib.Web.Controls
                     {
                         throw new ArgumentException("Invalid lookup data - table name does not match persister table (" + persister.TableName + " vs " + tableField[0] + ") - check EntityName setting");
                     }
-                    String propName = DecomposePath((SessionFactoryImpl)sess.SessionFactory, persister, lookupField.Path, lookupField.Format);
+                    String propName = DecomposePath((SessionFactoryImpl)sess.SessionFactory, persister, tableField[1], lookupField.Format);
                     if (propName != null)
                     {
                         result.Add(new LookupProperty(propName, lookupField.Caption));
+                        // TODO: we should set the property format here
                     }
+                }
+            }
+            if (LOG.IsDebugEnabled)
+            {
+                foreach (LookupProperty prop in result)
+                {
+                    LOG.Debug("Using property '" + prop.PropertyName + "' with header '" + prop.PropertyHeader + "'");
                 }
             }
             HttpContext.Current.Cache["LookupProperties$" + entityTypeName + "$" + lookupName] = result;
@@ -115,9 +123,7 @@ namespace OpenSlx.Lib.Web.Controls
             if (parts.Length == 1)
             {
                 // field name
-                // remove initial "@" (this is used to indicate calculated fields)
-                // TODO: fetch calculation from calculatedfielddata, to bypass the
-                // SLX provider interpreter
+                // remove initial "@" (this is used to indicate calculated fields)                
                 if (parts[0][0] == '@')
                     parts[0] = parts[0].Substring(1);
                 for (int i = 0; i < root.PropertyTypes.Length; i++)
@@ -125,7 +131,7 @@ namespace OpenSlx.Lib.Web.Controls
                     IType propType = root.PropertyTypes[i];
                     if (propType.IsCollectionType)
                     {
-                        return null;
+                        continue;
                     }
                     String propName = root.PropertyNames[i];
                     String[] columns = root.ToColumns(propName);
@@ -154,34 +160,45 @@ namespace OpenSlx.Lib.Web.Controls
                 return propertyName + "." + DecomposePath(sf, root, newpath, format);
             }
         }
-
+        
+        /// <summary>
+        /// Attempt to fix up the property according to the format.
+        /// If it fails, return null.
+        /// </summary>
+        /// <param name="propName"></param>
+        /// <param name="propType"></param>
+        /// <param name="format"></param>
+        /// <returns></returns>
         private static String FormatProperty(String propName, IType propType, String format)
         {
-            if (String.IsNullOrEmpty(format) || format == "0")
-                return propName;
             // adjust field for specific SLX formats
             switch (format)
             {
                 case "6":  // user - change the table, but only if this is a simple field
                     if (propType.IsEntityType)
                     {
-                        if (propType.Name == "UserInfo")
+                        if (propType.Name == "Sage.SalesLogix.Security.UserInfo")
                         {
                             return propName + ".UserName";
                         }
-                        else if (propType.Name == "User")
+                        else if (propType.Name == "Sage.SalesLogix.Security.User")
                         {
                             return propName + ".UserInfo.UserName";
                         }
                     }
                     break;
                 case "8":  // owner - change the table, but only if this is a simple field
-                    if (propType.IsEntityType && propType.Name == "Owner")
+                    if (propType.IsEntityType && propType.Name == "Sage.SalesLogix.Security.Owner")
                     {
                         return propName + ".OwnerDescription";
                     }
                     break;
             }
+            if (propType.IsEntityType)
+                // if we failed to find a correct format for the property
+                // don't use an entity type inside of a lookup as it messes
+                // up the query
+                return null;
             return propName;
         }
 

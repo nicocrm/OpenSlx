@@ -65,7 +65,8 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             _picklist.AllowMultiples = _attr.AllowMultiples;
             _picklist.AlphaSort = _attr.AlphaSorted;
             _picklist.NoneEditable = _attr.NoneEditable;
-            _picklist.Required = _attr.Required;
+            // do not set this attribute - the default validator created is too limited
+            //_picklist.Required = _attr.Required;
             _picklist.MustExistInList = _attr.ValueMustExist;
             _picklist.PickListValueChanged += delegate
             {
@@ -73,6 +74,16 @@ namespace OpenSlx.Lib.Web.Controls.Impl
                     TextChanged(this, EventArgs.Empty);
             };
             parentControl.Controls.Add(_picklist);
+        }
+
+
+        bool ReadOnly
+        {
+            set
+            {
+                if (_picklist != null)
+                    _picklist.Enabled = !value;
+            }
         }
 
         public event EventHandler TextChanged;

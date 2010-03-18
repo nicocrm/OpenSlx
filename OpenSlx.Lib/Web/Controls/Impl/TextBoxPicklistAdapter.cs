@@ -61,6 +61,16 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             parentControl.Controls.Add(_textbox);
         }
 
+
+        bool ReadOnly
+        {
+            set
+            {
+                if (_textbox != null)
+                    _textbox.Enabled = !value;
+            }
+        }
+
         public event EventHandler TextChanged;
 
         #endregion

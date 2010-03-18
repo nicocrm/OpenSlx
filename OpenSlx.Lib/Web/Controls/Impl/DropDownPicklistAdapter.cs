@@ -79,8 +79,16 @@ namespace OpenSlx.Lib.Web.Controls.Impl
                 _dropdown.SelectedValue = _dropdown.SelectedValue;
             };
             _dropdown.AutoPostBack = parentControl.AutoPostBack;
-            parentControl.Controls.Add(_dropdown);
-            // TODO: validation for required fields?
+            parentControl.Controls.Add(_dropdown);            
+        }
+
+        bool ReadOnly
+        {
+            set
+            {
+                if (_dropdown != null)
+                    _dropdown.Enabled = !value;
+            }
         }
 
         public event EventHandler TextChanged;

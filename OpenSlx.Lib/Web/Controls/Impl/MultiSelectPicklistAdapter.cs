@@ -114,18 +114,19 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             lstContainer.Style.Add(HtmlTextWriterStyle.ZIndex, "999");
             lstContainer.Controls.Add(lst);
             parentControl.Controls.Add(lstContainer);
-            if (_attr.Required)
-            {
-                RequiredFieldValidator vld = new RequiredFieldValidator();
-                vld.ControlToValidate = this._textbox.ID;
-                vld.Text = "*";
-                // todo - add error message
-                parentControl.Controls.Add(vld);
-            }
-
+            
             ScriptManager.RegisterClientScriptBlock(parentControl, parentControl.GetType(), "Pkl$" + parentControl.ClientID,
                 "OpenSlx_MultiSelectPicklist('" + _textbox.ClientID + "','" + 
                 lstContainer.ClientID + "','" + lst.ClientID + "');", true);
+        }
+
+        public bool ReadOnly
+        {
+            set
+            {
+                if (_textbox != null)
+                    _textbox.ReadOnly = true;
+            }
         }
 
         public event EventHandler TextChanged;

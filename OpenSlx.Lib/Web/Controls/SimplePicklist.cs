@@ -112,7 +112,11 @@ namespace OpenSlx.Lib.Web.Controls
         public bool ReadOnly
         {
             get { return ViewState["ReadOnly"] == null ? false : (bool)ViewState["ReadOnly"]; }
-            set { ViewState["ReadOnly"] = value; }
+            set { 
+                ViewState["ReadOnly"] = value;
+                if (_adapter != null)
+                    _adapter.ReadOnly = value;
+            }
         }
 
         [Bindable(true)]

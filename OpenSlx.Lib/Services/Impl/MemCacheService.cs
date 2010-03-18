@@ -20,7 +20,7 @@ using System.Text;
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace OpenSlx.Lib.Utility.Impl
+namespace OpenSlx.Lib.Utility.Services
 {
     /// <summary>
     /// Very simple cache service using a dictionary to implement the cache.

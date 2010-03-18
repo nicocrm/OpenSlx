@@ -21,7 +21,7 @@ using System.Web.Caching;
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-namespace OpenSlx.Lib.Utility
+namespace OpenSlx.Lib.Services
 {
     /// <summary>
     /// Wrapper for cache provider service.

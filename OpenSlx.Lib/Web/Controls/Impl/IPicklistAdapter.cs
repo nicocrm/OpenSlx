@@ -49,6 +49,13 @@ namespace OpenSlx.Lib.Web.Controls.Impl
         void CreateChildControls(SimplePicklist parentControl);
 
         /// <summary>
+        /// Set readonly flag 
+        /// (normally this is not hit, because we'll render the picklist as a read-only textbox.
+        /// But if the read-only flag is set late in the page lifecycle it will happen)
+        /// </summary>
+        bool ReadOnly { set; }
+
+        /// <summary>
         /// Events should get triggered when the value may have changed.
         /// </summary>
         event EventHandler TextChanged;

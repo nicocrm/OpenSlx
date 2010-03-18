@@ -4,6 +4,7 @@ using System.Text;
 using System.Web;
 using OpenSlx.Lib;
 using OpenSlx.Lib.Utility;
+using OpenSlx.Lib.Services;
 
 /*
     OpenSlx - Open Source SalesLogix Library and Tools
@@ -25,6 +26,10 @@ using OpenSlx.Lib.Utility;
 
 namespace OpenSlx.Lib.Web.Utility
 {
+    /// <summary>
+    /// Web-specific implementation of the cache service.
+    /// This is a simple wrapper around the ASP.NET cache.
+    /// </summary>
     public class WebCacheService : ICacheService
     {
         #region ICacheService Members

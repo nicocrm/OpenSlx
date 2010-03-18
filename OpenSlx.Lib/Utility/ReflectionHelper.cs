@@ -4,6 +4,7 @@ using System.Text;
 using System.Reflection;
 using System.ComponentModel;
 using log4net;
+using OpenSlx.Lib.Services;
 
 /*
     OpenSlx - Open Source SalesLogix Library and Tools

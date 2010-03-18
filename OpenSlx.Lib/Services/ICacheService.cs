@@ -26,7 +26,7 @@ namespace OpenSlx.Lib.Services
     /// <summary>
     /// Wrapper for cache provider service.
     /// There is an implementation using the ASP.NET cache in Web.Utility, and a 
-    /// default implementation in Utility.Impl.
+    /// default implementation in Services.Impl.
     /// </summary>
     public interface ICacheService
     {

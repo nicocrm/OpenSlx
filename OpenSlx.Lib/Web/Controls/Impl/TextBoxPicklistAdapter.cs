@@ -62,7 +62,7 @@ namespace OpenSlx.Lib.Web.Controls.Impl
         }
 
 
-        bool ReadOnly
+        public bool ReadOnly
         {
             set
             {

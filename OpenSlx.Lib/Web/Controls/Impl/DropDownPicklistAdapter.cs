@@ -82,7 +82,7 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             parentControl.Controls.Add(_dropdown);            
         }
 
-        bool ReadOnly
+        public bool ReadOnly
         {
             set
             {

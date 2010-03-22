@@ -55,7 +55,7 @@ namespace OpenSlx.Lib.Web.Controls
             object entity = FindParentSmartPart(control).BindingSource.Current;
             if (entity == null)
                 throw new InvalidOperationException("BindingSource.Current is null");
-            return ReflectionHelper.GetPropertyValue(entity, PropertyPath, new WebCacheService());
+            return ReflectionHelper.GetPropertyValue(entity, PropertyPath ?? "Id", new WebCacheService());
         }
 
         /// <summary>

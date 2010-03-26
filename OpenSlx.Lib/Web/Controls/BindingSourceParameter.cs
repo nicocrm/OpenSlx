@@ -45,6 +45,14 @@ namespace OpenSlx.Lib.Web.Controls
         public String PropertyPath { get; set; }
 
         /// <summary>
+        /// Sets defaults
+        /// </summary>
+        public BindingSourceParameter()
+        {
+            PropertyPath = "Id";
+        }
+
+        /// <summary>
         /// Retrieve value for the parameter.
         /// </summary>
         /// <param name="context"></param>
@@ -55,7 +63,7 @@ namespace OpenSlx.Lib.Web.Controls
             object entity = FindParentSmartPart(control).BindingSource.Current;
             if (entity == null)
                 throw new InvalidOperationException("BindingSource.Current is null");
-            return ReflectionHelper.GetPropertyValue(entity, PropertyPath ?? "Id", new WebCacheService());
+            return ReflectionHelper.GetPropertyValue(entity, PropertyPath, new WebCacheService());
         }
 
         /// <summary>

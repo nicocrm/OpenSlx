@@ -249,6 +249,7 @@ namespace OpenSlx.Lib.Web.Controls
             attr = PickList.GetPickListAttributes(pklId);            
             var pklItems = PickList.GetPickListItems(pklId);
             items = (from pkl in pklItems
+                     where pkl.UserId.Trim() == "ADMIN"
                      select new PicklistItem(pkl, DisplayMode, StorageMode))
                      .ToList();
         }

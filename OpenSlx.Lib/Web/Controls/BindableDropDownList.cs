@@ -58,6 +58,7 @@ namespace OpenSlx.Lib.Web.Controls
 
         /// <summary>
         /// Currently selected value.
+        /// If this is set to a value not available in the control, it will be cleared.
         /// </summary>
         [Bindable(true)]
         [Description("Currently selected value")]
@@ -69,14 +70,12 @@ namespace OpenSlx.Lib.Web.Controls
                 return base.SelectedValue == "" ? null : base.SelectedValue;
             }
             set
-            {                
-                try
+            {
+                var item = this.Items.FindByValue(value);
+                ClearSelection();
+                if (item != null)
                 {
-                    base.SelectedValue = (value == null ? null : value.Trim());
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    base.SelectedValue = null;
+                    item.Selected = true;
                 }
             }
         }

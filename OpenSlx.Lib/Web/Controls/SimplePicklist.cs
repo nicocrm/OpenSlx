@@ -104,6 +104,7 @@ namespace OpenSlx.Lib.Web.Controls
         [Category("Appearance")]
         public String PickListId { get; set; }
 
+        private bool _readonly = false;
         /// <summary>
         /// When set to true the picklist will be displayed as a readonly text box.
         /// </summary>
@@ -111,9 +112,10 @@ namespace OpenSlx.Lib.Web.Controls
         [Category("Appearance")]
         public bool ReadOnly
         {
-            get { return ViewState["ReadOnly"] == null ? false : (bool)ViewState["ReadOnly"]; }
-            set { 
-                ViewState["ReadOnly"] = value;
+            get { return _readonly; }
+            set
+            {
+                _readonly = value;
                 if (_adapter != null)
                     _adapter.ReadOnly = value;
             }
@@ -166,7 +168,7 @@ namespace OpenSlx.Lib.Web.Controls
             {
                 _adapter.SetValue((String)ViewState["Text"]);
             }
-            
+
             _adapter.TextChanged += delegate
             {
                 if (TextChanged != null && (String)ViewState["Text"] != _adapter.GetValue())
@@ -174,7 +176,7 @@ namespace OpenSlx.Lib.Web.Controls
                     ViewState["Text"] = _adapter.GetValue();
                     TextChanged(this, EventArgs.Empty);
                 }
-            };            
+            };
         }
 
         protected override void OnLoad(EventArgs e)
@@ -191,7 +193,7 @@ namespace OpenSlx.Lib.Web.Controls
         private IPicklistAdapter SelectPicklistAdapter()
         {
             PickListAttributes attr;
-            List<PicklistItem> items;            
+            List<PicklistItem> items;
 
             if (ReadOnly || String.IsNullOrEmpty(PickListName))
                 return new TextBoxPicklistAdapter();
@@ -246,7 +248,7 @@ namespace OpenSlx.Lib.Web.Controls
                 ReadOnly = true;
                 return;
             }
-            attr = PickList.GetPickListAttributes(pklId);            
+            attr = PickList.GetPickListAttributes(pklId);
             var pklItems = PickList.GetPickListItems(pklId);
             items = (from pkl in pklItems
                      where pkl.UserId.Trim() == "ADMIN"

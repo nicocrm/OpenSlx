@@ -50,11 +50,7 @@ namespace OpenSlx.Lib.Web.Controls.Impl
 
         public void SetValue(string value)
         {
-            try
-            {
-                _dropdown.SelectedValue = value;
-            }
-            catch { }  // ignore missing values
+            _dropdown.SelectedValue = value;
         }
 
         public void CreateChildControls(SimplePicklist parentControl)
@@ -79,7 +75,7 @@ namespace OpenSlx.Lib.Web.Controls.Impl
                 _dropdown.SelectedValue = _dropdown.SelectedValue;
             };
             _dropdown.AutoPostBack = parentControl.AutoPostBack;
-            parentControl.Controls.Add(_dropdown);            
+            parentControl.Controls.Add(_dropdown);
         }
 
         public bool ReadOnly

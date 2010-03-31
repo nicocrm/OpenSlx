@@ -34,6 +34,11 @@ namespace OpenSlx.Lib.Web.Utility
     {
         #region ICacheService Members
 
+        /// <summary>
+        /// Access cache item.
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public object this[string index]
         {
             get
@@ -49,6 +54,14 @@ namespace OpenSlx.Lib.Web.Utility
             }
         }
 
+        /// <summary>
+        /// Add an item.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="cacheDependency"></param>
+        /// <param name="absoluteExpiration"></param>
+        /// <param name="slidingExpiration"></param>
         public void Insert(string key, object value, System.Web.Caching.CacheDependency cacheDependency, DateTime absoluteExpiration, TimeSpan slidingExpiration)
         {
             HttpContext.Current.Cache.Insert(key, value, cacheDependency, absoluteExpiration, slidingExpiration);

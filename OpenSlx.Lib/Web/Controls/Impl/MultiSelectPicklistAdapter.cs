@@ -50,11 +50,19 @@ namespace OpenSlx.Lib.Web.Controls.Impl
 
         #region IPicklistAdapter Members
 
+        /// <summary>
+        /// Get Value
+        /// </summary>
+        /// <returns></returns>
         public string GetValue()
         {
             return _textbox.Text;
         }
 
+        /// <summary>
+        /// Set Value
+        /// </summary>
+        /// <param name="value"></param>
         public void SetValue(string value)
         {
             _textbox.Text = value;
@@ -120,6 +128,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
                 lstContainer.ClientID + "','" + lst.ClientID + "');", true);
         }
 
+        /// <summary>
+        /// ReadOnly
+        /// </summary>
         public bool ReadOnly
         {
             set
@@ -129,6 +140,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             }
         }
 
+        /// <summary>
+        /// TextChanged
+        /// </summary>
         public event EventHandler TextChanged;
 
         #endregion

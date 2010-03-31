@@ -31,6 +31,13 @@ namespace OpenSlx.Lib.Web.Controls.Impl
     /// </summary>
     public class PicklistItem
     {
+        /// <summary>
+        /// Create a picklist item from a SalesLogix picklist object.
+        /// Value and Text will be extracted from the picklist item based on display mode and storage mode.
+        /// </summary>
+        /// <param name="pkl"></param>
+        /// <param name="displayMode"></param>
+        /// <param name="storageMode"></param>
         public PicklistItem(PickList pkl, PicklistStorageMode displayMode, PicklistStorageMode storageMode)
         {
             Value = FormatText(pkl, storageMode);

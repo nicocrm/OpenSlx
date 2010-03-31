@@ -113,8 +113,10 @@ namespace OpenSlx.Lib.Web.Controls
         /// or
         /// From Field=To Field.To Table!Path
         /// </summary>
+        /// <param name="sf"></param>
         /// <param name="root"></param>
         /// <param name="path"></param>
+        /// <param name="format"></param>
         internal static String DecomposePath(SessionFactoryImpl sf, AbstractEntityPersister root, String path, String format)
         {
             String[] parts;
@@ -205,12 +207,6 @@ namespace OpenSlx.Lib.Web.Controls
         /// <summary>
         /// Find a join.  Return the name of the corresponding property.
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="toTable"></param>
-        /// <param name="toField"></param>
-        /// <param name="fromField"></param>
-        /// <param name="propertyName"></param>
-        /// <returns></returns>
         private static AbstractEntityPersister FindJoinedEntity(SessionFactoryImpl sf, AbstractEntityPersister root, string toTable, string fromField, out string propertyName)
         {
             //   root.ClassMetadata.PropertyTypes.First().Na
@@ -245,9 +241,6 @@ namespace OpenSlx.Lib.Web.Controls
         /// <summary>
         /// Return array of fields for the lookup (a pair field name, caption)
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="lookupName"></param>
-        /// <returns></returns>
         private static IEnumerable<LookupLayoutField> GetLookupFields(ISession sess, String tableName, String lookupName)
         {
             var lst = sess.CreateSQLQuery("select layout from lookup where maintable=? and (isnull(lookupname,'')=? or searchfield=?)")
@@ -283,6 +276,10 @@ namespace OpenSlx.Lib.Web.Controls
 
         #endregion
 
+        /// <summary>
+        /// Load the lookup properties from the lookup metadata
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);

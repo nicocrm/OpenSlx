@@ -31,6 +31,11 @@ namespace OpenSlx.Lib.Web.Controls.Impl
     /// </summary>
     public class DropDownPicklistAdapter : IPicklistAdapter
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="attr"></param>
+        /// <param name="items"></param>
         public DropDownPicklistAdapter(PickListAttributes attr, List<PicklistItem> items)
         {
             _items = items;
@@ -43,16 +48,28 @@ namespace OpenSlx.Lib.Web.Controls.Impl
 
         #region IPicklistAdapter Members
 
+        /// <summary>
+        /// GetValue
+        /// </summary>
+        /// <returns></returns>
         public string GetValue()
         {
             return _dropdown.SelectedValue;
         }
 
+        /// <summary>
+        /// SetValue
+        /// </summary>
+        /// <param name="value"></param>
         public void SetValue(string value)
         {
             _dropdown.SelectedValue = value;
         }
 
+        /// <summary>
+        /// CreateChildControls
+        /// </summary>
+        /// <param name="parentControl"></param>
         public void CreateChildControls(SimplePicklist parentControl)
         {
             _dropdown = new BindableDropDownList();
@@ -78,6 +95,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             parentControl.Controls.Add(_dropdown);
         }
 
+        /// <summary>
+        /// If true dropdown will be disabled
+        /// </summary>
         public bool ReadOnly
         {
             set
@@ -87,6 +107,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             }
         }
 
+        /// <summary>
+        /// Raised when text may have changed.
+        /// </summary>
         public event EventHandler TextChanged;
 
         #endregion

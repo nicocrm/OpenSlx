@@ -29,6 +29,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
     /// </summary>
     public class TextBoxPicklistAdapter : IPicklistAdapter
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public TextBoxPicklistAdapter()
         {
         }
@@ -37,16 +40,28 @@ namespace OpenSlx.Lib.Web.Controls.Impl
 
         #region IPicklistAdapter Members
 
+        /// <summary>
+        /// GetValue
+        /// </summary>
+        /// <returns></returns>
         public string GetValue()
         {
             return _textbox.Text;
         }
 
+        /// <summary>
+        /// SetValue
+        /// </summary>
+        /// <param name="value"></param>
         public void SetValue(string value)
         {
             _textbox.Text = value;
         }
 
+        /// <summary>
+        /// CreateChildControls
+        /// </summary>
+        /// <param name="parentControl"></param>
         public void CreateChildControls(SimplePicklist parentControl)
         {
             _textbox = new TextBox();
@@ -61,7 +76,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             parentControl.Controls.Add(_textbox);
         }
 
-
+        /// <summary>
+        /// Mark textbox readonly
+        /// </summary>
         public bool ReadOnly
         {
             set
@@ -71,6 +88,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public event EventHandler TextChanged;
 
         #endregion

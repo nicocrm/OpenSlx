@@ -33,7 +33,10 @@ using Sage.Platform.WebPortal.Services;
 
 namespace OpenSlx.Lib.Web.Controls
 {
-
+    /// <summary>
+    /// Simple picklist control emulates a SalesLogix picklist, attempting to use the settings 
+    /// established in the (legacy) picklist manager.
+    /// </summary>
     [DefaultProperty("Text")]
     [ToolboxData("<{0}:SimplePicklist runat=server></{0}:SimplePicklist>")]
     [ValidationProperty("Text")]
@@ -106,7 +109,10 @@ namespace OpenSlx.Lib.Web.Controls
 
         private bool _readonly = false;
         /// <summary>
-        /// When set to true the picklist will be displayed as a readonly text box.
+        /// When set to true the underlying adapter will be made read-only.
+        /// If this is set before the child controls have been created (e.g. in the aspx source markup), 
+        /// then the control will be rendered as a read-only textbox.  Because of this, the value is not persisted
+        /// to the ViewState (as it would make it hard to switch back and forth between read-only and read-write).
         /// </summary>
         [Bindable(true)]
         [Category("Appearance")]
@@ -121,17 +127,23 @@ namespace OpenSlx.Lib.Web.Controls
             }
         }
 
+        /// <summary>
+        /// When set the underlying control will be set to auto postback (if supported).
+        /// This must be set before the child controls have been created.
+        /// </summary>
         [Bindable(true)]
         public bool AutoPostBack { get; set; }
 
         /// <summary>
         /// How should the value be displayed in the client.
+        /// This must be set before the child controls have been created.
         /// </summary>
         [Bindable(true)]
         public PicklistStorageMode DisplayMode { get; set; }
 
         /// <summary>
         /// How the value should be reflected in the Text property.
+        /// This must be set before the child controls have been created.
         /// </summary>
         [Bindable(true)]
         public PicklistStorageMode StorageMode { get; set; }
@@ -139,6 +151,7 @@ namespace OpenSlx.Lib.Web.Controls
         /// <summary>
         /// Attempt to be as compatible as possible with the Saleslogix picklist
         /// (prevents the use of custom adapters)
+        /// This must be set before the child controls have been created.
         /// </summary>
         [Bindable(true)]
         public bool Compatible { get; set; }
@@ -150,12 +163,18 @@ namespace OpenSlx.Lib.Web.Controls
 
         private IPicklistAdapter _adapter = null;
 
+        /// <summary>
+        /// Constructor with default values.
+        /// </summary>
         public SimplePicklist()
         {
             StorageMode = PicklistStorageMode.Text;
             DisplayMode = PicklistStorageMode.Text;
         }
 
+        /// <summary>
+        /// Picks adapter and calls its createchildcontrols method.
+        /// </summary>
         protected override void CreateChildControls()
         {
             _adapter = SelectPicklistAdapter();
@@ -179,6 +198,10 @@ namespace OpenSlx.Lib.Web.Controls
             };
         }
 
+        /// <summary>
+        /// Register scripts.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);

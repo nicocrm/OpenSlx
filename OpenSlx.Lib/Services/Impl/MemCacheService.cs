@@ -45,6 +45,11 @@ namespace OpenSlx.Lib.Services.Impl
             _cache[key] = value;
         }
 
+        /// <summary>
+        /// Retrieve cache item
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public object this[string index]
         {
             get

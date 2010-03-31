@@ -33,6 +33,14 @@ namespace OpenSlx.Lib.Web.Controls.Workarounds
     /// </summary>
     public class FixSlxGridView : SlxGridView
     {
+        /// <summary>
+        /// Used in databinding.
+        /// There is a bug in the original SlxGridView which causes this method to fail.
+        /// </summary>
+        /// <param name="fieldValues"></param>
+        /// <param name="row"></param>
+        /// <param name="includeReadOnlyFields"></param>
+        /// <param name="includePrimaryKey"></param>
         protected override void ExtractRowValues(IOrderedDictionary fieldValues, GridViewRow row, bool includeReadOnlyFields, bool includePrimaryKey)
         {
             if (fieldValues != null)

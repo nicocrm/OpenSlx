@@ -59,11 +59,17 @@ namespace OpenSlx.Lib.Utility
 
         #region IUserService Members
 
+        /// <summary>
+        /// UserId
+        /// </summary>
         public override string UserId
         {
             get { return _userId; }
         }
 
+        /// <summary>
+        /// UserName
+        /// </summary>
         public override string UserName
         {
             get

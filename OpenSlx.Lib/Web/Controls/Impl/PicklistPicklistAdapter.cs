@@ -35,6 +35,12 @@ namespace OpenSlx.Lib.Web.Controls.Impl
         private PickListAttributes _attr;
         private PicklistStorageMode _storageMode;
 
+        /// <summary>
+        /// Create adapter
+        /// </summary>
+        /// <param name="picklistName"></param>
+        /// <param name="attr"></param>
+        /// <param name="storageMode"></param>
         public PicklistPicklistAdapter(String picklistName, PickListAttributes attr, PicklistStorageMode storageMode)
         {
             _picklistName = picklistName;
@@ -44,16 +50,28 @@ namespace OpenSlx.Lib.Web.Controls.Impl
 
         #region IPicklistAdapter Members
 
+        /// <summary>
+        /// Get underlying value.
+        /// </summary>
+        /// <returns></returns>
         public string GetValue()
         {
             return _picklist.PickListValue;
         }
 
+        /// <summary>
+        /// Set value on the underlying control.
+        /// </summary>
+        /// <param name="value"></param>
         public void SetValue(string value)
         {
             _picklist.PickListValue = value;
         }
 
+        /// <summary>
+        /// Create the control representing the picklist.
+        /// </summary>
+        /// <param name="parentControl"></param>
         public void CreateChildControls(SimplePicklist parentControl)
         {
             _picklist = new PickListControl();
@@ -76,7 +94,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             parentControl.Controls.Add(_picklist);
         }
 
-
+        /// <summary>
+        /// Disable / enable the picklist.
+        /// </summary>
         public bool ReadOnly
         {
             set
@@ -86,6 +106,9 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             }
         }
 
+        /// <summary>
+        /// Text may have changed.
+        /// </summary>
         public event EventHandler TextChanged;
 
         #endregion

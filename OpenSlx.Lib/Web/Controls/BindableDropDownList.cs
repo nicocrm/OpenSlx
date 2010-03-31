@@ -44,7 +44,10 @@ namespace OpenSlx.Lib.Web.Controls
         /// </summary>
         public event EventHandler SelectedValueChanged;
 
-        // add our event hook
+        /// <summary>
+        /// Add our event hook
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -80,6 +83,10 @@ namespace OpenSlx.Lib.Web.Controls
             }
         }
 
+        /// <summary>
+        /// Data binding - with exception handling.
+        /// </summary>
+        /// <param name="dataSource"></param>
         protected override void PerformDataBinding(System.Collections.IEnumerable dataSource)
         {
             //log4net.LogManager.GetLogger(ClientID).Debug("Before Databinding, selected index = " + SelectedIndex);

@@ -106,8 +106,6 @@ namespace OpenSlx.Lib.Utility
         /// <summary>
         /// Loads the connection string from the connection.config file.
         /// </summary>
-        /// <param name="p"></param>
-        /// <param name="adminPassword"></param>
         private String LoadSaleslogixConnectionString(string connectionFile, String username, String adminPassword)
         {
             XDocument doc = XDocument.Load(connectionFile);
@@ -115,6 +113,9 @@ namespace OpenSlx.Lib.Utility
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
         ~SlxAppSetup()
         {
             Dispose(false);
@@ -209,11 +210,8 @@ namespace OpenSlx.Lib.Utility
         /// This copies the given file under the fixed path for the application so it can be retrieved, and registers it.
         /// If SourceFolder is not specified then the file will be expected to already be there, and the copy step will be skipped.
         /// </summary>
-        /// <param name="workItem">Parent work item</param>
-        /// <param name="appName">Application name (arbitrary name that the app was built with)</param>
         /// <param name="configType">Type of configuration (eg HibernateConfiguration).  May be null if not applicable.</param>
-        /// <param name="configFile">Absolute path to configuration file.  It will be copied under the local configuration directory.</param>
-        /// <param name="p">Name of the configuration file</param>
+        /// <param name="configFile">Absolute path to configuration file.  It will be copied under the local configuration directory.</param>        
         private void PrepareConfigurationFile(Type configType, string configFile)
         {
             Directory.CreateDirectory(@"Configuration\Application\" + ApplicationName);
@@ -340,6 +338,10 @@ namespace OpenSlx.Lib.Utility
 
         #region IDisposable Members
 
+        /// <summary>
+        /// Shut down the application context (if it is still open).
+        /// Exceptions will be silently ignored.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);

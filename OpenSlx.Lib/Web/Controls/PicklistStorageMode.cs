@@ -31,8 +31,17 @@ namespace OpenSlx.Lib.Web.Controls
     [Flags]
     public enum PicklistStorageMode
     {
+        /// <summary>
+        /// Store as item id
+        /// </summary>
         Id = 1,
+        /// <summary>
+        /// Store as code (shorttext)
+        /// </summary>
         Code = 2,
+        /// <summary>
+        /// Store as actual text
+        /// </summary>
         Text = 4
     }
 }

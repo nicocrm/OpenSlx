@@ -97,10 +97,11 @@ namespace OpenSlx.Lib.Utility
         /// <summary>
         /// Locate a property (will throw error if prop not available!)
         /// Cache the property info.
-        /// Does not handle recursive path (Account.Address.City...)
+        /// Does not handle recursive path (Account.Address.City...) - use the higher level GetPropertyValue / SetPropertyValue for that.
         /// </summary>
         /// <param name="entityType"></param>
         /// <param name="propertyName"></param>
+        /// <param name="cacheProvider">If not null, it will be used to cache the reflection info</param>
         /// <exception cref="KeyNotFoundException">Property can't be found</exception>
         public static PropertyInfo FindPropertyOnEntity(Type entityType, String propertyName, ICacheService cacheProvider)
         {
@@ -114,7 +115,8 @@ namespace OpenSlx.Lib.Utility
         /// </summary>
         /// <param name="entityType"></param>
         /// <param name="propertyName"></param>
-        /// <param name="propertyName"></param>
+        /// <param name="cacheProvider">If not null, it will be used to cache the reflection info</param>
+        /// <param name="ignoreCase"></param>
         /// <exception cref="KeyNotFoundException">Property can't be found</exception>    
         public static PropertyInfo FindPropertyOnEntity(Type entityType, String propertyName, ICacheService cacheProvider, bool ignoreCase)
         {
@@ -380,6 +382,7 @@ namespace OpenSlx.Lib.Utility
             /// <param name="t"></param>
             /// <param name="propertyPath"></param>
             /// <param name="pathIndex">Indicates the current fragment of the path being processed</param>
+            /// <param name="pathAccu">used to store the results</param>
             private static LinkedList<PropertyInfo> FindProperty_wkh(Type t, String[] propertyPath, int pathIndex, LinkedList<PropertyInfo> pathAccu)
             {
                 t = GetStaticType(t);

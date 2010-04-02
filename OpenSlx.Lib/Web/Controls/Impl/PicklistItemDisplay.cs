@@ -29,7 +29,7 @@ namespace OpenSlx.Lib.Web.Controls.Impl
     /// The value and text do not necessarily correspond to the values from the picklist table,
     /// instead they depend on the StorageMode / DisplayMode
     /// </summary>
-    public class PicklistItem
+    public class PicklistItemDisplay
     {
         /// <summary>
         /// Create a picklist item from a SalesLogix picklist object.
@@ -38,7 +38,7 @@ namespace OpenSlx.Lib.Web.Controls.Impl
         /// <param name="pkl"></param>
         /// <param name="displayMode"></param>
         /// <param name="storageMode"></param>
-        public PicklistItem(PickList pkl, PicklistStorageMode displayMode, PicklistStorageMode storageMode)
+        public PicklistItemDisplay(PickList pkl, PicklistStorageMode displayMode, PicklistStorageMode storageMode)
         {
             Value = FormatText(pkl, storageMode);
             Text = FormatText(pkl, displayMode);

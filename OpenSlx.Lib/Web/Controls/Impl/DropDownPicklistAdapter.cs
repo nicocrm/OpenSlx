@@ -36,13 +36,13 @@ namespace OpenSlx.Lib.Web.Controls.Impl
         /// </summary>
         /// <param name="attr"></param>
         /// <param name="items"></param>
-        public DropDownPicklistAdapter(PickListAttributes attr, List<PicklistItem> items)
+        public DropDownPicklistAdapter(PickListAttributes attr, List<PicklistItemDisplay> items)
         {
             _items = items;
             _attr = attr;
         }
 
-        private List<PicklistItem> _items;
+        private List<PicklistItemDisplay> _items;
         private PickListAttributes _attr;
         private DropDownList _dropdown;
 

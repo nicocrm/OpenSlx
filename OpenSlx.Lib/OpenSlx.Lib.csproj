@@ -166,7 +166,7 @@
     <Compile Include="Web\Controls\Impl\DropDownPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\IPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\MultiSelectPicklistAdapter.cs" />
-    <Compile Include="Web\Controls\Impl\PicklistItem.cs" />
+    <Compile Include="Web\Controls\Impl\PicklistItemDisplay.cs" />
     <Compile Include="Web\Controls\Impl\PicklistPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\TextBoxPicklistAdapter.cs" />
     <Compile Include="Web\Controls\PicklistStorageMode.cs" />

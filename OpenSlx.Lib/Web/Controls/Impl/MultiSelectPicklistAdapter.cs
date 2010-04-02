@@ -37,13 +37,13 @@ namespace OpenSlx.Lib.Web.Controls.Impl
         /// </summary>
         /// <param name="attr">Picklist attributes from SLX</param>
         /// <param name="items">Picklist items from SLX</param>
-        public MultiSelectPicklistAdapter(PickListAttributes attr, List<PicklistItem> items)
+        public MultiSelectPicklistAdapter(PickListAttributes attr, List<PicklistItemDisplay> items)
         {
             _items = items;
             _attr = attr;
         }
 
-        private List<PicklistItem> _items;
+        private List<PicklistItemDisplay> _items;
         private PickListAttributes _attr;
         private TextBox _textbox;
 

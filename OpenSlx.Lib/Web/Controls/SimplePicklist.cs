@@ -216,7 +216,7 @@ namespace OpenSlx.Lib.Web.Controls
         private IPicklistAdapter SelectPicklistAdapter()
         {
             PickListAttributes attr;
-            List<PicklistItem> items;
+            List<PicklistItemDisplay> items;
 
             if (ReadOnly || String.IsNullOrEmpty(PickListName))
                 return new TextBoxPicklistAdapter();
@@ -256,10 +256,10 @@ namespace OpenSlx.Lib.Web.Controls
         /// </summary>
         /// <param name="attr"></param>
         /// <param name="items"></param>
-        private void GetPicklistItems(out PickListAttributes attr, out List<PicklistItem> items)
+        private void GetPicklistItems(out PickListAttributes attr, out List<PicklistItemDisplay> items)
         {
             attr = (PickListAttributes)Page.Cache["pkl" + (PickListName) + "$Attr"];
-            items = (List<PicklistItem>)Page.Cache["pkl" + (PickListName) + "$Items"];
+            items = (List<PicklistItemDisplay>)Page.Cache["pkl" + (PickListName) + "$Items"];
             if (attr != null && items != null)
                 return;
             String pklId = null;
@@ -272,11 +272,23 @@ namespace OpenSlx.Lib.Web.Controls
                 return;
             }
             attr = PickList.GetPickListAttributes(pklId);
-            var pklItems = PickList.GetPickListItems(pklId);
+            IEnumerable<PickList> pklItems = PickList.GetPickListItems(pklId);            
             items = (from pkl in pklItems
                      where pkl.UserId.Trim() == "ADMIN"
-                     select new PicklistItem(pkl, DisplayMode, StorageMode))
+                     select new PicklistItemDisplay(pkl, DisplayMode, StorageMode))
                      .ToList();
+            if (attr.AlphaSorted)
+                items.Sort(ComparePicklistItems);
+                //items = items.OrderBy(v => v.Text).ToList();
+        }
+
+        /// <summary>
+        /// Helper method for the alpha sort
+        /// </summary>
+        /// <returns></returns>
+        private static int ComparePicklistItems(PicklistItemDisplay x, PicklistItemDisplay y)
+        {
+            return x.Text.CompareTo(y.Text);
         }
 
         /// <summary>
@@ -303,6 +315,6 @@ namespace OpenSlx.Lib.Web.Controls
         {
             ScriptManager.RegisterClientScriptResource(this, GetType(), "OpenSlx.Lib.Web.Controls.Impl.SimplePicklist.js");
         }
-
+        
     }
 }

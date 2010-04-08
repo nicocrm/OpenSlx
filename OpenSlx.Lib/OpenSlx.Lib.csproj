@@ -175,6 +175,7 @@
     <Compile Include="Utility\ReflectionHelper.cs" />
     <Compile Include="Web\Controls\SlxSqlDataSource.cs" />
     <Compile Include="Web\Controls\Workarounds\FixSlxGridView.cs" />
+    <Compile Include="Web\Controls\Workarounds\FixSlxLookup.cs" />
     <Compile Include="Web\Utility\TypedWebEntityBindingGenerator.cs" />
     <Compile Include="Web\Utility\WebCacheService.cs" />
   </ItemGroup>

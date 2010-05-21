@@ -162,7 +162,7 @@ namespace OpenSlx.Lib.Web.Controls
                 return propertyName + "." + DecomposePath(sf, root, newpath, format);
             }
         }
-        
+
         /// <summary>
         /// Attempt to fix up the property according to the format.
         /// If it fails, return null.
@@ -212,7 +212,8 @@ namespace OpenSlx.Lib.Web.Controls
             //   root.ClassMetadata.PropertyTypes.First().Na
             for (int i = 0; i < root.PropertyTypes.Length; i++)
             {
-                if (root.PropertyTypes[i].IsAssociationType)
+                if (root.PropertyTypes[i].IsAssociationType &&
+                    !root.PropertyTypes[i].IsCollectionType)
                 {
                     String[] cols = root.ToColumns(root.PropertyNames[i]);
                     if (cols.Length == 1 && cols[0] == fromField)

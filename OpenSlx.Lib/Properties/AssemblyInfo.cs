@@ -38,3 +38,4 @@ using System.Web.UI;
 [assembly:InternalsVisibleTo("OpenSlx.Lib.UnitTest")]
 
 [assembly: WebResource("OpenSlx.Lib.Web.Controls.Impl.SimplePicklist.js", "text/javascript")]
+[assembly: WebResource("OpenSlx.Lib.Web.Controls.JS.formatted.js", "text/javascript")]

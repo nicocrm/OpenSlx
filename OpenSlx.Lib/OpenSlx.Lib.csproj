@@ -163,6 +163,7 @@
     <Compile Include="Web\Controls\BindableDropDownList.cs" />
     <Compile Include="Web\Controls\BindableRadioButtonList.cs" />
     <Compile Include="Web\Controls\BindingSourceParameter.cs" />
+    <Compile Include="Web\Controls\FormattedTextBox.cs" />
     <Compile Include="Web\Controls\Impl\DropDownPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\IPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\MultiSelectPicklistAdapter.cs" />
@@ -184,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SlxDataHelpers\README.txt" />
+    <EmbeddedResource Include="Web\Controls\JS\formatted.js" />
     <Content Include="Web\Controls\Workarounds\README.txt" />
   </ItemGroup>
   <ItemGroup>

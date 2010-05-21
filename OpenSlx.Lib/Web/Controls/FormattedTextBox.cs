@@ -60,7 +60,7 @@ namespace OpenSlx.Lib.Web.Controls
         {
             base.Render(writer);
 
-            String className = "FormattedField";
+            String className = "OpenSlx.FormattedField";
             if (Format > 0)
                 className += Format.ToString();
             

@@ -18,7 +18,6 @@ using log4net;
 
 /*
     OpenSlx - Open Source SalesLogix Library and Tools
-    Copyright (C) 2010 Strategic Sales Systems
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -244,7 +243,7 @@ namespace OpenSlx.Lib.Web.Controls
         /// </summary>
         private static IEnumerable<LookupLayoutField> GetLookupFields(ISession sess, String tableName, String lookupName)
         {
-            var lst = sess.CreateSQLQuery("select layout from lookup where maintable=? and (isnull(lookupname,'')=? or searchfield=?)")
+            var lst = sess.CreateSQLQuery("select layout from lookup where maintable=? and (slxstr(lookupname)=? or searchfield=?)")
                     .SetString(0, tableName)
                     .SetString(1, lookupName)
                     .SetString(2, lookupName)

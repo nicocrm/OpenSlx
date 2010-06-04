@@ -7,7 +7,6 @@ using Sage.SalesLogix.Web.Controls.PickList;
 
 /*
     OpenSlx - Open Source SalesLogix Library and Tools
-    Copyright (C) 2010 Strategic Sales Systems
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -91,6 +90,7 @@ namespace OpenSlx.Lib.Web.Controls.Impl
                 if (TextChanged != null)
                     TextChanged(this, EventArgs.Empty);
             };
+            _picklist.AutoPostBack = parentControl.AutoPostBack;
             parentControl.Controls.Add(_picklist);
         }
 

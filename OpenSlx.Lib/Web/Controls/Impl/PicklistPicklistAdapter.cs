@@ -102,7 +102,10 @@ namespace OpenSlx.Lib.Web.Controls.Impl
             set
             {
                 if (_picklist != null)
+                {
                     _picklist.Enabled = !value;
+                    _picklist.ReadOnly = value;
+                }
             }
         }
 

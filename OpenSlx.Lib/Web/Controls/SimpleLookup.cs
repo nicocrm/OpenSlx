@@ -277,6 +277,17 @@ namespace OpenSlx.Lib.Web.Controls
         #endregion
 
         /// <summary>
+        /// Load default image
+        /// </summary>
+        public SimpleLookup()
+        {
+            // Fix the image - by default the SLX controls tries to load it from the current type's assembly.
+            // since this is a subclass of LookupControl it is not in the "correct" assembly anymore.
+            // this fix ensures that the image is loaded from the original assembly
+            LookupImageURL = this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Find_16x16.gif");
+        }
+
+        /// <summary>
         /// Load the lookup properties from the lookup metadata
         /// </summary>
         /// <param name="e"></param>
@@ -284,10 +295,6 @@ namespace OpenSlx.Lib.Web.Controls
         {
             base.OnInit(e);
             this.LookupProperties = GetLookupProperties(this.LookupName, this.LookupEntityTypeName);
-            // Fix the image - by default the SLX controls tries to load it from the current type's assembly.
-            // since this is a subclass of LookupControl it is not in the "correct" assembly anymore.
-            // this fix ensures that the image is loaded from the original assembly
-            LookupImageURL = this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Find_16x16.gif");
         }
 
 

@@ -262,7 +262,7 @@ namespace OpenSlx.Lib.Web.Controls
                 {
                     Path = fields[0],
                     Caption = fields[2],
-                    Format = fields[5]
+                    Format = fields.Length > 5 ? fields[5] : ""
                 };
             }
         }

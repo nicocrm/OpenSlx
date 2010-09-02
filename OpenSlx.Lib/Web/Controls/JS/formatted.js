@@ -12,8 +12,7 @@
 * similar effect.
 */
 
-
-(function() {
+(function () {
 
     /**********************************************/
     /* HELPER METHODS */
@@ -132,9 +131,9 @@
         charCode > 0 &&  // special keys - arrows, tabs, etc
         (!allowDecimals || (DECIMAL_SEPARATOR == "." ? (charCode != 46) : (charCode != 44)))) {
             if (allowDecimals) {
-                alert("Enter only numbers in this field.");
+                alert(OpenSlx.FormattedField.Strings.EnterOnlyNumbers);
             } else {
-                alert("Enter only whole numbers, without cents.");
+                alert(OpenSlx.FormattedField.Strings.EnterOnlyWholeNumbers);
             }
             return false;
         }
@@ -151,16 +150,25 @@
     // add field (an id or object) to the list of formatted field.
     // current name of field must be set.
     // current value of field must be set (to unformatted value).
-    OpenSlx.FormattedField = function(field, numDecimals) {
+    OpenSlx.FormattedField = function (field, numDecimals) {
         if (arguments.length > 0)
             this.init(field, numDecimals);
     }
 
 
+    // Default for localized strings.
+    // They can be overridden either from Javascript code, or by defining the corresponding
+    // resources for OpenSlx.
+    OpenSlx.FormattedField.Strings =
+    {
+        EnterOnlyNumbers: "Enter only numbers in this field!",
+        EnterOnlyWholeNumbers: "Enter only whole numbers, without cents!"
+    };
+
     // constructor
     // create a hidden field and give it the name from this field, 
     // then remove the name from the current field so that it does not get posted.
-    OpenSlx.FormattedField.prototype.init = function(field, numDecimals) {
+    OpenSlx.FormattedField.prototype.init = function (field, numDecimals) {
         var f = getRawObject(field);
         if (!f)
             return;
@@ -189,11 +197,11 @@
 
         var r = this; // bind for closure
         var jqf = $(this.field);
-        jqf.focus(function() { r.deformat(); this.select(); });
-        jqf.blur(function() { r.reformat() });
+        jqf.focus(function () { r.deformat(); this.select(); });
+        jqf.blur(function () { r.reformat() });
         var allowDecimals = this._numDecimals > 0;
         var allowNonNumeric = !!this._allowNonNumeric;
-        jqf.keypress(function(e) {
+        jqf.keypress(function (e) {
             if (e.which == 13)
             // save the value to the hidden field in case this will be used for a save
                 r.setValue(r.field.value);
@@ -207,17 +215,17 @@
     }
 
     // copy hid value into field
-    OpenSlx.FormattedField.prototype.deformat = function() {
+    OpenSlx.FormattedField.prototype.deformat = function () {
         this.field.value = this.hidden.value;
         this.isformatted = false;
     }
 
-    OpenSlx.FormattedField.prototype.reformat = function() {
+    OpenSlx.FormattedField.prototype.reformat = function () {
         this.setValue(this.field.value);
     }
 
     // override this to format the value
-    OpenSlx.FormattedField.prototype.setValue = function(value) {
+    OpenSlx.FormattedField.prototype.setValue = function (value) {
         var val = value;
         if (typeof value == "string") {
             val = parseFloat(value.replace(new RegExp("[\\$%\\" + THOUSAND_SEPARATOR + "]", "g"), ""));
@@ -232,7 +240,7 @@
     }
 
     // get the raw value
-    OpenSlx.FormattedField.prototype.getValue = function() {
+    OpenSlx.FormattedField.prototype.getValue = function () {
         var val;
         if (this.isformatted) {
             val = this.hidden.value;
@@ -246,7 +254,7 @@
     }
 
     // get the formatted value
-    OpenSlx.FormattedField.prototype.getFormattedValue = function() {
+    OpenSlx.FormattedField.prototype.getFormattedValue = function () {
         var val;
 
         if (this.isformatted) {
@@ -266,7 +274,7 @@
 
     // Default keypress event handlers will prevent non-numeric keys.
     // Can be overridden to change that behavior
-    OpenSlx.FormattedField.prototype.onKeyPress = function(e) {
+    OpenSlx.FormattedField.prototype.onKeyPress = function (e) {
     }
 
     /*
@@ -274,7 +282,7 @@
     * In Saleslogix 6.2.3+, use phoneDisplay class to get a similar effect
     * with less effort.
     */
-    OpenSlx.FormattedFieldPhone = function(field) {
+    OpenSlx.FormattedFieldPhone = function (field) {
         if (arguments.length > 0)
             this.init(field);
     }
@@ -282,12 +290,12 @@
     OpenSlx.FormattedFieldPhone.prototype.constructor = OpenSlx.FormattedFieldPhone;
     OpenSlx.FormattedFieldPhone.superclass = OpenSlx.FormattedField.prototype;
 
-    OpenSlx.FormattedFieldPhone.prototype.init = function(field) {
+    OpenSlx.FormattedFieldPhone.prototype.init = function (field) {
         this._allowNonNumeric = true;
         OpenSlx.FormattedFieldPhone.superclass.init.call(this, field);
     }
 
-    OpenSlx.FormattedFieldPhone.prototype.setValue = function(value) {
+    OpenSlx.FormattedFieldPhone.prototype.setValue = function (value) {
         var formattedValue = "";
 
         if (value.length == 10) {
@@ -313,7 +321,7 @@
     /*
     * FormattedFieldPercent - percent format
     */
-    OpenSlx.FormattedFieldPercent = function(field) {
+    OpenSlx.FormattedFieldPercent = function (field) {
         if (arguments.length > 0)
             this.init(field);
     }
@@ -321,11 +329,11 @@
     OpenSlx.FormattedFieldPercent.prototype.constructor = OpenSlx.FormattedFieldPercent;
     OpenSlx.FormattedFieldPercent.superclass = OpenSlx.FormattedField.prototype;
 
-    OpenSlx.FormattedFieldPercent.prototype.init = function(field) {
+    OpenSlx.FormattedFieldPercent.prototype.init = function (field) {
         OpenSlx.FormattedFieldPercent.superclass.init.call(this, field);
     }
 
-    OpenSlx.FormattedFieldPercent.prototype.setValue = function(value) {
+    OpenSlx.FormattedFieldPercent.prototype.setValue = function (value) {
         var val = parseFloat(value);
         if (isNaN(val))
             val = 0;
@@ -337,7 +345,7 @@
     }
 
     // get the raw value
-    OpenSlx.FormattedFieldPercent.prototype.getValue = function() {
+    OpenSlx.FormattedFieldPercent.prototype.getValue = function () {
         var val = OpenSlx.FormattedFieldPercent.superclass.getValue.call(this);
         if (val > 1)
             return val / 100;
@@ -353,7 +361,7 @@
     /*
     * FormattedFieldDecimal - numeric format, arbitrary number of decimals
     */
-    OpenSlx.FormattedFieldDecimal = function(field, numDecimals) {
+    OpenSlx.FormattedFieldDecimal = function (field, numDecimals) {
         if (arguments.length > 0)
             this.init(field, numDecimals);
     }
@@ -362,11 +370,11 @@
     OpenSlx.FormattedFieldDecimal.superclass = OpenSlx.FormattedField.prototype;
 
 
-    OpenSlx.FormattedFieldDecimal.prototype.init = function(field, numDecimals) {
+    OpenSlx.FormattedFieldDecimal.prototype.init = function (field, numDecimals) {
         OpenSlx.FormattedFieldDecimal.superclass.init.call(this, field, numDecimals);
     }
 
-    OpenSlx.FormattedFieldDecimal.prototype.setValue = function(value) {
+    OpenSlx.FormattedFieldDecimal.prototype.setValue = function (value) {
         var val = parseFloat(value);
         if (isNaN(val))
             val = 0;

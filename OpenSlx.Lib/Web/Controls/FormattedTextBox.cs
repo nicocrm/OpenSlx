@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Sage.Platform.WebPortal;
+using Sage.Common.Syndication.Json;
+using OpenSlx.Lib.Properties;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -39,7 +42,7 @@ namespace OpenSlx.Lib.Web.Controls
         /// Format argument (the meaning depends on the format type - e.g. for decimal format it 
         /// indicates the number of decimals
         /// </summary>
-        public String FormatArgument {get; set; }
+        public String FormatArgument { get; set; }
 
         /// <summary>
         /// Register javascript include.
@@ -49,6 +52,13 @@ namespace OpenSlx.Lib.Web.Controls
         {
             base.OnLoad(e);
             ScriptManager.RegisterClientScriptResource(this, GetType(), "OpenSlx.Lib.Web.Controls.JS.formatted.js");
+            String script = JavaScriptConvert.SerializeObject(new
+            {
+                EnterOnlyNumbers = Resources.EnterOnlyNumbers,
+                EnterOnlyWholeNumbers = Resources.EnterOnlyWholeNumbers
+            });
+            ScriptManager.RegisterClientScriptBlock(this, GetType(), "OpenSlx.FormattedField.Strings",
+                "OpenSlx.FormattedField.Strings = " + script, true);
         }
 
         /// <summary>
@@ -62,12 +72,12 @@ namespace OpenSlx.Lib.Web.Controls
             String className = "OpenSlx.FormattedField";
             if (Format > 0)
                 className += Format.ToString();
-            
+
             String script = "new " + className + "('" + this.ClientID + "'";
-            if(!String.IsNullOrEmpty(FormatArgument))
+            if (!String.IsNullOrEmpty(FormatArgument))
                 script += "," + FormatArgument;
             script += ");";
-                
+
             ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(), script, true);
         }
 

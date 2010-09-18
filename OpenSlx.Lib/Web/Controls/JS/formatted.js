@@ -155,6 +155,9 @@
             this.init(field, numDecimals);
     }
 
+    OpenSlx.FormattedField.setFieldValue = setFieldValue;
+    OpenSlx.FormattedField.getFieldValue = getFieldValue;
+    OpenSlx.FormattedField.formatCurrency = formatCurrency;
 
     // Default for localized strings.
     // They can be overridden either from Javascript code, or by defining the corresponding

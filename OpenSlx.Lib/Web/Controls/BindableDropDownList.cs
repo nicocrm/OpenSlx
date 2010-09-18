@@ -44,6 +44,12 @@ namespace OpenSlx.Lib.Web.Controls
         public event EventHandler SelectedValueChanged;
 
         /// <summary>
+        /// If set to true, and the SelectedValue is set to an item that is not in the 
+        /// list, it will be added automatically.
+        /// </summary>
+        public bool AddMissingItems { get; set; }
+
+        /// <summary>
         /// Add our event hook
         /// </summary>
         /// <param name="e"></param>
@@ -75,6 +81,11 @@ namespace OpenSlx.Lib.Web.Controls
             {
                 var item = this.Items.FindByValue(value);
                 ClearSelection();
+                if (item == null && AddMissingItems)
+                {
+                    item = new ListItem(value, value);
+                    Items.Add(item);
+                }
                 if (item != null)
                 {
                     item.Selected = true;

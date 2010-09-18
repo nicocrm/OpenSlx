@@ -3,16 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Sage.Platform.WebPortal.SmartParts;
+using System.Web.UI;
+using Sage.Platform.Orm.Interfaces;
+
+/*
+   OpenSlx - Open Source SalesLogix Library and Tools
+   Copyright 2010 nicocrm (http://github.com/nicocrm/OpenSlx)
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
 namespace OpenSlx.Lib.Web.Utility
 {
     /// <summary>
     /// Helper class to reduce the amount of boilerplate code needed for custom, bound 
     /// smart parts.
+    /// The methods under "Configuration" can be overridden by subclasses.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class SimpleSmartPart<T> : EntityBoundSmartPartInfoProvider
-        where T: class
+    /// <typeparam name="TEntity">Type of entity - e.g. IAccount</typeparam>
+    public class SimpleSmartPart<TEntity> : EntityBoundSmartPartInfoProvider
+        where TEntity : class, IPersistentEntity
     {
         #region Helpers
 
@@ -20,11 +40,11 @@ namespace OpenSlx.Lib.Web.Utility
         /// Reference to the current entity.
         /// This can be null if the entity has not been loaded yet.
         /// </summary>
-        protected T CurrentEntity
+        protected TEntity CurrentEntity
         {
             get
             {
-                return BindingSource.Current as T;
+                return BindingSource.Current as TEntity;
             }
         }
 
@@ -35,13 +55,78 @@ namespace OpenSlx.Lib.Web.Utility
 
         public override Type EntityType
         {
-            get { return typeof(T); }
+            get { return typeof(TEntity); }
         }
 
         protected override void OnAddEntityBindings()
         {
 
         }
+
+        public override Sage.Platform.Application.UI.ISmartPartInfo GetSmartPartInfo(Type smartPartInfoType)
+        {
+            var tinfo = new ToolsSmartPartInfo();
+            var container = ToolbarContainer;
+            if (container != null)
+            {
+                List<Control> controlContainer = null;
+                switch (container.ToolbarLocation)
+                {
+                    case SmartPartToolsLocation.Right:
+                        controlContainer = tinfo.RightTools;
+                        break;
+                    case SmartPartToolsLocation.Left:
+                        controlContainer = tinfo.LeftTools;
+                        break;
+                    case SmartPartToolsLocation.Center:
+                        controlContainer = tinfo.CenterTools;
+                        break;
+                }
+                if (controlContainer != null)
+                {
+                    foreach (Control c in container.Controls)
+                    {
+                        controlContainer.Add(c);
+                    }
+                }
+            }
+            if (SmartPartTitle != null)
+            {
+                tinfo.Title = SmartPartTitle;
+                tinfo.Description = SmartPartTitle;
+            }
+            return tinfo;
+        }
+        
+
+        #endregion
+
+        #region Configuration
+
+        /// <summary>
+        /// Smart part title - the default is to read the "Title" local resource.
+        /// </summary>
+        protected virtual String SmartPartTitle
+        {
+            get
+            {
+                return (String)GetLocalResourceObject("Title") ?? "";
+            }
+        }
+
+
+        /// <summary>
+        /// Controls from this container will be added to the Smartpart Toolbar.
+        /// Return null if toolbar not desired.
+        /// </summary>
+        protected virtual SmartPartToolsContainer ToolbarContainer
+        {
+            get
+            {
+                return null;
+            }
+        }
+
 
         #endregion
     }

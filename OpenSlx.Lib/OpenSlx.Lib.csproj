@@ -61,6 +61,7 @@
     </Reference>
     <Reference Include="log4net">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\log4net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\NHibernate.dll</HintPath>
@@ -68,9 +69,11 @@
     </Reference>
     <Reference Include="Sage.Common.Syndication">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Common.Syndication.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Common.Syndication.Json">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Common.Syndication.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Entity.Interfaces">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Entity.Interfaces.dll</HintPath>
@@ -86,9 +89,11 @@
     </Reference>
     <Reference Include="Sage.Platform.Application.UI.Web">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.Application.UI.Web.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.Configuration">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.Configuration.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.WebPortal">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.WebPortal.dll</HintPath>
@@ -96,12 +101,15 @@
     </Reference>
     <Reference Include="Sage.SalesLogix">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.API">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.API.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.HighLevelTypes">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.HighLevelTypes.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.NHibernate">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.NHibernate.dll</HintPath>
@@ -109,6 +117,7 @@
     </Reference>
     <Reference Include="Sage.SalesLogix.PickLists">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.PickLists.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Security">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Security.dll</HintPath>
@@ -124,6 +133,7 @@
     </Reference>
     <Reference Include="Sage.SalesLogix.Web.Controls">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Web.Controls.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -161,6 +171,8 @@
     <Compile Include="Web\Controls\BindableDropDownList.cs" />
     <Compile Include="Web\Controls\BindableRadioButtonList.cs" />
     <Compile Include="Web\Controls\BindingSourceParameter.cs" />
+    <Compile Include="Web\Controls\EntityDataSource.cs" />
+    <Compile Include="Web\Controls\EntityDataSourceView.cs" />
     <Compile Include="Web\Controls\FormattedTextBox.cs" />
     <Compile Include="Web\Controls\Impl\DropDownPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\IPicklistAdapter.cs" />
@@ -172,7 +184,10 @@
     <Compile Include="Web\Controls\SimpleLookup.cs" />
     <Compile Include="Web\Controls\SimplePicklist.cs" />
     <Compile Include="Utility\ReflectionHelper.cs" />
+    <Compile Include="Web\Controls\SlxEntityDataSource.cs" />
     <Compile Include="Web\Controls\SlxSqlDataSource.cs" />
+    <Compile Include="Web\Controls\TabWorkspaceWithMiddleOnBottom.cs" />
+    <Compile Include="Web\Controls\WebControlConfigurationException.cs" />
     <Compile Include="Web\Controls\Workarounds\FixSlxGridView.cs" />
     <Compile Include="Web\Controls\Workarounds\FixSlxLookup.cs" />
     <Compile Include="Web\Utility\SimpleSmartPart.cs">

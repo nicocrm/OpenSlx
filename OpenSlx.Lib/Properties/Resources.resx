@@ -123,4 +123,36 @@
   <data name="EnterOnlyWholeNumbers" xml:space="preserve">
     <value>Enter only whole numbers, without cents.</value>
   </data>
+  <data name="DeleteMethodNameMustBeConfiguredInOrderToU" xml:space="preserve">
+    <value>DeleteMethodName must be configured in order to use Delete</value>
+    <comment>DeleteMethodNameMustBeConfiguredInOrderToU description</comment>
+  </data>
+  <data name="TheMethodX0CanTBeFoundOnTypeX1" xml:space="preserve">
+    <value>The method {0} can't be found on type {1}</value>
+    <comment>TheMethodX0CanTBeFoundOnTypeX1 description</comment>
+  </data>
+  <data name="CanTConvertTypeFromX0ToNullableX1" xml:space="preserve">
+    <value>Can't convert type from {0} to Nullable&lt;{1}&gt;</value>
+    <comment>CanTConvertTypeFromX0ToNullableX1 description</comment>
+  </data>
+  <data name="CanTConvertX0FromStringToX1" xml:space="preserve">
+    <value>Can't convert {0} from string to {1}</value>
+    <comment>CanTConvertX0FromStringToX1 description</comment>
+  </data>
+  <data name="InvalidPropertyExpressionForSortX0" xml:space="preserve">
+    <value>Invalid property expression for sort: {0}</value>
+    <comment>InvalidPropertyExpressionForSortX0 description</comment>
+  </data>
+  <data name="ExecuteUpdatePassedEmptyKeysArrayIsDataKey" xml:space="preserve">
+    <value>ExecuteUpdate passed empty 'keys' array - is DataKeyNames defined?</value>
+    <comment>ExecuteUpdatePassedEmptyKeysArrayIsDataKey description</comment>
+  </data>
+  <data name="SlxEntityDataSourceCanOnlyBeUsedOnAnEntity" xml:space="preserve">
+    <value>SlxEntityDataSource can only be used on an EntityBoundSmartPart</value>
+    <comment>SlxEntityDataSourceCanOnlyBeUsedOnAnEntity description</comment>
+  </data>
+  <data name="PropertyX0MustBeCastableToICollection" xml:space="preserve">
+    <value>Property {0} must be castable to ICollection</value>
+    <comment>PropertyX0MustBeCastableToICollection description</comment>
+  </data>
 </root>

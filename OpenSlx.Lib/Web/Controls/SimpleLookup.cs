@@ -15,6 +15,9 @@ using Sage.Platform.Orm;
 using System.Text.RegularExpressions;
 using Sage.SalesLogix.Security;
 using log4net;
+using System.Web.UI.WebControls;
+using OpenSlx.Lib.Utility;
+using OpenSlx.Lib.Web.Utility;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -290,8 +293,29 @@ namespace OpenSlx.Lib.Web.Controls
                 // since this is a subclass of LookupControl it is not in the "correct" assembly anymore.
                 // this fix ensures that the image is loaded from the original assembly
                 LookupImageURL = this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Find_16x16.gif");
+
             }
         }
+
+        /// <summary>
+        /// Fix for the "clear" image.
+        /// This image is not exposed like the lookup image, so we have to use a bit of javascript to replace it 
+        /// on the fly.
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            if (AllowClearingResult && !ReadOnly && Enabled)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(),
+                    String.Format("$('#{0}_btnClearResult').attr('src', '{1}');",
+                        ClientID,
+                        this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Delete_16x16.gif")),
+                    true);
+            }
+        }
+
 
 
         /// <summary>

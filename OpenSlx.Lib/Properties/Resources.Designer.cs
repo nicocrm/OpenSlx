@@ -61,6 +61,33 @@ namespace OpenSlx.Lib.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t convert type from {0} to Nullable&lt;{1}&gt;.
+        /// </summary>
+        internal static string CanTConvertTypeFromX0ToNullableX1 {
+            get {
+                return ResourceManager.GetString("CanTConvertTypeFromX0ToNullableX1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t convert {0} from string to {1}.
+        /// </summary>
+        internal static string CanTConvertX0FromStringToX1 {
+            get {
+                return ResourceManager.GetString("CanTConvertX0FromStringToX1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DeleteMethodName must be configured in order to use Delete.
+        /// </summary>
+        internal static string DeleteMethodNameMustBeConfiguredInOrderToU {
+            get {
+                return ResourceManager.GetString("DeleteMethodNameMustBeConfiguredInOrderToU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter only numbers in this field..
         /// </summary>
         internal static string EnterOnlyNumbers {
@@ -75,6 +102,51 @@ namespace OpenSlx.Lib.Properties {
         internal static string EnterOnlyWholeNumbers {
             get {
                 return ResourceManager.GetString("EnterOnlyWholeNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ExecuteUpdate passed empty &apos;keys&apos; array - is DataKeyNames defined?.
+        /// </summary>
+        internal static string ExecuteUpdatePassedEmptyKeysArrayIsDataKey {
+            get {
+                return ResourceManager.GetString("ExecuteUpdatePassedEmptyKeysArrayIsDataKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid property expression for sort: {0}.
+        /// </summary>
+        internal static string InvalidPropertyExpressionForSortX0 {
+            get {
+                return ResourceManager.GetString("InvalidPropertyExpressionForSortX0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property {0} must be castable to ICollection.
+        /// </summary>
+        internal static string PropertyX0MustBeCastableToICollection {
+            get {
+                return ResourceManager.GetString("PropertyX0MustBeCastableToICollection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SlxEntityDataSource can only be used on an EntityBoundSmartPart.
+        /// </summary>
+        internal static string SlxEntityDataSourceCanOnlyBeUsedOnAnEntity {
+            get {
+                return ResourceManager.GetString("SlxEntityDataSourceCanOnlyBeUsedOnAnEntity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The method {0} can&apos;t be found on type {1}.
+        /// </summary>
+        internal static string TheMethodX0CanTBeFoundOnTypeX1 {
+            get {
+                return ResourceManager.GetString("TheMethodX0CanTBeFoundOnTypeX1", resourceCulture);
             }
         }
     }

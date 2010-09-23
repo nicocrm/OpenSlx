@@ -5,6 +5,9 @@ using System.Text;
 using Sage.Platform.WebPortal.SmartParts;
 using System.Web.UI;
 using Sage.Platform.Orm.Interfaces;
+using Sage.Platform.WebPortal.Binding;
+using System.Linq.Expressions;
+using Sage.Platform.WebPortal;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -47,6 +50,22 @@ namespace OpenSlx.Lib.Web.Utility
                 return BindingSource.Current as TEntity;
             }
         }
+
+        private TypedWebEntityBindingGenerator<TEntity> _bf = null;        
+        /// <summary>
+        /// Create a new binding, add it to the binding source, and return it.
+        /// </summary>
+        protected WebEntityBinding AddBinding<TComponent, TProperty, TProperty2>(Expression<Func<TEntity, TProperty>> entityProperty,
+            TComponent component,
+            Expression<Func<TComponent, TProperty2>> componentProperty)
+        {
+            if (_bf == null)
+                _bf = new TypedWebEntityBindingGenerator<TEntity>();
+            WebEntityBinding bdg = _bf.CreateBinding(entityProperty, component, componentProperty);
+            BindingSource.Bindings.Add(bdg);
+            return bdg;
+        }
+
 
         #endregion
 

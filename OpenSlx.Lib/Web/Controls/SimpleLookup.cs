@@ -18,6 +18,7 @@ using log4net;
 using System.Web.UI.WebControls;
 using OpenSlx.Lib.Utility;
 using OpenSlx.Lib.Web.Utility;
+using Sage.Entity.Interfaces;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -130,6 +131,7 @@ namespace OpenSlx.Lib.Web.Controls
                 // remove initial "@" (this is used to indicate calculated fields)                
                 if (parts[0][0] == '@')
                     parts[0] = parts[0].Substring(1);
+                String fieldName = parts[0].ToUpper();
                 for (int i = 0; i < root.PropertyTypes.Length; i++)
                 {
                     IType propType = root.PropertyTypes[i];
@@ -139,7 +141,7 @@ namespace OpenSlx.Lib.Web.Controls
                     }
                     String propName = root.PropertyNames[i];
                     String[] columns = root.ToColumns(propName);
-                    if (columns.Length == 1 && columns[0] == parts[0])
+                    if (columns.Length == 1 && columns[0].ToUpper() == fieldName)
                     {
                         return FormatProperty(propName, propType, format);
                     }
@@ -286,6 +288,10 @@ namespace OpenSlx.Lib.Web.Controls
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
+            if (String.IsNullOrEmpty(LookupEntityTypeName))
+            {
+                LookupEntityTypeName = "Sage.SalesLogix.Entities." + LookupEntityName + ", Sage.SalesLogix.Entities";
+            }
             this.LookupProperties = GetLookupProperties(this.LookupName, this.LookupEntityTypeName);
             if (this.ViewState["LookupImageURL"] == null)
             {

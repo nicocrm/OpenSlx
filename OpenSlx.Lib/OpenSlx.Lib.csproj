@@ -190,6 +190,7 @@
     <Compile Include="Web\Controls\WebControlConfigurationException.cs" />
     <Compile Include="Web\Controls\Workarounds\FixSlxGridView.cs" />
     <Compile Include="Web\Controls\Workarounds\FixSlxLookup.cs" />
+    <Compile Include="Web\Extensions\UserControlExtensions.cs" />
     <Compile Include="Web\Utility\SimpleSmartPart.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

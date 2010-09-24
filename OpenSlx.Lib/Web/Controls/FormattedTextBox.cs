@@ -58,7 +58,7 @@ namespace OpenSlx.Lib.Web.Controls
                 EnterOnlyWholeNumbers = Resources.EnterOnlyWholeNumbers
             });
             ScriptManager.RegisterClientScriptBlock(this, GetType(), "OpenSlx.FormattedField.Strings",
-                "OpenSlx.FormattedField.Strings = " + script, true);
+                "OpenSlx.FormattedField.Strings = " + script + ";", true);
         }
 
         /// <summary>

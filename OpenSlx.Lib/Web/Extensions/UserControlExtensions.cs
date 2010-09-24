@@ -32,13 +32,13 @@ namespace OpenSlx.Lib.Web.Extensions
         /// <param name="msg"></param>
         /// <param name="callback">Can specify javascript code to be run when user closes the message box.  
         /// This needs to be specified as a Javascript function, for example "function() { alert('boo') }"</param>
-        public static void MessageBox(this UserControl ctl, String msg, String callback=null)
+        public static void MessageBox(this UserControl ctl, String msg, String callback = null)
         {
             String script = "Ext.MessageBox.alert('', '" + PortalUtil.JavaScriptEncode(msg) + "'";
             if (!String.IsNullOrEmpty(callback))
                 script += ", " + callback;
             script += ");";
-            ctl.JavaScript(script);            
+            ctl.JavaScript(script);
         }
     }
 }

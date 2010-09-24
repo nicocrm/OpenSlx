@@ -67,28 +67,6 @@ namespace OpenSlx.Lib.Web.Utility
             return bdg;
         }
 
-        /// <summary>
-        /// Convenience method to show an "Add" dialog.
-        /// </summary>
-        /// <typeparam name="TChild"></typeparam>
-        /// <param name="childsParentRelationship">How to get the parent from the child</param>
-        /// <param name="parentsChildCollection">How to get the child collection from the parent</param>
-        /// <param name="height"></param>
-        /// <param name="width"></param>
-        /// <param name="smartPartId"></param>
-        protected void ShowAddDialog<TChild>(Expression<Func<TChild, TEntity>> childsParentRelationship, 
-            Expression<Func<TEntity, ICollection<TChild>>> parentsChildCollection, 
-            int height, int width, String smartPartId)
-        {
-            PropertyInfo childsParentRelationshipProp = (PropertyInfo)((MemberExpression)childsParentRelationship.Body).Member; ;
-            PropertyInfo parentsChildCollectionProp = (PropertyInfo)((MemberExpression)parentsChildCollection.Body).Member;
-            DialogService.SetChildIsertInfo(typeof(TChild), typeof(TEntity), 
-                childsParentRelationshipProp, parentsChildCollectionProp);
-            DialogService.SetSpecs(height, width, smartPartId);
-            DialogService.ShowDialog();
-        }
-
-
         #endregion
 
 

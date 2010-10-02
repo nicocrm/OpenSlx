@@ -6,6 +6,7 @@ using System.Web.UI;
 using Sage.Platform.WebPortal;
 using System.Web.UI.WebControls;
 using Sage.Platform.WebPortal.SmartParts;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace OpenSlx.Lib.Web.Extensions
@@ -80,5 +81,29 @@ namespace OpenSlx.Lib.Web.Extensions
                 }
             }
         }
+        
+        /// Convenience method to show an "Add" dialog. (TODO)
+        /// </summary>
+        /// <typeparam name="TChild"></typeparam>
+        /// <typeparam name="TParent"></typeparam>
+        /// <param name="control"></param>
+        /// <param name="childsParentRelationship">How to get the parent from the child</param>
+        /// <param name="parentsChildCollection">How to get the child collection from the parent</param>
+        /// <param name="height"></param>
+        /// <param name="width"></param>
+        /// <param name="smartPartId"></param>
+        // not working 
+        //public static void ShowAddDialog<TParent, TChild>(this SmartPart control,
+        //    Expression<Func<TChild, TParent>> childsParentRelationship,
+        //    Expression<Func<TParent, ICollection<TChild>>> parentsChildCollection,
+        //    int height, int width, String smartPartId)
+        //{
+        //    PropertyInfo childsParentRelationshipProp = (PropertyInfo)((MemberExpression)childsParentRelationship.Body).Member; ;
+        //    PropertyInfo parentsChildCollectionProp = (PropertyInfo)((MemberExpression)parentsChildCollection.Body).Member;
+        //    control.DialogService.SetChildIsertInfo(typeof(TChild), typeof(TParent),
+        //        childsParentRelationshipProp, parentsChildCollectionProp);
+        //    control.DialogService.SetSpecs(height, width, smartPartId);
+        //    control.DialogService.ShowDialog();
+        //}
     }
 }

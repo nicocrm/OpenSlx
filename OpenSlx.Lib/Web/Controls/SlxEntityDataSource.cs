@@ -75,12 +75,12 @@ namespace OpenSlx.Lib.Web.Controls
             }
         }
 
-        /// <summary>
-        /// List of fields to be included in the retrieved data, separated by commas.
-        /// This can be used to include sub-properties, e.g. Product.Price.
-        /// If non-null a dictionary object containing all the specified properties will be returned,
-        /// otherwise the original object will be returned.
-        /// </summary>
+        
+        // List of fields to be included in the retrieved data, separated by commas.
+        // This can be used to include sub-properties, e.g. Product.Price.
+        // If non-null a dictionary object containing all the specified properties will be returned,
+        // otherwise the original object will be returned.
+        // (TODO)
         //public String SelectFields { get; set; }
 
         /// <summary>

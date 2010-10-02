@@ -248,7 +248,7 @@ namespace OpenSlx.Lib.Web.Controls
         /// </summary>
         private static IEnumerable<LookupLayoutField> GetLookupFields(ISession sess, String tableName, String lookupName)
         {
-            var lst = sess.CreateSQLQuery("select layout from lookup where maintable=? and (slxstr(lookupname)=? or searchfield=?)")
+            var lst = sess.CreateSQLQuery("select layout from lookup where maintable=? and (searchfield=? or lookupname=?)")
                     .SetString(0, tableName)
                     .SetString(1, lookupName)
                     .SetString(2, lookupName)

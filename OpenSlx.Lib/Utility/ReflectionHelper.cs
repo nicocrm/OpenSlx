@@ -5,6 +5,7 @@ using System.Reflection;
 using System.ComponentModel;
 using log4net;
 using OpenSlx.Lib.Services;
+using Sage.Platform.ComponentModel;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -385,7 +386,16 @@ namespace OpenSlx.Lib.Utility
             private static LinkedList<PropertyInfo> FindProperty_wkh(Type t, String[] propertyPath, int pathIndex, LinkedList<PropertyInfo> pathAccu)
             {
                 t = GetStaticType(t);
-                PropertyInfo p = t.GetProperty(propertyPath[pathIndex]);
+                PropertyInfo p = t.GetProperty(propertyPath[pathIndex], BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                if (p == null && propertyPath[pathIndex] == "Id")
+                {
+                    // work around for SalesLogix
+                    // interfaces hierarchies don't inherit the properties from the parent until they are actually implemented into a concrete class.
+                    // so, typeof(IAccount).GetProperty("Id") does not work.
+                    // a work around would be to manually flatten the hierarchy, but since in 99.9% of the case when using SLX we're only interested in the "Id" 
+                    // property of the parent interfaces, we will hard code the path as a shortcut
+                    p = typeof(IComponentReference).GetProperty("Id");
+                }
                 if (p != null)
                 {
                     pathAccu.AddLast(p);

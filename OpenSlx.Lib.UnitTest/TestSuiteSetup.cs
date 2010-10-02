@@ -32,7 +32,7 @@ namespace OpenSlx.Lib.UnitTest
             {
                 _setup.Open();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }

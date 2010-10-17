@@ -142,11 +142,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenSlx.RelationCheck\OpenSlx.RelationCheck.csproj">
+    <ProjectReference Include="..\OpenSlx.RelationCheck\OpenSlx.RelationCheck.csproj">
       <Project>{E49B24B6-A1FF-48BE-A03C-603D1D13357F}</Project>
       <Name>OpenSlx.RelationCheck</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenSlx.Lib.csproj">
+    <ProjectReference Include="..\OpenSlx.Lib\OpenSlx.Lib.csproj">
       <Project>{DC4F8B31-1A44-42DF-A934-7F0CB0F46959}</Project>
       <Name>OpenSlx.Lib</Name>
     </ProjectReference>

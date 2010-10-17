@@ -158,7 +158,7 @@ namespace OpenSlx.RelationCheck.App.ViewModel
         private void Login()
         {
             ApplicationContext.Initialize(Guid.NewGuid().ToString());
-            ApplicationContext.Current.Services.Add<IDataService>(new ConnectionStringDataService(SelectedConnection.BuildConnectionString()));
+            ApplicationContext.Current.Services.Add<IDataService>(new ConnectionStringDataService(SelectedConnection.BuildConnectionString(Password)));
             IProject project = ProjectUtility.InitProject(ModelPath);
             ApplicationContext.Current.Services.Add<IProjectContextService>(new SimpleProjectContextService(project));
             if(LoginSuccessful != null)

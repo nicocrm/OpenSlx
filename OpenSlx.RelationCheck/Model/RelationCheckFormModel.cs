@@ -181,9 +181,7 @@ namespace OpenSlx.RelationCheck.Model
                     {
                         if (relationship.Columns.Count > 1)
                             continue;
-                        if (relationship.Cardinality != "M:1")
-                            // we only need the child-parent relationships
-                            continue;
+                        
                         _dispatcher.Invoke(DispatcherPriority.Normal, new Action<OrmRelationship>(AddRelationship), relationship);
                     }
                 }

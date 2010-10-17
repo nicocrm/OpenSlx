@@ -37,10 +37,21 @@ namespace OpenSlx.RelationCheck.Model
         public Relationship(OrmRelationship sageRel)
         {
             RelationshipName = sageRel.ToString();
-            _parentTable = sageRel.ParentEntity.TableName;
-            _parentField = sageRel.Columns[0].ParentProperty.ColumnName;
-            _childTable = sageRel.ChildEntity.TableName;
-            _childField = sageRel.Columns[0].ChildProperty.ColumnName;
+
+            if (sageRel.Cardinality == "M:1")
+            {
+                _parentTable = sageRel.ParentEntity.TableName;
+                _parentField = sageRel.Columns[0].ParentProperty.ColumnName;
+                _childTable = sageRel.ChildEntity.TableName;
+                _childField = sageRel.Columns[0].ChildProperty.ColumnName;
+            }
+            else
+            {
+                _childTable = sageRel.ParentEntity.TableName;
+                _childField = sageRel.Columns[0].ParentProperty.ColumnName;
+                _parentTable = sageRel.ChildEntity.TableName;
+                _parentField = sageRel.Columns[0].ChildProperty.ColumnName;
+            }
         }
 
         #region Properties
@@ -57,7 +68,7 @@ namespace OpenSlx.RelationCheck.Model
                 {
                     _RelationshipName = value;
                     OnPropertyChanged("RelationshipName");
-                    OnPropertyChanged("Description");   
+                    OnPropertyChanged("Description");
                 }
             }
         }
@@ -79,7 +90,7 @@ namespace OpenSlx.RelationCheck.Model
             }
         }
         private String _Error;
-        
+
 
         ///<summary>
         /// Number of invalid FK
@@ -99,7 +110,7 @@ namespace OpenSlx.RelationCheck.Model
         }
         private int? _ErrorCount;
 
-        public string Description 
+        public string Description
         {
             get
             {

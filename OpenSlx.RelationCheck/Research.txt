@@ -1,0 +1,21 @@
+OrmEntity
+  Has a tablename
+  
+   ParentRelationProperties
+     (is an OrmEntityProperty -> OrmRelationProperty?)
+      OrmRelationProperty has a "Relationship" field
+      -> ParentEntity, ParentProperty  (an OrmRelationProperty)  has a PropertyName
+      
+      How do we go from ParentEntity to physical table name?
+      How do we go from PropertyName to physical field name?
+			We can look at the columns on the OrmEntity
+			Try casting the property to an OrmFieldProperty and read the ColumnName
+      
+      Does that always link up to the "Id" of the parent?  I don't think so
+      There is a "ChildProperty" field...
+      
+      
+      
+To try:
+ * Initialize a project
+ * Enumerate the relationships      

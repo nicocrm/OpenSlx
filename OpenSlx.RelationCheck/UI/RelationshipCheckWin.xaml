@@ -1,0 +1,36 @@
+﻿<Window x:Class="OpenSlx.RelationCheck.UI.RelationshipCheckWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:model="clr-namespace:OpenSlx.RelationCheck.Model;assembly="
+        xmlns:local="clr-namespace:OpenSlx.RelationCheck.UI;assembly="
+        Title="Relationship Check" Height="582" Width="617" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:ColorErrorCountConverter x:Key="errorCountConverter"/>
+        <local:BooleanToVisibleConverter x:Key="boolVisibleConverter"/>        
+    </Window.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding Path=Relationships}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Description}" 
+                               ToolTip="{Binding Path=Error}"
+                               Background="{Binding Path=ErrorCount, Converter={StaticResource ResourceKey=errorCountConverter}}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="75"/>
+            </Grid.ColumnDefinitions>
+            <ProgressBar Grid.Column="0" Value="{Binding Progress}" Margin="2" Visibility="{Binding Path=IsBusy,Converter={StaticResource ResourceKey=boolVisibleConverter}}"/>
+            <Button Grid.Column="1" Command="{Binding TestRelationshipsCommand}">Test</Button>
+            <Button Grid.Column="2" Command="{Binding RepairRelationshipsCommand}">Repair</Button>
+        </Grid>
+    </Grid>
+</Window>

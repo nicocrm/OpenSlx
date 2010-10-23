@@ -30,8 +30,15 @@
     function initGlobals() {
         var d = (2.2).toLocaleString();
         DECIMAL_SEPARATOR = d.substr(1, 1);
+        if (/\d/.test(DECIMAL_SEPARATOR))
+            DECIMAL_SEPARATOR = ".";
         d = (22222).toLocaleString();
         THOUSAND_SEPARATOR = d.substr(2, 1);
+        if (/\d/.test(THOUSAND_SEPARATOR))
+            // fallback in case the browser does not include the 1000's sep
+            // (Chrome)
+            // TODO - use the globalization plugin from MS?
+            THOUSAND_SEPARATOR = "";
     }
 
     // locate a formatted field

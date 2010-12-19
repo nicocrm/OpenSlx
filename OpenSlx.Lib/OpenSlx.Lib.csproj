@@ -104,10 +104,6 @@
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sage.SalesLogix.Activity.Entities">
-      <HintPath>..\..\..\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Activity.Entities.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Sage.SalesLogix.API">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.API.dll</HintPath>
       <Private>False</Private>

@@ -40,9 +40,35 @@ namespace OpenSlx.Lib.Web.Controls
 
         /// <summary>
         /// Format argument (the meaning depends on the format type - e.g. for decimal format it 
-        /// indicates the number of decimals
+        /// indicates the number of decimals)
+        /// This is deprecated now - the preferred method is to set the appropriate field like NumDecimals or AllowNegative.
         /// </summary>
-        public String FormatArgument { get; set; }
+        [Obsolete]
+        public String FormatArgument
+        {
+            get
+            {
+                return String.Format("{0}", NumDecimals);
+            }
+            set
+            {
+                int x;
+                if (int.TryParse(value, out x))
+                    NumDecimals = x;
+            }
+        }
+
+        public int? NumDecimals { get; set; }
+
+        /// <summary>
+        /// Whether to allow - number
+        /// </summary>
+        public bool AllowNegative { get; set; }
+
+        public FormattedTextBox()
+        {
+            NumDecimals = null;
+        }
 
         /// <summary>
         /// Register javascript include.
@@ -73,10 +99,13 @@ namespace OpenSlx.Lib.Web.Controls
             if (Format > 0)
                 className += Format.ToString();
 
-            String script = "new " + className + "('" + this.ClientID + "'";
-            if (!String.IsNullOrEmpty(FormatArgument))
-                script += "," + FormatArgument;
-            script += ");";
+            var config = new
+            {
+                allowNegative = AllowNegative,
+                numDecimals = NumDecimals
+            };
+            String script = "new " + className + "('" + this.ClientID + "'," +
+                JavaScriptConvert.SerializeObject(config) + ");";
 
             ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(), script, true);
         }

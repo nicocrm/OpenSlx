@@ -35,9 +35,9 @@
         d = (22222).toLocaleString();
         THOUSAND_SEPARATOR = d.substr(2, 1);
         if (/\d/.test(THOUSAND_SEPARATOR))
-            // fallback in case the browser does not include the 1000's sep
-            // (Chrome)
-            // TODO - use the globalization plugin from MS?
+        // fallback in case the browser does not include the 1000's sep
+        // (Chrome)
+        // TODO - use the globalization plugin from MS?
             THOUSAND_SEPARATOR = "";
     }
 
@@ -102,32 +102,28 @@
         amount = Math.round(amount * b) / b;
 
         var intpart = Math.floor(amount);
-        var floatpart = amount - intpart;
-
-        floatpart = Math.round(floatpart * 100);
-        if (floatpart < 10)
-            floatpart = "0" + floatpart;
+        var floatpart = String(amount - intpart);
 
         if (intpart >= 1000) {
-            acc = formatCurrency_wkh(intpart.toString());
+            acc = formatCurrency_wkh(String(intpart));
         } else {
             acc = intpart;
         }
 
         acc = currencySymbol + acc;
         if (numDecimals > 0) {
-            acc += DECIMAL_SEPARATOR + floatpart;
+            acc += floatpart.replace(/^0/, "");
         }
 
         return acc;
     }
 
     // Keypress handler - return false if that wasnt a number
-    function numberPlease(evt, allowDecimals) {
+    function numberPlease(evt, allowDecimals, allowNegative) {
         var charCode = evt.which;
 
         if (typeof console != "undefined") {
-            console.log("FormattedField: Char code: " + charCode + ", allowDecimals: " + allowDecimals);
+            console.log("FormattedField: Char code: " + charCode + ", allowDecimals: " + allowDecimals + ", allowNegative: " + allowNegative);
         }
         // 40 and under: control chars
         // 44: comma, 46: decimal point
@@ -136,6 +132,8 @@
         // but it won't format correctly
         if ((charCode < 48 || charCode > 57) && // 0-9
         charCode > 0 &&  // special keys - arrows, tabs, etc
+        charCode != 8 && // backspace
+        (!allowNegative || charCode != 45) && 
         (!allowDecimals || (DECIMAL_SEPARATOR == "." ? (charCode != 46) : (charCode != 44)))) {
             if (allowDecimals) {
                 alert(OpenSlx.FormattedField.Strings.EnterOnlyNumbers);
@@ -178,7 +176,10 @@
     // constructor
     // create a hidden field and give it the name from this field, 
     // then remove the name from the current field so that it does not get posted.
-    OpenSlx.FormattedField.prototype.init = function (field, numDecimals) {
+    OpenSlx.FormattedField.prototype.init = function (field, config) {
+        var numDecimals = config.numDecimals || 2;
+        var allowNegative = config.allowNegative || false;
+
         var f = getRawObject(field);
         if (!f)
             return;
@@ -186,9 +187,8 @@
             _fieldList = new Array();
         _fieldList.push(this);
         this.field = f;
-        if (typeof (numDecimals) == "undefined")
-            numDecimals = 2;
-        this._numDecimals = numDecimals;
+        this._numDecimals = Number(numDecimals);
+        this._allowNegative = allowNegative;
         var existingHids = $("[name=" + this.field.name + "][type=hidden]");
         var hid;
         if (existingHids.length > 0) {
@@ -216,7 +216,7 @@
             // save the value to the hidden field in case this will be used for a save
                 r.setValue(r.field.value);
             if (!allowNonNumeric) {
-                return numberPlease(e, allowDecimals);
+                return numberPlease(e, allowDecimals, allowNegative);
             }
             return true;
         });
@@ -371,17 +371,17 @@
     /*
     * FormattedFieldDecimal - numeric format, arbitrary number of decimals
     */
-    OpenSlx.FormattedFieldDecimal = function (field, numDecimals) {
+    OpenSlx.FormattedFieldDecimal = function (field, config) {
         if (arguments.length > 0)
-            this.init(field, numDecimals);
+            this.init(field, config);
     }
     OpenSlx.FormattedFieldDecimal.prototype = new OpenSlx.FormattedField();
     OpenSlx.FormattedFieldDecimal.prototype.constructor = OpenSlx.FormattedFieldDecimal;
     OpenSlx.FormattedFieldDecimal.superclass = OpenSlx.FormattedField.prototype;
 
 
-    OpenSlx.FormattedFieldDecimal.prototype.init = function (field, numDecimals) {
-        OpenSlx.FormattedFieldDecimal.superclass.init.call(this, field, numDecimals);
+    OpenSlx.FormattedFieldDecimal.prototype.init = function (field, config) {
+        OpenSlx.FormattedFieldDecimal.superclass.init.call(this, field, config);
     }
 
     OpenSlx.FormattedFieldDecimal.prototype.setValue = function (value) {

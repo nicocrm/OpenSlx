@@ -133,7 +133,7 @@
         if ((charCode < 48 || charCode > 57) && // 0-9
         charCode > 0 &&  // special keys - arrows, tabs, etc
         charCode != 8 && // backspace
-        (!allowNegative || charCode != 45) && 
+        (!allowNegative || charCode != 45) &&
         (!allowDecimals || (DECIMAL_SEPARATOR == "." ? (charCode != 46) : (charCode != 44)))) {
             if (allowDecimals) {
                 alert(OpenSlx.FormattedField.Strings.EnterOnlyNumbers);
@@ -238,7 +238,11 @@
     OpenSlx.FormattedField.prototype.setValue = function (value) {
         var val = value;
         if (typeof value == "string") {
-            val = parseFloat(value.replace(new RegExp("[\\$%\\" + THOUSAND_SEPARATOR + "]", "g"), ""));
+            var ts = THOUSAND_SEPARATOR;
+            if (ts)
+                // make sure we dont escape it if its blank...
+                ts = "\\" + ts;
+            val = parseFloat(value.replace(new RegExp("[\\$%" + ts + "]", "g"), ""));
         } else if (typeof value != "number") {
             throw "Invalid value for formatted field: " + value;
         }

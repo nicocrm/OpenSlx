@@ -76,12 +76,12 @@ namespace OpenSlx.Lib.Utility
 
         /// <summary>
         /// Set a value on the specified object.
+        /// If the specified property is not found then this call will be ignored.
         /// </summary>
         /// <param name="instance">Instance the value will be set on</param>
         /// <param name="propertyPathString">Path to property.  Subproperties may be separated by periods (Account.Address.City).</param>
         /// <param name="value">Value to be set</param>
         /// <param name="cacheProvider">Used to cache the propertyinfo information.  May be null to skip cache.</param>
-        /// <exception cref="KeyNotFoundException">Property can't be found</exception>
         public static void SetPropertyValue(object instance, String propertyPathString, object value, ICacheService cacheProvider)
         {
             IPropertyPath propertyPath = GetPropertyPath(instance.GetType(), propertyPathString, cacheProvider);

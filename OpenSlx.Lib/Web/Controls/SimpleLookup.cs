@@ -252,10 +252,10 @@ namespace OpenSlx.Lib.Web.Controls
                     .SetString(0, tableName)
                     .SetString(1, lookupName)
                     .SetString(2, lookupName)
-                    .SetMaxResults(1).List();
+                    .SetMaxResults(1).List<String>();
             if (lst.Count == 0)
                 throw new ArgumentException("Invalid lookup " + tableName + ":" + lookupName);
-            String layout = (String)((object[])lst[0])[1];
+            String layout = lst[0];
             String[] layoutParts = Regex.Split(layout, "\\|\r\n\\|");
             foreach (String layoutPart in layoutParts)
             {
@@ -307,18 +307,32 @@ namespace OpenSlx.Lib.Web.Controls
         /// Fix for the "clear" image.
         /// This image is not exposed like the lookup image, so we have to use a bit of javascript to replace it 
         /// on the fly.
+        /// Also, fix to enable default sort
         /// </summary>
         /// <param name="e"></param>
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            if (AllowClearingResult && !ReadOnly && Enabled)
+            if (!ReadOnly && Enabled)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(),
-                    String.Format("$('#{0}_btnClearResult').attr('src', '{1}');",
-                        ClientID,
-                        this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Delete_16x16.gif")),
-                    true);
+                if (AllowClearingResult)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(),
+                        String.Format("$('#{0}_btnClearResult').attr('src', '{1}');",
+                            ClientID,
+                            this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Delete_16x16.gif")),
+                        true);
+                }
+                if (!String.IsNullOrEmpty(DefaultSort))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(),
+            "$(document).ready(function() { setTimeout(function() {" +
+            this.ClientID + @"_luobj.initGrid = function (seedValue, reload) {
+                LookupControl.prototype.initGrid.call(this, seedValue, reload);
+                this.getGrid().getNativeGrid().getStore().setDefaultSort('" + this.DefaultSort + @"');            
+            }   
+            }, 500); });", true);
+                }
             }
         }
 
@@ -330,5 +344,10 @@ namespace OpenSlx.Lib.Web.Controls
         /// If a blank is passed then the first lookup for the specified table will be used.
         /// </summary>
         public String LookupName { get; set; }
+
+        /// <summary>
+        /// Name of the property to do the initial sort by.
+        /// </summary>
+        public String DefaultSort { get; set; }
     }
 }

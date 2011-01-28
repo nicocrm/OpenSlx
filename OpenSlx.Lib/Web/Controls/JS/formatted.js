@@ -302,7 +302,7 @@
 
     OpenSlx.FormattedFieldPhone.prototype.init = function (field) {
         this._allowNonNumeric = true;
-        OpenSlx.FormattedFieldPhone.superclass.init.call(this, field);
+        OpenSlx.FormattedFieldPhone.superclass.init.call(this, field, {});
     }
 
     OpenSlx.FormattedFieldPhone.prototype.setValue = function (value) {
@@ -331,16 +331,16 @@
     /*
     * FormattedFieldPercent - percent format
     */
-    OpenSlx.FormattedFieldPercent = function (field) {
+    OpenSlx.FormattedFieldPercent = function (field, config) {
         if (arguments.length > 0)
-            this.init(field);
+            this.init(field, config);
     }
     OpenSlx.FormattedFieldPercent.prototype = new OpenSlx.FormattedField();
     OpenSlx.FormattedFieldPercent.prototype.constructor = OpenSlx.FormattedFieldPercent;
     OpenSlx.FormattedFieldPercent.superclass = OpenSlx.FormattedField.prototype;
 
-    OpenSlx.FormattedFieldPercent.prototype.init = function (field) {
-        OpenSlx.FormattedFieldPercent.superclass.init.call(this, field);
+    OpenSlx.FormattedFieldPercent.prototype.init = function (field, config) {
+        OpenSlx.FormattedFieldPercent.superclass.init.apply(this, arguments);
     }
 
     OpenSlx.FormattedFieldPercent.prototype.setValue = function (value) {

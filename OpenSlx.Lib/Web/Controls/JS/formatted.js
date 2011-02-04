@@ -210,12 +210,11 @@
         jqf.focus(function () { r.deformat(); this.select(); });
         jqf.blur(function () { r.reformat() });
         var allowDecimals = this._numDecimals > 0;
-        var allowNonNumeric = !!this._allowNonNumeric;
         jqf.keypress(function (e) {
             if (e.which == 13)
             // save the value to the hidden field in case this will be used for a save
                 r.setValue(r.field.value);
-            if (!allowNonNumeric) {
+            if (!r._allowNonNumeric) {
                 return numberPlease(e, allowDecimals, allowNegative);
             }
             return true;
@@ -240,7 +239,7 @@
         if (typeof value == "string") {
             var ts = THOUSAND_SEPARATOR;
             if (ts)
-                // make sure we dont escape it if its blank...
+            // make sure we dont escape it if its blank...
                 ts = "\\" + ts;
             val = parseFloat(value.replace(new RegExp("[\\$%" + ts + "]", "g"), ""));
         } else if (typeof value != "number") {
@@ -305,8 +304,8 @@
     OpenSlx.FormattedFieldPhone.superclass = OpenSlx.FormattedField.prototype;
 
     OpenSlx.FormattedFieldPhone.prototype.init = function (field) {
-        this._allowNonNumeric = true;
         OpenSlx.FormattedFieldPhone.superclass.init.call(this, field, {});
+        this._allowNonNumeric = true;
     }
 
     OpenSlx.FormattedFieldPhone.prototype.setValue = function (value) {
@@ -353,7 +352,14 @@
             val = 0;
         if (val > 1)
             val = val / 100;
-        this.field.value = (Math.round(val * 100)) + " %"
+        if (/^0\./.test(value))
+            // if they type "0.9" we'll assume they really meant "0.9%", i.e. 0.009
+            val = val / 100;
+        // .9 => 90% 
+        // 95.12 => 95.12% (with numdecimals = 2)
+        var b = Math.pow(10, this._numDecimals);
+        amount = Math.round(val * 100 * b) / b;
+        this.field.value = amount + " %"
         this.hidden.value = val;
         this.isformatted = true;
     }

@@ -133,6 +133,7 @@
         if ((charCode < 48 || charCode > 57) && // 0-9
         charCode > 0 &&  // special keys - arrows, tabs, etc
         charCode != 8 && // backspace
+        charCode != 37 &&
         (!allowNegative || charCode != 45) &&
         (!allowDecimals || (DECIMAL_SEPARATOR == "." ? (charCode != 46) : (charCode != 44)))) {
             if (allowDecimals) {
@@ -350,13 +351,15 @@
         var val = parseFloat(value);
         if (isNaN(val))
             val = 0;
-        if (val > 1)
+        
+        if (/%$/.test(value))
             val = val / 100;
-        if (/^0\./.test(value))
-            // if they type "0.9" we'll assume they really meant "0.9%", i.e. 0.009
+        else if (val > 1)
             val = val / 100;
         // .9 => 90% 
         // 95.12 => 95.12% (with numdecimals = 2)
+        // "95%" => 95%
+        // ".9%" => 0.9%
         var b = Math.pow(10, this._numDecimals);
         amount = Math.round(val * 100 * b) / b;
         this.field.value = amount + " %"

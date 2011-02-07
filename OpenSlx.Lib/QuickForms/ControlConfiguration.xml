@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ControlProviders>
+
+  <!-- The content below between the "CUT" lines must be pasted to Web.ControlConfiguration.xml, 
+  right after the opening "ControlProviders" tag (near the top of the file) -->
+
+
+  <!-- CUT -->
+
+  <WebControlRenderingProvider>
+    <TemplateName>OpenSlx.QFEntityDataSource.WebControlRenderingTemplate.vm</TemplateName>
+    <PropertyMaps />
+    <QuickFormControlType TypeName="OpenSlx.Lib.QuickForms.QFEntityDataSource, OpenSlx.Lib">
+      <Properties />
+    </QuickFormControlType>
+  </WebControlRenderingProvider>
+
+  <WebControlRenderingProvider>
+    <TemplateName>OpenSlx.QFComboBox.WebControlRenderingTemplate.vm</TemplateName>
+    <PropertyMaps />
+    <QuickFormControlType TypeName="OpenSlx.Lib.QuickForms.QFComboBox, OpenSlx.Lib">
+      <Properties />
+    </QuickFormControlType>
+  </WebControlRenderingProvider>
+
+  <!-- CUT -->
+
+
+
+</ControlProviders>

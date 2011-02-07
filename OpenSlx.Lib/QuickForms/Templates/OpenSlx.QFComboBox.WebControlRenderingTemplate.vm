@@ -1,0 +1,32 @@
+﻿##
+## Caption
+##
+#if(${qfcontrol.Caption} != "")
+#if($qfcontrol.ControlLabelPlacement == "left")
+ <div class="#if(${qfcontrol.ColumnSpan} == 2)twocollbl#else lbl#end#if(${qfcontrol.ColumnSpan} > 2) colspan3#end#if(${qfcontrol.CaptionAlignment} == "right") alignright#elseif(${qfcontrol.CaptionAlignment} == "center") aligncenter#else alignleft#end" #if($IsPrintView)style="margin-top:.5em;"#end>
+   <asp:Label ID="${qfcontrol.LabelId}" AssociatedControlID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label>
+ </div>
+#elseif($qfcontrol.ControlLabelPlacement == "top")
+ <div class="lbltop#if(${qfcontrol.CaptionAlignment} == "right") alignright#elseif(${qfcontrol.CaptionAlignment} == "center") aligncenter#else alignleft#end">
+   <asp:Label ID="${qfcontrol.LabelId}" AssociatedControlID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!$qfcontrol.Visible)Visible="false" #end></asp:Label>
+ </div>
+#end #end
+##
+## Control
+##
+ <div #if(${qfcontrol.ColumnSpan} > 1 || ${qfcontrol.ControlLabelPlacement} == "top") class="twocoltextcontrol" #else class="textcontrol" #end #if($IsPrintView)style="margin-top:.5em;"#end >
+#if($IsPrintView)
+ <asp:Label runat="server" ID="$qfcontrol.ControlId" style="white-space:normal" #if($qfcontrol.Text != "")Text="<%$ resources: ${qfcontrol.ControlId}.Text %>" #end />
+#else
+ <%@ Register Assembly="OpenSlx.Lib" Namespace="OpenSlx.Lib.Web.Controls" TagPrefix="OpenSlx" %>
+ <OpenSlx:ComboBox runat="server" ID="${qfcontrol.ControlId}" DataSourceID="${qfcontrol.DataSourceID}" />
+#end
+</div>
+##
+## Right-side caption
+##
+#if((${qfcontrol.Caption} != "") && ($qfcontrol.ControlLabelPlacement == "right"))
+ <div class="lblright#if(${qfcontrol.CaptionAlignment} == "right") alignright#elseif(${qfcontrol.CaptionAlignment} == "center") aligncenter#else alignleft#end">
+   <asp:Label ID="${qfcontrol.LabelId}" AssociatedControlID="${qfcontrol.ControlId}" runat="server" Text="<%$ resources: ${qfcontrol.ControlId}.Caption %>" #if(!${qfcontrol.Visible})Visible="false" #end></asp:Label>
+ </div>
+#end

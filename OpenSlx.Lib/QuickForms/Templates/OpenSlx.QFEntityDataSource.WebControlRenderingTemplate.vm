@@ -1,0 +1,2 @@
+﻿<%@ Register Assembly="OpenSlx.Lib" Namespace="OpenSlx.Lib.Web.Controls" TagPrefix="OpenSlx" %>
+<OpenSlx:SlxEntityDataSource runat="server" ID="${qfcontrol.ControlId}" EntityDataSourceProperty="${qfcontrol.GetByProperty}" />

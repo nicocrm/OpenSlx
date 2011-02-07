@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sage.Platform;
-using Sage.Entity.Interfaces;
+using Sage.Platform.Controls;
+
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -22,26 +22,16 @@ using Sage.Entity.Interfaces;
    limitations under the License.
 */
 
-namespace OpenSlx.Lib.SlxDataHelpers
+
+namespace OpenSlx.Lib.QuickForms.Interfaces
 {
     /// <summary>
-    /// Formatting of SalesLogix data
+    /// Interface used to reference to the combo box from code snippet actions.
+    /// This is not working at the moment - the project Sage.Form.Interfaces is not getting a reference
+    /// to OpenSlx.Lib.dll so it does not build.
     /// </summary>
-    public class Formatting
+    public interface IQFComboBox : IControl
     {
-        /// <summary>
-        /// Retrieve user name based on user id.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public static String FormatUserName(String userId)
-        {
-            if (String.IsNullOrEmpty(userId))
-                return "";
-            var user = EntityFactory.GetById<IUser>(userId);
-            return user == null ? "" : user.UserInfo.UserName;
-        }
-
-
+        String Text { get; set; }
     }
 }

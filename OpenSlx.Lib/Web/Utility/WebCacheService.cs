@@ -8,7 +8,7 @@ using OpenSlx.Lib.Services;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
-   Copyright 2010 nicocrm (http://github.com/nicocrm/OpenSlx)
+   Copyright 2010 nicocrm (http://github.com/ngaller/OpenSlx)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

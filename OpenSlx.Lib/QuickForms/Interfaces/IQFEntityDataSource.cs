@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sage.Platform;
-using Sage.Entity.Interfaces;
+
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -22,26 +21,11 @@ using Sage.Entity.Interfaces;
    limitations under the License.
 */
 
-namespace OpenSlx.Lib.SlxDataHelpers
+
+namespace OpenSlx.Lib.QuickForms.Interfaces
 {
-    /// <summary>
-    /// Formatting of SalesLogix data
-    /// </summary>
-    public class Formatting
+    public interface IQFEntityDataSource
     {
-        /// <summary>
-        /// Retrieve user name based on user id.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public static String FormatUserName(String userId)
-        {
-            if (String.IsNullOrEmpty(userId))
-                return "";
-            var user = EntityFactory.GetById<IUser>(userId);
-            return user == null ? "" : user.UserInfo.UserName;
-        }
-
-
+        String GetByProperty { get; set; }
     }
 }

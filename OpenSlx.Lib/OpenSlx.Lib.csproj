@@ -96,6 +96,22 @@
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.Configuration.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Sage.Platform.Design">
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Design.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sage.Platform.Projects">
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Projects.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sage.Platform.QuickForms">
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.QuickForms.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sage.Platform.QuickForms.QFControls">
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.QuickForms.QFControls.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Sage.Platform.WebPortal">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.WebPortal.dll</HintPath>
       <Private>False</Private>
@@ -141,10 +157,12 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -164,6 +182,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="QuickForms\Adapters\ComboBoxAdapter.cs" />
+    <Compile Include="QuickForms\Editors\BoundEntityPropertyNameEditor.cs" />
+    <Compile Include="QuickForms\Editors\DataSourceSelectEditor.cs" />
+    <Compile Include="QuickForms\Interfaces\IQFComboBox.cs" />
+    <Compile Include="QuickForms\Interfaces\IQFEntityDataSource.cs" />
+    <Compile Include="QuickForms\QFComboBox.cs" />
+    <Compile Include="QuickForms\QFEntityDataSource.cs" />
     <Compile Include="SlxDataHelpers\Formatting.cs" />
     <Compile Include="SlxDataHelpers\TimeZoneConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -176,6 +201,7 @@
     <Compile Include="Web\Controls\BindableDropDownList.cs" />
     <Compile Include="Web\Controls\BindableRadioButtonList.cs" />
     <Compile Include="Web\Controls\BindingSourceParameter.cs" />
+    <Compile Include="Web\Controls\ComboBox.cs" />
     <Compile Include="Web\Controls\EntityDataSource.cs" />
     <Compile Include="Web\Controls\EntityDataSourceView.cs" />
     <Compile Include="Web\Controls\FormattedTextBox.cs" />
@@ -210,6 +236,8 @@
     <EmbeddedResource Include="Web\Controls\Impl\SimplePicklist.js" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="QuickForms\ControlConfiguration.xml" />
+    <Content Include="QuickForms\README.txt" />
     <Content Include="SlxDataHelpers\README.txt" />
     <EmbeddedResource Include="Web\Controls\JS\formatted.js" />
     <Content Include="Web\Controls\Workarounds\README.txt" />
@@ -233,6 +261,10 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QuickForms\Templates\OpenSlx.QFComboBox.WebControlRenderingTemplate.vm" />
+    <None Include="QuickForms\Templates\OpenSlx.QFEntityDataSource.WebControlRenderingTemplate.vm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

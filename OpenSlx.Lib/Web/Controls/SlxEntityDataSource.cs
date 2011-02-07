@@ -19,10 +19,11 @@ using Sage.Platform.WebPortal.Services;
 using OpenSlx.Lib.Properties;
 using OpenSlx.Lib.Utility;
 using OpenSlx.Lib.Web.Utility;
+using OpenSlx.Lib.QuickForms.Interfaces;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
-   Copyright 2010 nicocrm (http://github.com/nicocrm/OpenSlx)
+   Copyright 2010 nicocrm (http://github.com/ngaller/OpenSlx)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -45,15 +46,20 @@ namespace OpenSlx.Lib.Web.Controls
     /// Suitable for editable datagrids on Saleslogix tabs.
     /// </summary>
     [ToolboxData("<{0}:SlxEntityDataSource runat=server></{0}:SlxEntityDataSource>")]
-    public class SlxEntityDataSource : EntityDataSource
+    public class SlxEntityDataSource : EntityDataSource, IQFEntityDataSource
     {
-        private String _entityDataSourceProperty;
         [Description("Name of the property to access in the form's entity to retrieve the collection to bind to.  To bind to the entity itself, use a period."),
         DefaultValue(".")]
-        public String EntityDataSourceProperty
+        public String EntityDataSourceProperty { get; set; }
+
+        /// <summary>
+        /// Alias for the EntityDataSourceProperty 
+        /// (this is used from QuickForms for consistency with the Sage naming
+        /// </summary>
+        public String GetByProperty
         {
-            get { return _entityDataSourceProperty; }
-            set { _entityDataSourceProperty = value; }
+            get { return EntityDataSourceProperty; }
+            set { EntityDataSourceProperty = value; }
         }
 
         private IPersistentEntity _sourceEntity = null;
@@ -107,18 +113,18 @@ namespace OpenSlx.Lib.Web.Controls
             object entity = SourceEntity;
             if (entity == null)
                 return;
-            if (_entityDataSourceProperty == ".")
+            if (EntityDataSourceProperty == ".")
                 DataSource = new object[] { entity };
             else
             {
                 try
                 {
-                    DataSource = ((IEnumerable)ReflectionHelper.GetPropertyValue(entity, _entityDataSourceProperty, new WebCacheService()))
+                    DataSource = ((IEnumerable)ReflectionHelper.GetPropertyValue(entity, EntityDataSourceProperty, new WebCacheService()))
                         .Cast<object>();
                 }
                 catch (InvalidCastException)
                 {
-                    throw new InvalidOperationException(String.Format(Resources.PropertyX0MustBeCastableToICollection, _entityDataSourceProperty));
+                    throw new InvalidOperationException(String.Format(Resources.PropertyX0MustBeCastableToICollection, EntityDataSourceProperty));
                 }
             }
         }

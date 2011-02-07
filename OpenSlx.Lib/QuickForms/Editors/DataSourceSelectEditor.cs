@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sage.Platform;
-using Sage.Entity.Interfaces;
+using Sage.Platform.Design;
+using Sage.Platform.QuickForms.Controls;
+using System.ComponentModel;
+
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -22,26 +24,24 @@ using Sage.Entity.Interfaces;
    limitations under the License.
 */
 
-namespace OpenSlx.Lib.SlxDataHelpers
+namespace OpenSlx.Lib.QuickForms.Editors
 {
     /// <summary>
-    /// Formatting of SalesLogix data
+    /// Used to select a "QFEntityDataSource"
     /// </summary>
-    public class Formatting
+    public class DataSourceSelectEditor : ListBoxTypeEditor
     {
-        /// <summary>
-        /// Retrieve user name based on user id.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public static String FormatUserName(String userId)
+        protected override IEnumerable<string> GetValues(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
-            if (String.IsNullOrEmpty(userId))
-                return "";
-            var user = EntityFactory.GetById<IUser>(userId);
-            return user == null ? "" : user.UserInfo.UserName;
+            QuickFormsControlBase control = context.Instance as QuickFormsControlBase;
+            if (control == null)
+            {
+                throw new InvalidOperationException("Invalid context - null instance (or not a QuickFormsControl)");
+            }
+            return control.QuickFormDefinition.AllControls
+                .Where(x => x is QFEntityDataSource)
+                .OrderBy(x => x.ControlId)
+                .Select(x => x.ControlId);
         }
-
-
     }
 }

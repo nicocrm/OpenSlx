@@ -2,19 +2,19 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2B1CB0A7-B83B-46FA-90E8-13A51DAF6842}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenSlx.AutoWire</RootNamespace>
-    <AssemblyName>OpenSlx.AutoWire</AssemblyName>
+    <RootNamespace>OpenSlx.AutoWire.Cmd</RootNamespace>
+    <AssemblyName>OpenSlx.AutoWire.Cmd</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +23,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,24 +35,18 @@
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\SalesLogix\SupportFiles\log4net.dll</HintPath>
+      <HintPath>..\..\..\..\inetpub\wwwroot\SlxClient\Bin\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform, Version=7.5.3.4227, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.dll</HintPath>
+      <HintPath>..\..\..\..\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.AdminModule">
       <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.AdminModule.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.Application, Version=7.5.3.4227, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Application.dll</HintPath>
-    </Reference>
-    <Reference Include="Sage.Platform.Configuration">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Sage.Platform.FileSystem">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.FileSystem.dll</HintPath>
+      <HintPath>..\..\..\..\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.Application.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.Projects">
       <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Projects.dll</HintPath>
@@ -60,7 +55,7 @@
       <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Projects.AdminModule.dll</HintPath>
     </Reference>
     <Reference Include="Sage.SalesLogix">
-      <HintPath>..\..\..\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.dll</HintPath>
+      <HintPath>..\..\..\..\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.BundleModel">
       <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.BundleModel.dll</HintPath>
@@ -91,17 +86,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventType.cs" />
-    <Compile Include="Inspector.cs" />
-    <Compile Include="MethodDescription.cs" />
-    <Compile Include="ParamDescription.cs" />
-    <Compile Include="Process.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenSlx.Lib\OpenSlx.Lib.csproj">
-      <Project>{DC4F8B31-1A44-42DF-A934-7F0CB0F46959}</Project>
-      <Name>OpenSlx.Lib</Name>
+    <ProjectReference Include="..\OpenSlx.AutoWire\OpenSlx.AutoWire.csproj">
+      <Project>{2B1CB0A7-B83B-46FA-90E8-13A51DAF6842}</Project>
+      <Name>OpenSlx.AutoWire</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

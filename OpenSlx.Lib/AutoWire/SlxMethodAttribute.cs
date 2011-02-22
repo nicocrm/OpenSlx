@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 
 namespace OpenSlx.Lib.AutoWire
-{
-    [AttributeUsage(AttributeTargets.Method)]
-    public class SlxMethodAttribute : Attribute
+{    
+    public abstract class SlxMethodAttribute : Attribute
     {
+        public TargetStepType StepType { get; set; }
+        public String Description { get; set; }
     }
 }

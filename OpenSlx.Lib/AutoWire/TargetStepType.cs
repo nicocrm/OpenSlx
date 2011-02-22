@@ -8,10 +8,10 @@ namespace OpenSlx.Lib.AutoWire
     /// <summary>
     /// Indicates whether the method executes as a pre, post, or main step.
     /// </summary>
-    public enum StepType
+    public enum TargetStepType
     {
-        PreExecute,
         Primary,
+        PreExecute,        
         PostExecute,
         PostFlush
     }

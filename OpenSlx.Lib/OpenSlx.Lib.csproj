@@ -173,8 +173,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoWire\AutoWireAttribute.cs" />
+    <Compile Include="AutoWire\BusinessRuleAttribute.cs" />
+    <Compile Include="AutoWire\OnBeforeInsertAttribute.cs" />
     <Compile Include="AutoWire\SlxMethodAttribute.cs" />
-    <Compile Include="AutoWire\StepType.cs" />
+    <Compile Include="AutoWire\TargetStepType.cs" />
     <Compile Include="Db\DbHelper.cs" />
     <Compile Include="Db\SlxCustomDialect.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

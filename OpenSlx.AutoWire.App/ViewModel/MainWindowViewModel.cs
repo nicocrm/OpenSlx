@@ -14,7 +14,7 @@ using Sage.Platform.Projects;
 using System.Windows.Navigation;
 using System.Windows;
 using Sage.Platform.Projects.Interfaces;
-using OpenSlx.RelationCheck.Commands;
+using OpenSlx.AutoWire.App.Commands;
 
 
 /*
@@ -35,7 +35,7 @@ using OpenSlx.RelationCheck.Commands;
 */
 
 
-namespace OpenSlx.RelationCheck.App.ViewModel
+namespace OpenSlx.AutoWire.App.ViewModel
 {
     public class MainWindowViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -242,7 +242,7 @@ namespace OpenSlx.RelationCheck.App.ViewModel
             Connections = SlxConnectionInfo.ListAllConnections();
             if (Connections.Count > 0)
                 SelectedConnection = Connections[0];
-            ModelPath = "";
+            ModelPath = @"E:\Projects\SSS\SlxBaseline\Model";
         }
 
     }

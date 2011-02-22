@@ -15,6 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSlx.RelationCheck", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSlx.RelationCheck.App", "..\OpenSlx.RelationCheck.App\OpenSlx.RelationCheck.App.csproj", "{3C0ABBD0-51E1-45E7-A3D2-61FC7EB5EBDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSlx.AutoWire.Cmd", "..\OpenSlx.AutoWire.Cmd\OpenSlx.AutoWire.Cmd.csproj", "{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSlx.AutoWire.App", "..\OpenSlx.AutoWire.App\OpenSlx.AutoWire.App.csproj", "{06882A76-0FC7-4FD9-B515-C809AF286A2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenSlx.AutoWire.Demo", "..\OpenSlx.AutoWire.Demo\OpenSlx.AutoWire.Demo.csproj", "{09870094-D414-4E06-9C7C-D2E85DF9D0C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,12 +81,45 @@ Global
 		{3C0ABBD0-51E1-45E7-A3D2-61FC7EB5EBDE}.Release|Mixed Platforms.Build.0 = Release|x86
 		{3C0ABBD0-51E1-45E7-A3D2-61FC7EB5EBDE}.Release|x86.ActiveCfg = Release|x86
 		{3C0ABBD0-51E1-45E7-A3D2-61FC7EB5EBDE}.Release|x86.Build.0 = Release|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Debug|x86.ActiveCfg = Debug|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Debug|x86.Build.0 = Debug|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Release|Any CPU.ActiveCfg = Release|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Release|Mixed Platforms.Build.0 = Release|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Release|x86.ActiveCfg = Release|x86
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA}.Release|x86.Build.0 = Release|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Debug|x86.ActiveCfg = Debug|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Debug|x86.Build.0 = Debug|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Release|Any CPU.ActiveCfg = Release|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Release|Mixed Platforms.Build.0 = Release|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Release|x86.ActiveCfg = Release|x86
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F}.Release|x86.Build.0 = Release|x86
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2B1CB0A7-B83B-46FA-90E8-13A51DAF6842} = {42D7EDB3-DE33-4CCA-9564-45283F093336}
+		{F3CCCA05-5283-4F62-ACDA-4F6E228298DA} = {42D7EDB3-DE33-4CCA-9564-45283F093336}
+		{06882A76-0FC7-4FD9-B515-C809AF286A2F} = {42D7EDB3-DE33-4CCA-9564-45283F093336}
+		{09870094-D414-4E06-9C7C-D2E85DF9D0C5} = {42D7EDB3-DE33-4CCA-9564-45283F093336}
 		{E49B24B6-A1FF-48BE-A03C-603D1D13357F} = {042CB821-5CEB-4BE4-A26E-315A9A270319}
 		{3C0ABBD0-51E1-45E7-A3D2-61FC7EB5EBDE} = {042CB821-5CEB-4BE4-A26E-315A9A270319}
 	EndGlobalSection

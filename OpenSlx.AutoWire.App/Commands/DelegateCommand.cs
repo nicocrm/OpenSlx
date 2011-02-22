@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 
-namespace OpenSlx.RelationCheck.Commands
+namespace OpenSlx.AutoWire.App.Commands
 {
     /// <summary>
     ///     This class allows delegating the commanding logic to methods passed as parameters,

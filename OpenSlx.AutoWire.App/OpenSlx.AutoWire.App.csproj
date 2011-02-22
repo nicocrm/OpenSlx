@@ -5,12 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3C0ABBD0-51E1-45E7-A3D2-61FC7EB5EBDE}</ProjectGuid>
+    <ProjectGuid>{06882A76-0FC7-4FD9-B515-C809AF286A2F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenSlx.RelationCheck.App</RootNamespace>
-    <AssemblyName>OpenSlx.RelationCheck.App</AssemblyName>
+    <RootNamespace>OpenSlx.AutoWire.App</RootNamespace>
+    <AssemblyName>OpenSlx.AutoWire.App</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -44,48 +46,47 @@
       <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.AdminModule">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.AdminModule.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.AdminModule.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.Application, Version=7.5.3.4227, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Application.dll</HintPath>
     </Reference>
-    <Reference Include="Sage.Platform.Configuration, Version=7.5.3.4227, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Sage.Platform.Configuration">
       <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.FileSystem">
       <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.FileSystem.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.Projects">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Projects.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Projects.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.Projects.AdminModule">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Projects.AdminModule.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Projects.AdminModule.dll</HintPath>
     </Reference>
     <Reference Include="Sage.SalesLogix">
       <HintPath>..\..\..\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.BundleModel">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.BundleModel.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.BundleModel.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.Mashups.AdminModule">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Mashups.AdminModule.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Mashups.AdminModule.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.QuickForms">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.QuickForms.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.QuickForms.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.QuickForms.QFControls">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.QuickForms.QFControls.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.QuickForms.QFControls.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.WebPortal">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.WebPortal.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.WebPortal.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform.WebPortal.Design">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.WebPortal.Design.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\Platform\Sage.Platform.WebPortal.Design.dll</HintPath>
     </Reference>
     <Reference Include="Sage.SalesLogix.QuickForms.QFControls">
-      <HintPath>..\..\..\..\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.QuickForms.QFControls.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.QuickForms.QFControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -102,15 +103,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Controls\ValidationSummary.xaml.cs">
       <DependentUpon>ValidationSummary.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ValidationSummaryValidator.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Page Include="Controls\ValidationSummary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -123,6 +121,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Controls\ValidationSummary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -142,6 +144,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,9 +152,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenSlx.RelationCheck\OpenSlx.RelationCheck.csproj">
-      <Project>{E49B24B6-A1FF-48BE-A03C-603D1D13357F}</Project>
-      <Name>OpenSlx.RelationCheck</Name>
+    <ProjectReference Include="..\OpenSlx.AutoWire\OpenSlx.AutoWire.csproj">
+      <Project>{2B1CB0A7-B83B-46FA-90E8-13A51DAF6842}</Project>
+      <Name>OpenSlx.AutoWire</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenSlx.Lib\OpenSlx.Lib.csproj">
       <Project>{DC4F8B31-1A44-42DF-A934-7F0CB0F46959}</Project>

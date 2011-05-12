@@ -7,6 +7,7 @@ using Sage.Platform.Security;
 using Sage.Platform.Orm;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
+using Sage.SalesLogix.Security;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -82,8 +83,30 @@ namespace OpenSlx.Lib.Security
                 return 0 < sess.CreateQuery("select count(*) from OwnerRights sr where sr.User.Id=? and sr.Owner.OwnerDescription=?")
                     .SetString(0, userId)
                     .SetString(1, teamName)
+                    .SetCacheable(true)
                     .UniqueResult<long>();
             }
+        }
+
+        /// <summary>
+        /// Check if given user has the specified role.
+        /// This is a temporary fix for Sage's bugged implementation of User.IsUserInRole.
+        /// </summary>
+        public static bool IsUserInRole(String userId, String roleName)
+        {
+            if (userId.Trim() == "ADMIN")
+            {
+                return true;
+            }
+            ICollection<IUserRole> usersInRole = Role.GetUsersInRole(roleName);
+            foreach (IUserRole current in usersInRole)
+            {
+                if ((String)current.User.Id == userId)
+                {
+                    return true;                    
+                }
+            }
+            return false;
         }
     }
 }

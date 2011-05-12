@@ -26,7 +26,7 @@ namespace OpenSlx.Lib.UnitTest
         public void Setup()
         {
             // app root - this needs to be updated if the project is deployed somewhere else
-            _setup = new SlxAppSetup(@"\Projects\RCSecurities\WWWRoot\SlxClient", "");
+            _setup = new SlxAppSetup(@"\inetpub\WWWRoot\SlxEval\SlxClient", "");
 
             try
             {

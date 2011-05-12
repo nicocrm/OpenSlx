@@ -72,10 +72,6 @@
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Common.Syndication.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sage.Common.Syndication.Json">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Common.Syndication.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Sage.Entity.Interfaces">
       <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Entity.Interfaces.dll</HintPath>
       <Private>True</Private>

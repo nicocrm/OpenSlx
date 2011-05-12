@@ -100,7 +100,8 @@ namespace OpenSlx.Lib.Web.Controls
                     LOG.Debug("Using property '" + prop.PropertyName + "' with header '" + prop.PropertyHeader + "'");
                 }
             }
-            HttpContext.Current.Cache["LookupProperties$" + entityTypeName + "$" + lookupName] = result;
+            if(HttpContext.Current != null)
+                HttpContext.Current.Cache["LookupProperties$" + entityTypeName + "$" + lookupName] = result;
             return result;
         }
 
@@ -248,11 +249,11 @@ namespace OpenSlx.Lib.Web.Controls
         /// </summary>
         private static IEnumerable<LookupLayoutField> GetLookupFields(ISession sess, String tableName, String lookupName)
         {
-            var lst = sess.CreateSQLQuery("select layout from lookup where maintable=? and (searchfield=? or lookupname=?)")
+            var lst = sess.CreateSQLQuery("select top 1 layout from lookup where maintable=? and (searchfield=? or lookupname=?)")
                     .SetString(0, tableName)
                     .SetString(1, lookupName)
                     .SetString(2, lookupName)
-                    .SetMaxResults(1).List<String>();
+                    .List<String>();
             if (lst.Count == 0)
                 throw new ArgumentException("Invalid lookup " + tableName + ":" + lookupName);
             String layout = lst[0];

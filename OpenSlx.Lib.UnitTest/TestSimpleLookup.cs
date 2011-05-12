@@ -53,5 +53,11 @@ namespace OpenSlx.Lib.UnitTest
                 Assert.AreEqual("Owner.OwnerDescription", SimpleLookup.DecomposePath(sf, persister, "SECCODEID", "8"));
             }
         }
+
+        [Test]
+        public void TestGetLookupProperties()
+        {
+            SimpleLookup.GetLookupProperties("ACCOUNT:Account", "Sage.SalesLogix.Entities.Account, Sage.SalesLogix.Entities");
+        }
     }
 }

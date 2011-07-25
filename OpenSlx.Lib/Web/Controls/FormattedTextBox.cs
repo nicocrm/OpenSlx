@@ -5,7 +5,6 @@ using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Sage.Platform.WebPortal;
-using Sage.Common.Syndication.Json;
 using OpenSlx.Lib.Properties;
 
 /*
@@ -77,12 +76,10 @@ namespace OpenSlx.Lib.Web.Controls
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            ScriptManager.RegisterClientScriptResource(this, GetType(), "OpenSlx.Lib.Web.Controls.JS.formatted.js");
-            String script = JavaScriptConvert.SerializeObject(new
-            {
-                EnterOnlyNumbers = Resources.EnterOnlyNumbers,
-                EnterOnlyWholeNumbers = Resources.EnterOnlyWholeNumbers
-            });
+            ScriptManager.RegisterClientScriptResource(this, GetType(), "OpenSlx.Lib.Web.Controls.JS.formatted.js");           
+            String script = String.Format("{{ EnterOnlyNumbers: '{0}', EnterOnlyWholeNumbers: '{1}' }}",
+                PortalUtil.JavaScriptEncode(Resources.EnterOnlyNumbers, true), 
+                PortalUtil.JavaScriptEncode(Resources.EnterOnlyWholeNumbers, true));
             ScriptManager.RegisterClientScriptBlock(this, GetType(), "OpenSlx.FormattedField.Strings",
                 "OpenSlx.FormattedField.Strings = " + script + ";", true);
         }
@@ -104,8 +101,10 @@ namespace OpenSlx.Lib.Web.Controls
                 allowNegative = AllowNegative,
                 numDecimals = NumDecimals
             };
-            String script = "new " + className + "('" + this.ClientID + "'," +
-                JavaScriptConvert.SerializeObject(config) + ");";
+            String script = String.Format("new {0}('{1}', {{ allowNegative: {2}, numDecimals: {3} }});",
+                className, ClientID, 
+                AllowNegative ? "true" : "false", 
+                NumDecimals.GetValueOrDefault());            
 
             ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(), script, true);
         }

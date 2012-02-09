@@ -246,10 +246,9 @@
         } else if (typeof value != "number") {
             throw "Invalid value for formatted field: " + value;
         }
-        if (isNaN(val))
-            val = 0;
-        this.field.value = formatCurrency(val, this._numDecimals);
-        this.hidden.value = val;
+
+        this.field.value = isNaN(val) ? "" : formatCurrency(val, this._numDecimals);
+        this.hidden.value = isNaN(val) ? "" : val;
         this.isformatted = true;
     }
 
@@ -349,20 +348,23 @@
 
     OpenSlx.FormattedFieldPercent.prototype.setValue = function (value) {
         var val = parseFloat(value);
-        if (isNaN(val))
-            val = 0;
-        
-        if (/%$/.test(value))
-            val = val / 100;
-        else if (val > 1)
-            val = val / 100;
-        // .9 => 90% 
-        // 95.12 => 95.12% (with numdecimals = 2)
-        // "95%" => 95%
-        // ".9%" => 0.9%
-        var b = Math.pow(10, this._numDecimals);
-        amount = Math.round(val * 100 * b) / b;
-        this.field.value = amount + " %"
+        if (isNaN(val)) {
+            val = "";
+            this.field.value = "";
+        } else {
+
+            if (/%$/.test(value))
+                val = val / 100;
+            else if (val > 1)
+                val = val / 100;
+            // .9 => 90% 
+            // 95.12 => 95.12% (with numdecimals = 2)
+            // "95%" => 95%
+            // ".9%" => 0.9%
+            var b = Math.pow(10, this._numDecimals);
+            amount = Math.round(val * 100 * b) / b;
+            this.field.value = amount + " %"
+        }
         this.hidden.value = val;
         this.isformatted = true;
     }
@@ -399,9 +401,12 @@
 
     OpenSlx.FormattedFieldDecimal.prototype.setValue = function (value) {
         var val = parseFloat(value);
-        if (isNaN(val))
-            val = 0;
-        this.field.value = formatCurrency(val, this._numDecimals, "");
+        if (isNaN(val)) {
+            val = "";
+            this.field.value = "";
+        } else {
+            this.field.value = formatCurrency(val, this._numDecimals, "");
+        }
         this.hidden.value = val;
         this.isformatted = true;
     }

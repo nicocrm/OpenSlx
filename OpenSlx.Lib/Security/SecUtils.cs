@@ -8,6 +8,7 @@ using Sage.Platform.Orm;
 using Sage.Entity.Interfaces;
 using Sage.Platform;
 using Sage.SalesLogix.Security;
+using Sage.SalesLogix.API;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -37,7 +38,7 @@ namespace OpenSlx.Lib.Security
         /// Shortcut to retrieve the current user id.
         /// </summary>
         /// <returns></returns>
-        public static String CurrentUserId 
+        public static String CurrentUserId
         {
             get
             {
@@ -52,7 +53,17 @@ namespace OpenSlx.Lib.Security
         {
             get
             {
-                return EntityFactory.GetById<IUser>(CurrentUserId);
+                // this is cached... it causes an exception in some cases (eg lead import)
+                //return EntityFactory.GetById<IUser>(CurrentUserId);
+
+                // use this rather than EntityFactory.GetById.
+                // the difference is this one is not cached... the caching causes an issue in some cases, eg the lead import
+                var svc = ApplicationContext.Current.Services.Get<IUserService>();
+                if (svc is SLXUserService)
+                {
+                    return ((SLXUserService)svc).GetUser();
+                }
+                return null;
             }
         }
 
@@ -103,7 +114,7 @@ namespace OpenSlx.Lib.Security
             {
                 if ((String)current.User.Id == userId)
                 {
-                    return true;                    
+                    return true;
                 }
             }
             return false;

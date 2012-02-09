@@ -102,7 +102,7 @@
         amount = Math.round(amount * b) / b;
 
         var intpart = Math.floor(amount);
-        var floatpart = String(amount - intpart);
+        var floatpart = amount - intpart;
 
         if (intpart >= 1000) {
             acc = formatCurrency_wkh(String(intpart));
@@ -112,7 +112,7 @@
 
         acc = currencySymbol + acc;
         if (numDecimals > 0) {
-            acc += floatpart.replace(/^0/, "");
+            acc += String(Math.round(floatpart * Math.pow(10, numDecimals)) / Math.pow(10, numDecimals)).substring(1);
         }
 
         return acc;
@@ -122,9 +122,9 @@
     function numberPlease(evt, allowDecimals, allowNegative) {
         var charCode = evt.which;
 
-        if (typeof console != "undefined") {
-            console.log("FormattedField: Char code: " + charCode + ", allowDecimals: " + allowDecimals + ", allowNegative: " + allowNegative);
-        }
+//        if (typeof console != "undefined") {
+//            console.log("FormattedField: Char code: " + charCode + ", allowDecimals: " + allowDecimals + ", allowNegative: " + allowNegative);
+//        }
         // 40 and under: control chars
         // 44: comma, 46: decimal point
         // 48 to 57: number
@@ -365,6 +365,7 @@
             amount = Math.round(val * 100 * b) / b;
             this.field.value = amount + " %"
         }
+
         this.hidden.value = val;
         this.isformatted = true;
     }
@@ -409,6 +410,8 @@
         }
         this.hidden.value = val;
         this.isformatted = true;
+//        console.log("FormattedField.setValue - raw value:", val);
+//        console.log("FormattedField.setValue - formatted value:", this.field.value);
     }
 
 

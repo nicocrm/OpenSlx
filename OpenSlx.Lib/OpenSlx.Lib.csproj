@@ -188,6 +188,7 @@
     <Compile Include="QuickForms\Interfaces\IQFEntityDataSource.cs" />
     <Compile Include="QuickForms\QFComboBox.cs" />
     <Compile Include="QuickForms\QFEntityDataSource.cs" />
+    <Compile Include="Services\Impl\AspnetCacheService.cs" />
     <Compile Include="SlxDataHelpers\Formatting.cs" />
     <Compile Include="SlxDataHelpers\TimeZoneConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

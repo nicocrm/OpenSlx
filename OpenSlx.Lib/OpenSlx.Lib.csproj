@@ -143,6 +143,7 @@
     </Reference>
     <Reference Include="Sage.SalesLogix.System">
       <HintPath>..\..\..\Inetpub\wwwroot\TLX\SlxClient\bin\Sage.SalesLogix.System.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Web">
       <HintPath>C:\Inetpub\wwwroot\TLX\SlxClient\bin\Sage.SalesLogix.Web.dll</HintPath>

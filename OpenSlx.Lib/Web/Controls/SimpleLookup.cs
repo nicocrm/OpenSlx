@@ -293,15 +293,7 @@ namespace OpenSlx.Lib.Web.Controls
             {
                 LookupEntityTypeName = "Sage.SalesLogix.Entities." + LookupEntityName + ", Sage.SalesLogix.Entities";
             }
-            this.LookupProperties = GetLookupProperties(this.LookupName, this.LookupEntityTypeName);
-            if (this.ViewState["LookupImageURL"] == null)
-            {
-                // Fix the image - by default the SLX controls tries to load it from the current type's assembly.
-                // since this is a subclass of LookupControl it is not in the "correct" assembly anymore.
-                // this fix ensures that the image is loaded from the original assembly
-                LookupImageURL = this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Find_16x16.gif");
-
-            }
+            this.LookupProperties = GetLookupProperties(this.LookupName, this.LookupEntityTypeName);            
         }
 
         /// <summary>
@@ -316,14 +308,6 @@ namespace OpenSlx.Lib.Web.Controls
             base.OnPreRender(e);
             if (!ReadOnly && Enabled)
             {
-                if (AllowClearingResult)
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(),
-                        String.Format("$('#{0}_btnClearResult').attr('src', '{1}');",
-                            ClientID,
-                            this.Page.ClientScript.GetWebResourceUrl(typeof(LookupControl), "Sage.SalesLogix.Web.Controls.Resources.Delete_16x16.gif")),
-                        true);
-                }
                 if (!String.IsNullOrEmpty(DefaultSort))
                 {
                     ScriptManager.RegisterStartupScript(this, GetType(), Guid.NewGuid().ToString(),

@@ -42,7 +42,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="offset"></param>
         /// <param name="last"></param>
         /// <returns></returns>
-        public override NHibernate.SqlCommand.SqlString GetLimitString(NHibernate.SqlCommand.SqlString querySqlString, int offset, int last)
+        public override NHibernate.SqlCommand.SqlString GetLimitString(NHibernate.SqlCommand.SqlString querySqlString, SqlString offsetString, SqlString lastString)
         {
             if (!querySqlString.StartsWithCaseInsensitive("select "))
             {
@@ -55,6 +55,12 @@ namespace OpenSlx.Lib.Db
                 sqlString = sqlString.Substring(0, (sqlString.Length - orderSql.Length) - 1);
             }
             SqlStringBuilder builder = new SqlStringBuilder();
+            int offset;
+            if (!int.TryParse(offsetString.ToString(), out offset))
+                offset = 0;
+            int last;
+            if (!int.TryParse(lastString.ToString(), out last))
+                last = -1;
             int num = offset + 1;
             builder.Add("SELECT TOP ").Add(last.ToString()).Add(" ").Add(sqlString);
             if(offset > 0)

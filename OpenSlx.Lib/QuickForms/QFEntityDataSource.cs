@@ -34,7 +34,7 @@ namespace OpenSlx.Lib.QuickForms
 {
     [DisplayName("OpenSlx Entity Data Source")]
     [Description("Binds to a property of the form's entity.  Used as a standard ASP.NET datasource for standard and 3rd party controls - not compatible with the Sage data binding")]
-    [VisibleControl(false)]
+    //[VisibleControl(false)]
     public class QFEntityDataSource : QuickFormsControlBase, IQFEntityDataSource
     {
         [Editor(typeof(BoundEntityPropertyNameEditor), typeof(UITypeEditor))]

@@ -39,10 +39,15 @@ namespace OpenSlx.Lib.Web.Extensions
         /// This needs to be specified as a Javascript function, for example "function() { alert('boo') }"</param>
         public static void MessageBox(this UserControl ctl, String msg, String callback = null)
         {
-            String script = "Ext.MessageBox.alert('', '" + PortalUtil.JavaScriptEncode(msg) + "'";
-            if (!String.IsNullOrEmpty(callback))
-                script += ", " + callback;
-            script += ");";
+            String script;
+            if (callback != null)
+            {
+                script = "Sage.UI.Dialogs.raiseQueryDialogExt({ callbackFn: " + callback + ", title: 'Sage SalesLogix', query: '" + PortalUtil.JavaScriptEncode(msg) + "' });";
+            }
+            else
+            {
+                script = "Sage.UI.Dialogs.alert('" + PortalUtil.JavaScriptEncode(msg) + "');";
+            }
             ctl.JavaScript(script);
         }
 
@@ -63,7 +68,7 @@ namespace OpenSlx.Lib.Web.Extensions
                     // there is no point in making it go through this logic.
                     // SLX databinding won't work with them anyway since they won't trigger events correctly, so its a pretty safe bet.
                     continue;
-                if (c.Controls.Count > 0)
+                if (c.Controls.Count > 0 && !(c is CompositeControl))
                     LockForm(c, islocked);
 
                 PropertyInfo pr = c.GetType().GetProperty("ReadOnly");

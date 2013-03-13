@@ -61,9 +61,9 @@
       <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Iesi.Collections.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\log4net.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SupportFiles\log4net.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>C:\Program Files (x86)\SalesLogix\Platform\NHibernate.dll</HintPath>

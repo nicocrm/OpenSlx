@@ -103,21 +103,10 @@ namespace OpenSlx.Lib.Security
         /// Check if given user has the specified role.
         /// This is a temporary fix for Sage's bugged implementation of User.IsUserInRole.
         /// </summary>
+        [Obsolete("No longer needed for SLX 8")]
         public static bool IsUserInRole(String userId, String roleName)
         {
-            if (userId.Trim() == "ADMIN")
-            {
-                return true;
-            }
-            ICollection<IUserRole> usersInRole = Role.GetUsersInRole(roleName);
-            foreach (IUserRole current in usersInRole)
-            {
-                if ((String)current.User.Id == userId)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return EntityFactory.GetById<IUser>(userId).IsUserInRole(roleName);            
         }
     }
 }

@@ -68,6 +68,22 @@ namespace OpenSlx.Lib.Security
         }
 
         /// <summary>
+        /// Shortcut to retrieve the currently logged in contact (this will return null if not currently on the customer portal)
+        /// </summary>
+        public static IContact CurrentPortalUser
+        {
+            get
+            {
+                var svc = ApplicationContext.Current.Services.Get<IUserService>();
+                if (svc is IWebPortalUserService)
+                {
+                    return ((IWebPortalUserService)svc).GetPortalUser().Contact;
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
         /// True if current user is in specified team (or department).
         /// Note that this will return true whether the user is a direct member of the team,
         /// or manager of someone who is.
@@ -106,7 +122,7 @@ namespace OpenSlx.Lib.Security
         [Obsolete("No longer needed for SLX 8")]
         public static bool IsUserInRole(String userId, String roleName)
         {
-            return EntityFactory.GetById<IUser>(userId).IsUserInRole(roleName);            
+            return EntityFactory.GetById<IUser>(userId).IsUserInRole(roleName);
         }
     }
 }

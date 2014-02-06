@@ -57,39 +57,39 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Iesi.Collections">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Iesi.Collections.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Iesi.Collections.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\log4net.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\NHibernate.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\NHibernate.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Common.Syndication">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.Common.Syndication.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SupportFiles\Sage.Common.Syndication.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Entity.Interfaces">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.Entity.Interfaces.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\ReferenceAssemblies\Sage.Entity.Interfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.Platform.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.Application">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.Platform.Application.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Application.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.Application.UI.Web">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.Platform.Application.UI.Web.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Application.UI.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.Configuration">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.Platform.Configuration.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Configuration.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.Design">
@@ -109,43 +109,43 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.Platform.WebPortal">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.Platform.WebPortal.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.WebPortal.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.API">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.API.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.HighLevelTypes">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.HighLevelTypes.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.HighLevelTypes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.NHibernate">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.NHibernate.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.NHibernate.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.PickLists">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.PickLists.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.PickLists.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Security">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.Security.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.Security.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Security.Entities">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.Security.Entities.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.Security.Entities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Web">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.Web.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.Web.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Web.Controls">
-      <HintPath>E:\inetpub\wwwroot\RCS\SlxClient\Bin\Sage.SalesLogix.Web.Controls.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.Web.Controls.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />

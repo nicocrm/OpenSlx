@@ -61,7 +61,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\log4net.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SupportFiles\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate">

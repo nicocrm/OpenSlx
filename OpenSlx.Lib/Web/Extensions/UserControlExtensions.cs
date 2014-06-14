@@ -76,13 +76,10 @@ namespace OpenSlx.Lib.Web.Extensions
                 {
                     pr.SetValue(c, islocked, null);
                 }
-                else
+                pr = c.GetType().GetProperty("Enabled");
+                if (pr != null)
                 {
-                    pr = c.GetType().GetProperty("Enabled");
-                    if (pr != null)
-                    {
-                        pr.SetValue(c, !islocked, null);
-                    }
+                    pr.SetValue(c, !islocked, null);
                 }
             }
         }

@@ -20,6 +20,8 @@ using Sage.Platform.Orm;
 using Sage.Platform;
 using Sage.Entity.Interfaces;
 using Sage.SalesLogix.Security;
+using Sage.Platform.Application.UI.Web;
+using Sage.Platform.Orm.Services;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -167,14 +169,36 @@ namespace OpenSlx.Lib.Utility
                 _workItem.Services.Add<IDataService>(new ConnectionStringDataService(connectionString));
                 _workItem.Services.Add<IUserService>(new MockUserService(Username));
                 _workItem.Services.AddNew(typeof(WebUserOptionsService), typeof(IUserOptionsService));
-                _workItem.Services.AddNew(typeof(EntityFactoryContextService), typeof(IEntityContextService));
+
+                // XXX do we need the "EntityContextService"?
+                // it requires a "Parent" work item... so it won't work with the root work item (_workItem)
+                WorkItem childWorkItem = new WorkItem();
+                childWorkItem.Parent = _workItem;
+                _workItem.BuildTransientItem(childWorkItem);
+                childWorkItem.Services.AddNew(typeof(EntityFactoryContextService), typeof(IEntityContextService));
+
+                _workItem.Services.AddNew(typeof(SessionFactoryEntityMappingInfoService), typeof(IEntityMappingInfoService));
                 _workItem.Services.Add<IFieldLevelSecurityService>(new FieldLevelSecurityService());
+
             }
             catch (Exception x)
             {
                 LOG.Warn("Test setup failed", x);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Setup a default time zone - this is used in some business rules.
+        /// Normally passed in from the client browser.
+        /// </summary>
+        /// <param name="timezone"></param>
+        public void SetTimezone(String timezone)
+        {
+            var tz = new Sage.Platform.TimeZones().FindTimeZone(timezone);
+            if(tz == null)
+                throw new Exception("Invalid timezone " + timezone);
+            ApplicationContext.Current.Services.Get<Sage.Platform.Application.IContextService>().SetContext("TimeZone", tz);
         }
 
         /// <summary>

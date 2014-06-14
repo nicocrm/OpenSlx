@@ -109,7 +109,7 @@ namespace OpenSlx.Lib.Web.Utility
                     }
                 }
             }
-            if (SmartPartTitle != null)
+            if (!String.IsNullOrEmpty(SmartPartTitle))
             {
                 tinfo.Title = SmartPartTitle;
                 tinfo.Description = SmartPartTitle;

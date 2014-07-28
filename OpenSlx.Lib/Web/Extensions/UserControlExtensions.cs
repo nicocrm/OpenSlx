@@ -57,8 +57,10 @@ namespace OpenSlx.Lib.Web.Extensions
         /// </summary>
         /// <param name="parent">The control to be disabled (usually called from a form as this.LockForm(true))</param>
         /// <param name="islocked"></param>
-        public static void LockForm(this Control parent, bool islocked)
+        /// <returns>A list of ids that were touched (enabled or disabled).  This can be stored in the viewstate to automatically undo the LockForm method by calling UnlockForm.</returns>
+        public static List<String> LockForm(this Control parent, bool islocked)
         {
+            List<String> result = new List<string>();
             foreach (Control c in parent.Controls)
             {
                 if (c is IButtonControl || c is SmartPartToolsContainer)
@@ -69,17 +71,53 @@ namespace OpenSlx.Lib.Web.Extensions
                     // SLX databinding won't work with them anyway since they won't trigger events correctly, so its a pretty safe bet.
                     continue;
                 if (c.Controls.Count > 0 && !(c is CompositeControl))
-                    LockForm(c, islocked);
+                    result.AddRange(LockForm(c, islocked));
 
+                bool touched = false;
                 PropertyInfo pr = c.GetType().GetProperty("ReadOnly");
-                if (pr != null)
+                if (pr != null && (bool)pr.GetValue(c, null) != islocked)
                 {
+                    touched = true;
                     pr.SetValue(c, islocked, null);
                 }
                 pr = c.GetType().GetProperty("Enabled");
-                if (pr != null)
+                if (pr != null && (bool)pr.GetValue(c, null) != !islocked)
                 {
+                    touched = true;
                     pr.SetValue(c, !islocked, null);
+                    if (c is WebControl && !((WebControl)c).SupportsDisabledAttribute)
+                    {
+                        ((WebControl)c).Attributes["disabled"] = "disabled";
+                    }
+                }
+                if(touched)
+                    result.Add(c.UniqueID);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Undo the "LockForm" using the list of ids returned by LockForm
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="controlIds"></param>
+        public static void UnlockForm(this Control parent, List<String> controlIds)
+        {
+            foreach (String id in controlIds)
+            {
+                Control c = parent.FindControl(id);
+                if (c != null)
+                {
+                    PropertyInfo pr = c.GetType().GetProperty("ReadOnly");
+                    if (pr != null)
+                    {
+                        pr.SetValue(c, false, null);
+                    }
+                    pr = c.GetType().GetProperty("Enabled");
+                    if (pr != null)
+                    {
+                        pr.SetValue(c, true, null);
+                    }
                 }
             }
         }

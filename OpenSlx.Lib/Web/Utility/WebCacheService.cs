@@ -42,14 +42,19 @@ namespace OpenSlx.Lib.Web.Utility
         {
             get
             {
+                if (HttpContext.Current == null)
+                    return null;
                 return HttpContext.Current.Cache[index];                
             }
             set
             {
-                if (value == null)
-                    HttpContext.Current.Cache.Remove(index);
-                else
-                    HttpContext.Current.Cache[index] = value;
+                if (HttpContext.Current != null)
+                {
+                    if (value == null)
+                        HttpContext.Current.Cache.Remove(index);
+                    else
+                        HttpContext.Current.Cache[index] = value;
+                }
             }
         }
 
@@ -63,7 +68,8 @@ namespace OpenSlx.Lib.Web.Utility
         /// <param name="slidingExpiration"></param>
         public void Insert(string key, object value, System.Web.Caching.CacheDependency cacheDependency, DateTime absoluteExpiration, TimeSpan slidingExpiration)
         {
-            HttpContext.Current.Cache.Insert(key, value, cacheDependency, absoluteExpiration, slidingExpiration);
+            if(HttpContext.Current != null)
+                HttpContext.Current.Cache.Insert(key, value, cacheDependency, absoluteExpiration, slidingExpiration);
         }
 
         #endregion

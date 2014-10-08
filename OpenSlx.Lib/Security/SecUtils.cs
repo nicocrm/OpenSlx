@@ -42,7 +42,7 @@ namespace OpenSlx.Lib.Security
         {
             get
             {
-                return ApplicationContext.Current.Services.Get<IUserService>().UserId;
+                return ApplicationContext.Current.Services.Get<IUserService>().UserId.Trim();
             }
         }
 

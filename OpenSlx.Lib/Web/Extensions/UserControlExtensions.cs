@@ -74,23 +74,35 @@ namespace OpenSlx.Lib.Web.Extensions
                     result.AddRange(LockForm(c, islocked));
 
                 bool touched = false;
-                PropertyInfo pr = c.GetType().GetProperty("ReadOnly");
-                if (pr != null && (bool)pr.GetValue(c, null) != islocked)
+                PropertyInfo prRO = c.GetType().GetProperty("ReadOnly");
+                PropertyInfo prEnabled = c.GetType().GetProperty("Enabled");
+                bool isRo = false;
+                if (prRO != null && (bool)prRO.GetValue(c, null))
+                    isRo = true;
+                if (prEnabled != null && !(bool)prEnabled.GetValue(c, null))
+                    isRo = true;
+                if (isRo == islocked)
                 {
-                    touched = true;
-                    pr.SetValue(c, islocked, null);
+                    // already set to right state
+                    continue;
                 }
-                pr = c.GetType().GetProperty("Enabled");
-                if (pr != null && (bool)pr.GetValue(c, null) != !islocked)
+                if (prRO != null)
                 {
                     touched = true;
-                    pr.SetValue(c, !islocked, null);
+                    prRO.SetValue(c, islocked, null);
+                }
+                else if (prEnabled != null)
+                {
+                    touched = true;
+                    prEnabled.SetValue(c, !islocked, null);
                     if (c is WebControl && !((WebControl)c).SupportsDisabledAttribute)
+                    // extra for dropdowns because ASP.NET marks them as SupportsDisabledAttribute = false, 
+                    // which means the "disabled" attribute does not get output by default
                     {
                         ((WebControl)c).Attributes["disabled"] = "disabled";
                     }
                 }
-                if(touched)
+                if (touched)
                     result.Add(c.UniqueID);
             }
             return result;
@@ -105,7 +117,7 @@ namespace OpenSlx.Lib.Web.Extensions
         {
             foreach (String id in controlIds)
             {
-                Control c = parent.FindControl(id);
+                Control c = FindControlRecursive(parent, id);
                 if (c != null)
                 {
                     PropertyInfo pr = c.GetType().GetProperty("ReadOnly");
@@ -121,7 +133,26 @@ namespace OpenSlx.Lib.Web.Extensions
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Helper method to find a control nested in a hierarchy of naming containers
+        /// </summary>
+        /// <param name="rootControl"></param>
+        /// <param name="controlID">UniqueID of the control to locate</param>
+        /// <returns></returns>
+        private static Control FindControlRecursive(Control rootControl, string controlID)
+        {
+            if (rootControl.UniqueID == controlID) return rootControl;
+
+            foreach (Control controlToSearch in rootControl.Controls)
+            {
+                Control controlToReturn =
+                    FindControlRecursive(controlToSearch, controlID);
+                if (controlToReturn != null) return controlToReturn;
+            }
+            return null;
+        }
+
         /// Convenience method to show an "Add" dialog. (TODO)
         /// </summary>
         /// <typeparam name="TChild"></typeparam>

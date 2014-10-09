@@ -113,7 +113,7 @@ namespace OpenSlx.Lib.Web.Extensions
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="controlIds"></param>
-        public static void UnlockForm(this Control parent, List<String> controlIds)
+        public static void UnlockForm(this Control parent, IEnumerable<String> controlIds)
         {
             foreach (String id in controlIds)
             {

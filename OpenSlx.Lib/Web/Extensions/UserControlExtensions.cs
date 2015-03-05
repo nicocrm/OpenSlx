@@ -130,6 +130,12 @@ namespace OpenSlx.Lib.Web.Extensions
                     {
                         pr.SetValue(c, true, null);
                     }
+                    if (c is WebControl && !((WebControl)c).SupportsDisabledAttribute)
+                    // extra for dropdowns because ASP.NET marks them as SupportsDisabledAttribute = false, 
+                    // which means the "disabled" attribute does not get output by default
+                    {
+                        ((WebControl)c).Attributes.Remove("disabled");
+                    }
                 }
             }
         }

@@ -23,6 +23,7 @@ using Sage.SalesLogix.Security;
 using Sage.Platform.Application.UI.Web;
 using Sage.Platform.Configuration;
 using Sage.Platform.Orm.Services;
+using Sage.SalesLogix;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -180,7 +181,8 @@ namespace OpenSlx.Lib.Utility
 
                 _workItem.Services.Add<IDataService>(new ConnectionStringDataService(connectionString));
                 _workItem.Services.Add<IUserService>(new MockUserService(Username));
-                _workItem.Services.AddNew(typeof(WebUserOptionsService), typeof(IUserOptionsService));
+                _workItem.Services.Add<IUserOptionsService>(new UserOptionsService(_workItem.Services.Get<IUserService>(), 
+                    _workItem.Services.Get<IDataService>()));
 
                 // XXX do we need the "EntityContextService"?
                 // it requires a "Parent" work item... so it won't work with the root work item (_workItem)

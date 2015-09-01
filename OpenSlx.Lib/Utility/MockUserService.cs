@@ -81,6 +81,15 @@ namespace OpenSlx.Lib.Utility
             }
         }
 
+        /// <summary>
+        /// User - we override the default because it checks for Windows identity etc.
+        /// </summary>
+        /// <returns></returns>
+        public override IUser GetUser()
+        {
+            return EntityFactory.GetById<IUser>(_userId.PadRight(12, ' '));
+        }
+
         #endregion
 
 

@@ -203,6 +203,7 @@
     <Compile Include="Utility\MockUserService.cs" />
     <Compile Include="Utility\SlxAppSetup.cs" />
     <Compile Include="Utility\LegacySlx\SlxConnectionInfo.cs" />
+    <Compile Include="Utility\TestObjectFactory.cs" />
     <Compile Include="Web\Controls\BindableDropDownList.cs" />
     <Compile Include="Web\Controls\BindableRadioButtonList.cs" />
     <Compile Include="Web\Controls\BindingSourceParameter.cs" />

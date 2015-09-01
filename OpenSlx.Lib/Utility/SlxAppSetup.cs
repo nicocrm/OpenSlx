@@ -24,6 +24,7 @@ using Sage.Platform.Application.UI.Web;
 using Sage.Platform.Configuration;
 using Sage.Platform.Orm.Services;
 using Sage.SalesLogix;
+using Sage.SalesLogix.Services;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -173,7 +174,7 @@ namespace OpenSlx.Lib.Utility
                 // allow users to specify connection via the App.config file.
                 // if not specified, we'll try and read it from the deployed connection.config.
                 var conConfig = System.Configuration.ConfigurationManager.ConnectionStrings["Saleslogix"];
-                String connectionString = conConfig == null ? null : conConfig.ConnectionString;
+                string connectionString = conConfig == null ? null : conConfig.ConnectionString;
                 if (connectionString == null)
                 {
                     connectionString = LoadSaleslogixConnectionString(GetConfigurationFile("connection.config"), Username, Password);
@@ -193,6 +194,7 @@ namespace OpenSlx.Lib.Utility
 
                 _workItem.Services.AddNew(typeof(SessionFactoryEntityMappingInfoService), typeof(IEntityMappingInfoService));
                 _workItem.Services.Add<IFieldLevelSecurityService>(new FieldLevelSecurityService());
+                _workItem.Services.Add<ISystemOptionsService>(new SystemOptionsService());
 
             }
             catch (Exception x)

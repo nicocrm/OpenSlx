@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenSlx.Lib.UnitTest</RootNamespace>
     <AssemblyName>OpenSlx.Lib.UnitTest</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,91 +53,107 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="Iesi.Collections">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Iesi.Collections.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\log4net.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SupportFiles\log4net.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\NHibernate.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\NHibernate.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\OpenSlx.Lib\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Common.Syndication">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Common.Syndication.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SupportFiles\Sage.Common.Syndication.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sage.Entity.Interfaces">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Entity.Interfaces.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Sage.Entity.Interfaces, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\SalesLogix\ReferenceAssemblies\Sage.Entity.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="Sage.Platform">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.Platform.Application">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.Application.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Application.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.Platform.Application.UI.Web">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.Application.UI.Web.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Application.UI.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.Platform.Configuration">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.Configuration.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sage.Platform.Design">
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sage.Platform.Projects">
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.Projects.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sage.Platform.QuickForms">
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.QuickForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sage.Platform.QuickForms.QFControls">
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.QuickForms.QFControls.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.Platform.WebPortal">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.Platform.WebPortal.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\Platform\Sage.Platform.WebPortal.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Sage.SalesLogix.Activity.Entities">
-      <HintPath>..\..\..\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Activity.Entities.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.API">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.API.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.API.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sage.SalesLogix.Entities">
-      <HintPath>..\..\..\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Entities.dll</HintPath>
+    <Reference Include="Sage.SalesLogix.Entities, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\SalesLogix\ReferenceAssemblies\Sage.SalesLogix.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Sage.SalesLogix.HighLevelTypes">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.HighLevelTypes.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.HighLevelTypes.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.NHibernate">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.NHibernate.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.PickLists">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.PickLists.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.PickLists.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Security">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Security.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Security.Entities">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Security.Entities.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.Security.Entities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sage.SalesLogix.System">
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.System.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Web">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Web.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.Web.Controls">
-      <HintPath>C:\inetpub\wwwroot\SlxClient\Bin\Sage.SalesLogix.Web.Controls.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.Web.Controls.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -157,6 +174,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestReflectionHelper.cs" />
     <Compile Include="TestSimpleLookup.cs" />
+    <Compile Include="TestSlxEntityUtility.cs" />
     <Compile Include="TestSuiteSetup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +199,9 @@
       <Project>{DC4F8B31-1A44-42DF-A934-7F0CB0F46959}</Project>
       <Name>OpenSlx.Lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

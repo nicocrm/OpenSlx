@@ -85,5 +85,34 @@ namespace OpenSlx.Lib.Utility
                 prod.Save();
             return prod;
         }
+
+        public virtual IOpportunity CreateOpportunity(bool save = false, IAccount account = null)
+        {
+            if (account == null)
+                account = CreateAccount(save);
+            var opp = EntityFactory.Create<IOpportunity>();
+            opp.Account = account;
+            account.Opportunities.Add(opp);
+            opp.Description = "Test Opportunity";
+            opp.Owner = account.Owner;
+            opp.AccountManager = account.AccountManager;
+            opp.Status = "Open";
+            if (save)
+                opp.Save();
+            return opp;
+        }
+
+        public virtual IOpportunityProduct CreateOpportunityProduct(bool save = false, IOpportunity opportunity = null, IProduct product = null)
+        {
+            if (opportunity == null)
+                opportunity = CreateOpportunity(save);
+            var oppProd = EntityFactory.Create<IOpportunityProduct>();
+            oppProd.Opportunity = opportunity;
+            oppProd.Product = CreateProduct(save);
+            opportunity.Products.Add(oppProd);
+            if (save)
+                oppProd.Save();
+            return oppProd;
+        }
     }
 }

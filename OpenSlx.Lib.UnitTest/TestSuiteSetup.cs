@@ -8,9 +8,7 @@ using OpenSlx.Lib.Utility;
 
 namespace OpenSlx.Lib.UnitTest
 {    
-    /// <summary>
-    /// Setup fixture for the assembly (outside of all namespaces)
-    /// </summary>
+    
     [SetUpFixture]
     public class TestSuiteSetup
     {

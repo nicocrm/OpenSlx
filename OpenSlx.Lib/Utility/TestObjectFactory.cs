@@ -30,6 +30,10 @@ namespace OpenSlx.Lib.Utility
             a.AccountName = "Test Account";
             a.Owner = SecUtils.CurrentUser.DefaultOwner;
             a.AccountManager = SecUtils.CurrentUser;
+            a.Address.Address1 = "Test Address";
+            a.Address.City = "Test City";
+            a.Address.PostalCode = "34444";
+            a.Address.State = "TN";
             if (save)
                 a.Save();
             return a;

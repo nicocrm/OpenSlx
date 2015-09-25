@@ -124,3 +124,6 @@ These include:
             }
         }
     }
+    
+Be sure to build your test assembly in 32-bit mode, and you may also have to set up your test runner to 
+avoid copying the test assemblies to an alternate location (e.g. in Resharper, disable shadow copying)

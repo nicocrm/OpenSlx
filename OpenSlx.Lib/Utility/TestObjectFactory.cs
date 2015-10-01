@@ -57,7 +57,7 @@ namespace OpenSlx.Lib.Utility
         public virtual ITicket CreateTicket(bool save = false, IAccount account = null, IContact contact = null)
         {
             if (account == null)
-                account = CreateAccount();
+                account = CreateAccount(save);
             ITicket ticket = EntityFactory.Create<ITicket>();
             ticket.Account = account;
             ticket.Contact = contact ?? CreateContact(save, account);

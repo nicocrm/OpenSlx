@@ -72,7 +72,7 @@ These include:
  * SlxAppSetup: a test harness meant to be extended and used as your TestSuiteSetup
  * TestObjectFactory: an extensible factory class for generating objects 
  
- Example test suite setup class: 
+Example test suite setup class: 
  
     using System;
     using System.Collections.Generic;

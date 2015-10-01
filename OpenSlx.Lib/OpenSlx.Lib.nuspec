@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ngaller/OpenSlx</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <!--<releaseNotes>Summary of changes made in this release of the package.</releaseNotes>-->
+    <releaseNotes>Remove obsolete SimpleLookup and FixLookup.  Fix problem in TestObjectFactory.CreateTicket.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>inforcrm saleslogix</tags>
   </metadata>

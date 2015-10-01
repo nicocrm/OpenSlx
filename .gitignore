@@ -1,0 +1,9 @@
+Model/deployment/*
+
+Deleted Items
+modelindex.xml
+obj
+Debug
+Release
+*.suo
+packages

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if SIMPLE_PICKLIST 
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -317,3 +319,5 @@ namespace OpenSlx.Lib.Web.Controls
         
     }
 }
+
+#endif

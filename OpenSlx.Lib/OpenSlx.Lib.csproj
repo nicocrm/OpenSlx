@@ -64,6 +64,7 @@
     <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files (x86)\SalesLogix\SupportFiles\log4net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>C:\Program Files (x86)\SalesLogix\Platform\NHibernate.dll</HintPath>
@@ -119,10 +120,6 @@
     </Reference>
     <Reference Include="Sage.SalesLogix.API">
       <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.API.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Sage.SalesLogix.HighLevelTypes">
-      <HintPath>C:\Program Files (x86)\SalesLogix\SalesLogix\Sage.SalesLogix.HighLevelTypes.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sage.SalesLogix.NHibernate">
@@ -203,6 +200,8 @@
     <Compile Include="Utility\MockUserService.cs" />
     <Compile Include="Utility\SlxAppSetup.cs" />
     <Compile Include="Utility\LegacySlx\SlxConnectionInfo.cs" />
+    <Compile Include="Utility\SlxEntityUtility.cs" />
+    <Compile Include="Utility\TestObjectFactory.cs" />
     <Compile Include="Web\Controls\BindableDropDownList.cs" />
     <Compile Include="Web\Controls\BindableRadioButtonList.cs" />
     <Compile Include="Web\Controls\BindingSourceParameter.cs" />
@@ -217,7 +216,6 @@
     <Compile Include="Web\Controls\Impl\PicklistPicklistAdapter.cs" />
     <Compile Include="Web\Controls\Impl\TextBoxPicklistAdapter.cs" />
     <Compile Include="Web\Controls\PicklistStorageMode.cs" />
-    <Compile Include="Web\Controls\SimpleLookup.cs" />
     <Compile Include="Web\Controls\SimplePicklist.cs" />
     <Compile Include="Utility\ReflectionHelper.cs" />
     <Compile Include="Web\Controls\SlxEntityDataSource.cs" />
@@ -225,7 +223,6 @@
     <Compile Include="Web\Controls\TabWorkspaceWithMiddleOnBottom.cs" />
     <Compile Include="Web\Controls\WebControlConfigurationException.cs" />
     <Compile Include="Web\Controls\Workarounds\FixSlxGridView.cs" />
-    <Compile Include="Web\Controls\Workarounds\FixSlxLookup.cs" />
     <Compile Include="Web\Extensions\UserControlExtensions.cs" />
     <Compile Include="Web\Utility\SimpleSmartPart.cs">
       <SubType>ASPXCodeBehind</SubType>

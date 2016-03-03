@@ -40,8 +40,8 @@ namespace OpenSlx.Lib.Db
     public class DbHelper : IDisposable
     {
         private OleDbConnection _connection = null;
-        private List<String> _idCache = null;
-        private String _connectionString = null;
+        private List<string> _idCache = null;
+        private string _connectionString = null;
 
         /// <summary>
         /// Uses the current dataservice to retrieve the database connection string.
@@ -65,7 +65,7 @@ namespace OpenSlx.Lib.Db
             DontCloseConnection = true;
         }
 
-        public DbHelper(String connectionString)
+        public DbHelper(string connectionString)
         {
             _connectionString = connectionString;
         }
@@ -85,7 +85,7 @@ namespace OpenSlx.Lib.Db
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public object DoSQL(String sql)
+        public object DoSQL(string sql)
         {
             return DoSQL(sql, null);
         }
@@ -97,7 +97,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public object DoSQL(String sql, params object[] parameters)
+        public object DoSQL(string sql, params object[] parameters)
         {
             ICollection pvals;
             if (parameters != null && parameters.Length == 1 && parameters[0] is ICollection)
@@ -115,7 +115,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="parameters"></param>
         /// <returns></returns>
         [SuppressMessage("Microsoft.Security", "CA2100", Justification = "Query is built from code")]
-        public object DoSQL(String sql, ICollection parameters)
+        public object DoSQL(string sql, ICollection parameters)
         {
             object result;
             IEnumerator iter;
@@ -145,7 +145,7 @@ namespace OpenSlx.Lib.Db
         /// Return number of rows affected.
         /// </summary>
         /// <param name="sql"></param>
-        public int ExecuteSQL(String sql)
+        public int ExecuteSQL(string sql)
         {
             return ExecuteSQL(sql, null);
         }
@@ -157,7 +157,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="sql"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public int ExecuteSQL(String sql, params object[] parameters)
+        public int ExecuteSQL(string sql, params object[] parameters)
         {
             ICollection pvals;
             if (parameters != null && parameters.Length == 1 && parameters[0] is ICollection)
@@ -175,7 +175,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="parameters"></param>
         /// <returns></returns>
         [SuppressMessage("Microsoft.Security", "CA2100", Justification = "Query is built from code")]
-        public int ExecuteSQL(String sql, ICollection parameters)
+        public int ExecuteSQL(string sql, ICollection parameters)
         {
             using (OleDbCommand cmd = (OleDbCommand)CreateCommand())
             {
@@ -200,7 +200,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="tableName"></param>
         /// <param name="condition"></param>
         /// <returns></returns>
-        public object GetField(String fieldName, String tableName, String condition)
+        public object GetField(string fieldName, string tableName, string condition)
         {
             return GetField(fieldName, tableName, condition, null);
         }
@@ -209,9 +209,9 @@ namespace OpenSlx.Lib.Db
         /// Retrieve value of specified field (null if not found)
         /// Null value in the database are returned as a null value, NOT a DBNull object.
         /// </summary>
-        public object GetField(String fieldName, String tableName, String condition, params object[] parameters)
+        public object GetField(string fieldName, string tableName, string condition, params object[] parameters)
         {
-            String sql = "SELECT " + fieldName + " FROM " + tableName;
+            string sql = "SELECT " + fieldName + " FROM " + tableName;
             if (condition != "")
             {
                 sql = sql + " WHERE " + condition;
@@ -232,9 +232,9 @@ namespace OpenSlx.Lib.Db
         /// <param name="condition"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public Dictionary<String, object> GetFields(String fieldNames, String tableName, String condition, params object[] parameters)
+        public Dictionary<string, object> GetFields(string fieldNames, string tableName, string condition, params object[] parameters)
         {
-            String sql = "SELECT " + fieldNames + " FROM " + tableName;
+            string sql = "SELECT " + fieldNames + " FROM " + tableName;
             if (condition != "")
             {
                 sql = sql + " WHERE " + condition;
@@ -243,7 +243,7 @@ namespace OpenSlx.Lib.Db
             {
                 if (reader.Read())
                 {
-                    Dictionary<String, object> vals = new Dictionary<string, object>();
+                    Dictionary<string, object> vals = new Dictionary<string, object>();
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         vals[reader.GetName(i)] = reader[i];
@@ -260,7 +260,7 @@ namespace OpenSlx.Lib.Db
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public IDataReader OpenDataReader(String sql)
+        public IDataReader OpenDataReader(string sql)
         {
             return OpenDataReader(sql, (ICollection)null);
         }
@@ -275,7 +275,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="conditionParams"></param>
         /// <returns></returns>
         [SuppressMessage("Microsoft.Security", "CA2100", Justification = "Query is built from code")]
-        public IDataReader OpenDataReader(String sql, ICollection conditionParams)
+        public IDataReader OpenDataReader(string sql, ICollection conditionParams)
         {
             OleDbCommand cmd = (OleDbCommand)CreateCommand();
             cmd.CommandText = sql;
@@ -302,7 +302,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="sql"></param>
         /// <param name="conditionParams"></param>
         /// <returns></returns>
-        public IDataReader OpenDataReader(String sql, params object[] conditionParams)
+        public IDataReader OpenDataReader(string sql, params object[] conditionParams)
         {
             return OpenDataReader(sql, (ICollection)conditionParams);
         }
@@ -398,7 +398,7 @@ namespace OpenSlx.Lib.Db
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public DataSet OpenDataSet(String sql)
+        public DataSet OpenDataSet(string sql)
         {
             return OpenDataSet(sql, (ICollection)null);
         }
@@ -409,7 +409,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="sql"></param>
         /// <param name="conditionParams"></param>
         /// <returns></returns>
-        public DataSet OpenDataSet(String sql, params object[] conditionParams)
+        public DataSet OpenDataSet(string sql, params object[] conditionParams)
         {
             return OpenDataSet(sql, (ICollection)conditionParams);
         }
@@ -421,7 +421,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="conditionParams"></param>
         /// <returns></returns>
         [SuppressMessage("Microsoft.Reliability", "CA2000", Justification = "We are returning the newly created object!")]
-        public DataSet OpenDataSet(String sql, ICollection conditionParams)
+        public DataSet OpenDataSet(string sql, ICollection conditionParams)
         {
             DataSet ds = new DataSet();
             DataTable dt = ds.Tables.Add();
@@ -436,7 +436,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="sql"></param>
         /// <param name="conditionParams"></param>
         /// <returns></returns>
-        public DataTable FillDataTable(DataTable dt, String sql, params object[] conditionParams)
+        public DataTable FillDataTable(DataTable dt, string sql, params object[] conditionParams)
         {
             return FillDataTable(dt, sql, (ICollection)conditionParams);
         }
@@ -449,7 +449,7 @@ namespace OpenSlx.Lib.Db
         /// <param name="conditionParams"></param>
         /// <returns></returns>
         [SuppressMessage("Microsoft.Security", "CA2100", Justification = "Query is built from code")]
-        public DataTable FillDataTable(DataTable dt, String sql, ICollection conditionParams)
+        public DataTable FillDataTable(DataTable dt, string sql, ICollection conditionParams)
         {
             using (OleDbCommand cmd = (OleDbCommand)CreateCommand())
             {
@@ -482,12 +482,12 @@ namespace OpenSlx.Lib.Db
         /// <param name="fields"></param>
         /// <returns></returns>
         [SuppressMessage("Microsoft.Security", "CA2100", Justification = "Query is built from code")]
-        public DataTable FillTableSchema(DataTable dt, String fields)
+        public DataTable FillTableSchema(DataTable dt, string fields)
         {
             if (dt.Columns.Count > 0)
                 // assume it was already filled
                 return dt;
-            using (OleDbDataAdapter da = new OleDbDataAdapter(String.Format("select {0} from {1} where 1=2", fields, dt.TableName),
+            using (OleDbDataAdapter da = new OleDbDataAdapter(string.Format("select {0} from {1} where 1=2", fields, dt.TableName),
                 GetConnection()))
             {
                 da.SelectCommand.Transaction = (OleDbTransaction)_transaction;
@@ -519,11 +519,11 @@ namespace OpenSlx.Lib.Db
                 {
                     object oldValue = row[dc, DataRowVersion.Original];
                     object newValue = row[dc, DataRowVersion.Current];
-                    if (oldValue is String)
+                    if (oldValue is string)
                         oldValue = oldValue.ToString().Trim();
-                    if (newValue is String)
+                    if (newValue is string)
                         newValue = newValue.ToString().Trim();
-                    if (oldValue == DBNull.Value && newValue is String)
+                    if (oldValue == DBNull.Value && newValue is string)
                         oldValue = oldValue.ToString();
                     if (oldValue != newValue &&
                         !oldValue.Equals(newValue))
@@ -587,31 +587,31 @@ namespace OpenSlx.Lib.Db
         /// <returns></returns>
         public static OleDbType GetOleDbType(Type sysType)
         {
-            if (sysType == typeof(String))
+            if (sysType == typeof(string))
                 return OleDbType.VarChar;
-            else if (sysType == typeof(Int64))
+            else if (sysType == typeof(long))
                 return OleDbType.BigInt;
-            else if (sysType == typeof(Int32))
+            else if (sysType == typeof(int))
                 return OleDbType.Integer;
-            else if (sysType == typeof(Int16))
+            else if (sysType == typeof(short))
                 return OleDbType.SmallInt;
-            else if (sysType == typeof(Boolean))
+            else if (sysType == typeof(bool))
                 return OleDbType.Boolean;
             else if (sysType == typeof(DateTime))
                 return OleDbType.DBTimeStamp;
-            else if (sysType == typeof(Char))
+            else if (sysType == typeof(char))
                 return OleDbType.Char;
-            else if (sysType == typeof(Double))
+            else if (sysType == typeof(double))
                 return OleDbType.Double;
-            else if (sysType == typeof(Double))
+            else if (sysType == typeof(double))
                 return OleDbType.Double;
-            else if (sysType == typeof(Single))
+            else if (sysType == typeof(float))
                 return OleDbType.Single;
-            else if (sysType == typeof(Byte))
+            else if (sysType == typeof(byte))
                 return OleDbType.Binary;
             else if (sysType == typeof(Guid))
                 return OleDbType.Guid;
-            else if (sysType == typeof(Decimal))
+            else if (sysType == typeof(decimal))
                 return OleDbType.Numeric;
             else
                 throw new Exception("Type " + sysType.Name + " can't be converted to OleDbType");
@@ -648,12 +648,12 @@ namespace OpenSlx.Lib.Db
         /// </summary>
         /// <param name="table"></param>
         /// <returns></returns>
-        public String GetIDFor(String table)
+        public string GetIDFor(string table)
         {
-            String keyname;
+            string keyname;
             if (_idCache != null && _idCache.Count > 0)
             {
-                String s = _idCache[0];
+                string s = _idCache[0];
                 _idCache.RemoveAt(0);
                 return s;
             }
@@ -672,8 +672,8 @@ namespace OpenSlx.Lib.Db
                 default: keyname = table; break;
             }
 
-            String sql = "slx_DBIDs('" + keyname + "', 1)";
-            return (String)DoSQL(sql);
+            string sql = "slx_DBIDs('" + keyname + "', 1)";
+            return (string)DoSQL(sql);
         }
 
         /// <summary>
@@ -704,7 +704,7 @@ namespace OpenSlx.Lib.Db
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static String SqlQuote(String s)
+        public static string SqlQuote(string s)
         {
             return "'" + s.Replace("'", "''") + "'";
         }
@@ -714,7 +714,7 @@ namespace OpenSlx.Lib.Db
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
-        public static String FormatSlxDate(DateTime d)
+        public static string FormatSlxDate(DateTime d)
         {
             return d.ToString("yyyyMMdd hh:mm:ss");
         }
@@ -725,9 +725,9 @@ namespace OpenSlx.Lib.Db
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public static bool CheckSafeSQL(String sql)
+        public static bool CheckSafeSQL(string sql)
         {
-            String sqlNoQuotes = Regex.Replace(sql, "'[^']*'", "");
+            string sqlNoQuotes = Regex.Replace(sql, "'[^']*'", "");
             if (Regex.Match(sqlNoQuotes, ";|--").Success)
                 return false;
             return true;
@@ -788,7 +788,7 @@ namespace OpenSlx.Lib.Db
             /// <summary>
             /// Holds cache of insert commands
             /// </summary>
-            private static Dictionary<String, CommandCacheItem> _commandCache = new Dictionary<string, CommandCacheItem>();
+            private static Dictionary<string, CommandCacheItem> _commandCache = new Dictionary<string, CommandCacheItem>();
 
             /// <summary>
             /// Attempt to build the insert, update and delete commands for the given data table.

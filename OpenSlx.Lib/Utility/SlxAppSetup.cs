@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using Sage.Platform.Application;
 using Sage.Platform.DynamicMethod;
-using Sage.Platform.Configuration;
+
 using Sage.Platform.Data;
 using System.Data.OleDb;
 using System.Text.RegularExpressions;
@@ -21,8 +21,10 @@ using Sage.Platform;
 using Sage.Entity.Interfaces;
 using Sage.SalesLogix.Security;
 using Sage.Platform.Application.UI.Web;
+using Sage.Platform.Configuration;
 using Sage.Platform.Orm.Services;
 using Sage.SalesLogix;
+using Sage.SalesLogix.Services;
 
 /*
    OpenSlx - Open Source SalesLogix Library and Tools
@@ -131,10 +133,32 @@ namespace OpenSlx.Lib.Utility
         {
             //Globals.Initialize();
             System.Environment.CurrentDirectory = Path.GetDirectoryName(typeof(SlxAppSetup).Assembly.Location);
+            CopyBaseFiles();
+            FinishOpen();
+        }
+
+        private void CopyBaseFiles()
+        {
+            CopyConfigurationFile("hibernate.xml");
+            CopyConfigurationFile("dynamicmethods.xml");
+            CopyConfigurationFile("dynamicInterceptors.xml");            
+            if (SourceFolder != null)
+                CopySaleslogixAssemblies(Path.Combine(SourceFolder, "bin"),
+                    Path.GetDirectoryName(
+                        GetType().Assembly.GetModules()[0].FullyQualifiedName));
+            else
+                LOG.Debug("SourceFolder is null - not copying Saleslogix Assemblies (they must already be present under the execution path!)");
+        }
+
+        private void FinishOpen()
+        {
             try
             {
                 _workItem = ApplicationContext.Initialize(ApplicationName);
 
+                PrepareConfigurationFile(typeof(HibernateConfiguration), "hibernate.xml");
+                PrepareConfigurationFile(typeof(DynamicMethodConfiguration), "dynamicmethods.xml");
+                PrepareConfigurationFile(typeof(DynamicInterceptorConfiguration), "dynamicInterceptors.xml");
                 PrepareConfigurationFile(null, "log4net.config");
                 FileInfo logConfigInfo = new FileInfo(GetConfigurationFile("log4net.config"));
                 if (logConfigInfo.Exists)
@@ -144,27 +168,17 @@ namespace OpenSlx.Lib.Utility
                 else
                 {
                     log4net.Config.XmlConfigurator.Configure();
-                }
-                PrepareConfigurationFile(typeof(HibernateConfiguration), "hibernate.xml");
-                PrepareConfigurationFile(typeof(DynamicMethodConfiguration), "dynamicmethods.xml");
-                PrepareConfigurationFile(typeof(DynamicInterceptorConfiguration), "dynamicInterceptors.xml");
+                }                
                 PrepareConfigurationFile(null, "connection.config");
 
                 // allow users to specify connection via the App.config file.
                 // if not specified, we'll try and read it from the deployed connection.config.
                 var conConfig = System.Configuration.ConfigurationManager.ConnectionStrings["Saleslogix"];
-                String connectionString = conConfig == null ? null : conConfig.ConnectionString;
+                string connectionString = conConfig == null ? null : conConfig.ConnectionString;
                 if (connectionString == null)
                 {
                     connectionString = LoadSaleslogixConnectionString(GetConfigurationFile("connection.config"), Username, Password);
-                }
-
-                if (SourceFolder != null)
-                    CopySaleslogixAssemblies(Path.Combine(SourceFolder, "bin"),
-                        Path.GetDirectoryName(
-                            GetType().Assembly.GetModules()[0].FullyQualifiedName));
-                else
-                    LOG.Debug("SourceFolder is null - not copying Saleslogix Assemblies (they must already be present under the execution path!)");
+                }                
 
                 _workItem.Services.Add<IDataService>(new ConnectionStringDataService(connectionString));
                 _workItem.Services.Add<IUserService>(new MockUserService(Username));
@@ -180,6 +194,7 @@ namespace OpenSlx.Lib.Utility
 
                 _workItem.Services.AddNew(typeof(SessionFactoryEntityMappingInfoService), typeof(IEntityMappingInfoService));
                 _workItem.Services.Add<IFieldLevelSecurityService>(new FieldLevelSecurityService());
+                _workItem.Services.Add<ISystemOptionsService>(new SystemOptionsService());
 
             }
             catch (Exception x)
@@ -197,7 +212,7 @@ namespace OpenSlx.Lib.Utility
         public void SetTimezone(String timezone)
         {
             var tz = new Sage.Platform.TimeZones().FindTimeZone(timezone);
-            if(tz == null)
+            if (tz == null)
                 throw new Exception("Invalid timezone " + timezone);
             ApplicationContext.Current.Services.Get<Sage.Platform.Application.IContextService>().SetContext("TimeZone", tz);
         }
@@ -238,11 +253,9 @@ namespace OpenSlx.Lib.Utility
         /// <param name="configFile">Absolute path to configuration file.  It will be copied under the local configuration directory.</param>        
         private void PrepareConfigurationFile(Type configType, string configFile)
         {
-            Directory.CreateDirectory(@"Configuration\Application\" + ApplicationName);
-            if (SourceFolder != null && File.Exists(Path.Combine(this.SourceFolder, configFile)))
+            if (configFile != null)
             {
-                File.Copy(Path.Combine(this.SourceFolder, configFile),
-                    GetConfigurationFile(configFile), true);
+                CopyConfigurationFile(configFile);
             }
             if (configType != null)
             {
@@ -250,6 +263,16 @@ namespace OpenSlx.Lib.Utility
                 ReflectionConfigurationTypeInfo typeInfo = new ReflectionConfigurationTypeInfo(configType);
                 typeInfo.ConfigurationSourceType = typeof(LocalFileConfigurationSource);
                 configManager.RegisterConfigurationType(typeInfo);
+            }
+        }
+
+        private void CopyConfigurationFile(string configFile)
+        {
+            Directory.CreateDirectory(@"Configuration\Application\" + ApplicationName);
+            if (SourceFolder != null && File.Exists(Path.Combine(this.SourceFolder, configFile)))
+            {
+                File.Copy(Path.Combine(this.SourceFolder, configFile),
+                    GetConfigurationFile(configFile), true);
             }
         }
 
@@ -294,6 +317,7 @@ namespace OpenSlx.Lib.Utility
                 .Union(Directory.GetFiles(source, "Iesi.*.dll"))
                 .Union(Directory.GetFiles(source, "LinqBridge.dll"))
                 .Union(Directory.GetFiles(source, "Interop.*.dll"))
+                .Union(Directory.GetFiles(source, "Enyim.Caching.dll"))
                 .Union(Directory.GetFiles(source, "Sage.Entity*.dll"))
                 .Union(Directory.GetFiles(source, "Sage.SalesLogix*.dll"))
                 .Union(Directory.GetFiles(source, "Sage.Platform*.dll")))

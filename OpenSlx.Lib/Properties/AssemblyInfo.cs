@@ -7,11 +7,11 @@ using System.Web.UI;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("OpenSlx.Lib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A collection of utilities and controls for the InforCRM platform")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Strategic Sales Systems")]
+[assembly: AssemblyCompany("Nicolas Galler")]
 [assembly: AssemblyProduct("OpenSlx.Lib")]
-[assembly: AssemblyCopyright("Copyright © Strategic Sales Systems 2010")]
+[assembly: AssemblyCopyright("Copyright © Nicolas Galler <ngaller@gmail.com> 2010-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

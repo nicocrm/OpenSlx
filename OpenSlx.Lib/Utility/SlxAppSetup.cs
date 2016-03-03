@@ -166,7 +166,6 @@ namespace OpenSlx.Lib.Utility
                 else
                     LOG.Debug("SourceFolder is null - not copying Saleslogix Assemblies (they must already be present under the execution path!)");
 
-
                 _workItem.Services.Add<IDataService>(new ConnectionStringDataService(connectionString));
                 _workItem.Services.Add<IUserService>(new MockUserService(Username));
                 _workItem.Services.Add<IUserOptionsService>(new UserOptionsService(_workItem.Services.Get<IUserService>(), 

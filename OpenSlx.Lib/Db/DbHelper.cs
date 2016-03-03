@@ -131,7 +131,7 @@ namespace OpenSlx.Lib.Db
                         if (iter.Current != null)
                             cmd.Parameters.Add("p" + cmd.Parameters.Count, GetOleDbType(iter.Current.GetType())).Value = iter.Current;
                         else
-                            cmd.Parameters.Add("p" + cmd.Parameters.Count, OleDbType.VarChar, 1).Value = null;
+                            cmd.Parameters.Add("p" + cmd.Parameters.Count, OleDbType.VarChar, 1).Value = "";
                     }
                 }
                 result = cmd.ExecuteScalar();
@@ -184,8 +184,8 @@ namespace OpenSlx.Lib.Db
                 {
                     foreach (object p in parameters)
                     {
-                        cmd.Parameters.Add("p" + cmd.Parameters.Count,
-                            (p == null) ? OleDbType.VarChar : GetOleDbType(p.GetType())).Value = p;
+                        var param = cmd.Parameters.Add("p" + cmd.Parameters.Count,
+                            (p == null) ? OleDbType.VarChar : GetOleDbType(p.GetType())).Value = p ?? "";
                     }
                 }
                 return cmd.ExecuteNonQuery();

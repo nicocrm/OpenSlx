@@ -23,7 +23,10 @@ using Sage.SalesLogix.Security;
 using Sage.Platform.Application.UI.Web;
 using Sage.Platform.Configuration;
 using Sage.Platform.Orm.Services;
+using Sage.Platform.SData;
+using Sage.Platform.WebPortal.Services;
 using Sage.SalesLogix;
+using Sage.SalesLogix.IntegrationContract;
 using Sage.SalesLogix.Services;
 
 /*
@@ -195,7 +198,7 @@ namespace OpenSlx.Lib.Utility
                 _workItem.Services.AddNew(typeof(SessionFactoryEntityMappingInfoService), typeof(IEntityMappingInfoService));
                 _workItem.Services.Add<IFieldLevelSecurityService>(new FieldLevelSecurityService());
                 _workItem.Services.Add<ISystemOptionsService>(new SystemOptionsService());
-
+                _workItem.Services.AddNew(typeof(AppIdMappingService), typeof(IAppIdMappingService));
             }
             catch (Exception x)
             {

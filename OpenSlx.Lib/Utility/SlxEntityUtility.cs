@@ -29,19 +29,23 @@ namespace OpenSlx.Lib.Utility
             return target;
         }
 
-        public static void CopyEntityProperties<T>(T target, T source)
+        public static void CopyEntityProperties<T>(T target, T source, ISet<string> propsToExclude = null)
             where T : IDynamicEntity
         {
-            foreach (PropertyInfo prop in source.GetType().GetProperties())
+            var iface = GetInterface(source.GetType());
+            foreach (PropertyInfo prop in iface.GetProperties())
             {
+                if (propsToExclude != null && propsToExclude.Contains(prop.Name))
+                    continue;
+
                 // only copy the ones associated with DB fields
                 // (note that this includes M-1 relationships)
                 if (Attribute.GetCustomAttribute(prop, typeof(FieldAttribute)) != null)
                 {
                     var extendedType =
-                        (DynamicEntityDescriptorConfigurationService.ExtendedTypeInformationAttribute)
+                        (ExtendedTypeAttribute)
                             prop.GetCustomAttributes(
-                                typeof(DynamicEntityDescriptorConfigurationService.ExtendedTypeInformationAttribute),
+                                typeof(ExtendedTypeAttribute),
                                 false).FirstOrDefault();
                     // don't copy ID fields - we'll pick up the reference properties instead 
                     if (extendedType != null && extendedType.ExtendedTypeName ==
@@ -52,6 +56,16 @@ namespace OpenSlx.Lib.Utility
                     target[prop.Name] = source[prop.Name];
                 }
             }
+        }
+
+        public static Type GetInterface(Type entityType)
+        {
+            if (entityType.IsInterface)
+                return entityType;
+            var ifaceType = entityType.GetInterface("I" + entityType.Name);
+            if (ifaceType == null)
+                throw new ApplicationException("Unable to locate interface for " + entityType.Name);
+            return ifaceType;
         }
     }
 }

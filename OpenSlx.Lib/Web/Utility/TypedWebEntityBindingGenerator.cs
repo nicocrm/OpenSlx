@@ -70,7 +70,8 @@ namespace OpenSlx.Lib.Web.Utility
             String formatString)
         {
             var bdg = this.CreateBinding(entityProperty, component, componentProperty);
-            bdg.FormatString = formatString;
+            if(formatString != null)
+                bdg.FormatString = formatString;
             return bdg;
         }
 

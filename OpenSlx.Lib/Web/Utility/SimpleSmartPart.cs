@@ -58,11 +58,12 @@ namespace OpenSlx.Lib.Web.Utility
         /// </summary>
         protected WebEntityBinding AddBinding<TComponent, TProperty, TProperty2>(Expression<Func<TEntity, TProperty>> entityProperty,
             TComponent component,
-            Expression<Func<TComponent, TProperty2>> componentProperty)
+            Expression<Func<TComponent, TProperty2>> componentProperty, 
+            String formatString = null)
         {
             if (_bf == null)
                 _bf = new TypedWebEntityBindingGenerator<TEntity>();
-            WebEntityBinding bdg = _bf.CreateBinding(entityProperty, component, componentProperty);
+            WebEntityBinding bdg = _bf.CreateBinding(entityProperty, component, componentProperty, formatString);
             BindingSource.Bindings.Add(bdg);
             return bdg;
         }
